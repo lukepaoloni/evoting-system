@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using evoting_system.Models;
+using evotingsystem.Models;
 
 namespace evoting_system.Controllers
 {
@@ -12,6 +13,9 @@ namespace evoting_system.Controllers
     {
         public IActionResult Index()
         {
+            var user = new User();
+            user.name = "John Wick";
+            user.addUser();
             return View();
         }
 
