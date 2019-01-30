@@ -13,5 +13,15 @@ namespace evotingsystem.Models
             var firebase = new FirebaseClient("https://evoting-b3620.firebaseio.com/");
             var user = await firebase.Child("users").PostAsync(this);
         }
+
+        //this is shezan, i am testing if the unit testing is working
+        public bool IsPrime(int candidate)
+        {
+        	if(candidate == 1)
+        	{
+                return true;
+        	}
+            throw new NotImplementedException("Please create a test first");
+        }
     }
 }
