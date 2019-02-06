@@ -13,9 +13,10 @@ namespace evoting_system.Controllers
     {
         public IActionResult Index()
         {
-            var user = new User();
-            user.name = "John Wick";
-            user.addUser();
+            var user = new AdminAccount();
+            user.FirstName = "John";
+            user.LastName = "Wick";
+            user.AddUser();
             return View();
         }
 
