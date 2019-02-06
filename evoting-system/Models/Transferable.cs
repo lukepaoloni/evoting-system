@@ -1,10 +1,4 @@
-﻿using System;
-<<<<<<< Updated upstream
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace evotingsystem.Models
+﻿namespace evotingsystem.Models
 {
     public class Transferable : Vote
     {
@@ -21,15 +15,7 @@ namespace evotingsystem.Models
 
         public void RemoveLastCandidate()
         {
-
-=======
-namespace evotingsystem.Models
-{
-    public class Transferable
-    {
-        public Transferable()
-        {
->>>>>>> Stashed changes
+        
         }
     }
 }

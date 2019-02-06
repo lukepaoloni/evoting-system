@@ -1,10 +1,4 @@
-﻿using System;
-<<<<<<< Updated upstream
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace evotingsystem.Models
+﻿namespace evotingsystem.Models
 {
     public class Preferential : Vote
     {
@@ -22,15 +16,5 @@ namespace evotingsystem.Models
 
         }
 
-
-=======
-namespace evotingsystem.Models
-{
-    public class Preferential
-    {
-        public Preferential()
-        {
-        }
->>>>>>> Stashed changes
     }
 }
