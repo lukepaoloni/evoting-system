@@ -17,11 +17,9 @@ namespace evotingsystem.Models
 
         public Candidate() { }
 
-        public void incrementVote(Vote vote)
+        public void incrementVote()
         {
-            //needs the Vote class committed
-
-
+            this.NumVotes++;
 
         }
 

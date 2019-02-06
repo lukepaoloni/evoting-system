@@ -25,7 +25,7 @@ namespace evotingsystem.Models
             //needs implementing -HW
             ListOfCandidates searchList = new ListOfCandidates();
 
-            //searchList = this.Find(x => (x.FirstName == firstName) && (x.LastName == lastName));
+            //searchList = this.FindAll(x => (x.FirstName == firstName) && (x.LastName == lastName));
 
             return new ListOfCandidates();
         }

@@ -10,7 +10,7 @@ namespace evotingsystem.Models
 
         public void findCandidateWithMostVotes() //this should return Candidate when that class is created
         {
-
+        
         }
     }
 }

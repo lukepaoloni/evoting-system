@@ -12,12 +12,9 @@ namespace evotingsystem.Models
         public Candidate ElectedCandidate { get; set; }
         public ListOfCandidates ListOfCandidates { get; set; }
 
-        //private List<Vote> numVotes; (needs vote class from Jake)
+        //private List<Vote> numVotes;
 
-        public Constituency(String name)
-        {
-            this.Name = name;    
-        }
+        public Constituency() { }
 
         public void electCandidate(Candidate candidate)
         {
