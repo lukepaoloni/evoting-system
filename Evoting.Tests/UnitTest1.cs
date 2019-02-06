@@ -6,10 +6,10 @@ namespace Evoting.Tests
 {
     public class UnitTest1
     {   // User is the target class, find this class in models folder
-    	private readonly User _primeService;
+    	private readonly AdminAccount _primeService;
         public UnitTest1()
         {
-            _primeService = new User();
+            _primeService = new AdminAccount();
         }
 
         [Fact]
