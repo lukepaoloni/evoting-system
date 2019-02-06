@@ -14,9 +14,7 @@ namespace evoting_system.Controllers
         public IActionResult Index()
         {
             var user = new AdminAccount();
-            user.FirstName = "John";
-            user.LastName = "Wick";
-            user.AddUser();
+            user.ConfigureVote((AdminAccount.VoteType) 2);
             return View();
         }
 

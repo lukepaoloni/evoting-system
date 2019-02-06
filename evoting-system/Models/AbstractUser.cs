@@ -6,7 +6,7 @@ namespace evotingsystem.Models
 {
     public abstract class AbstractUser
     {
-        private readonly string Collection = "users";
+        private readonly string collection = "users";
         public string Role { get; set; }
         public string Id { get; }
         public string UserId { get; set; }
@@ -18,7 +18,7 @@ namespace evotingsystem.Models
         public async void AddUser()
         {
             var firebase = new FirebaseClient("https://evoting-b3620.firebaseio.com/");
-            var user = await firebase.Child(this.Collection).PostAsync(this);
+            var user = await firebase.Child(this.collection).PostAsync(this);
         }
 
         //this is shezan, i am testing if the unit testing is working

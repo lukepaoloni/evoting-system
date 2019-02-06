@@ -1,8 +1,4 @@
-﻿using System;
-using Firebase.Database;
-using Firebase.Database.Query;
-
-namespace evotingsystem.Models
+﻿namespace evotingsystem.Models
 {
     public class Vote
     {
@@ -15,7 +11,7 @@ namespace evotingsystem.Models
 
         public void Apply()
         {
-
+        
         }
     }
 }
