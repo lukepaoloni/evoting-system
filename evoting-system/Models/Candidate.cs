@@ -23,7 +23,6 @@ namespace evotingsystem.Models
             this.lastName = lastName;
             this.constituency = constituency;
             this.party = party;
-
         }
 
         public Constituency getConstituency()

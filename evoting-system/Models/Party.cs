@@ -11,9 +11,13 @@ namespace evotingsystem.Models
         private String link;
         private String manifesto;
 
-        public Party()
+        public Party(String name,
+                     String link,
+                     String manifesto)
         {
-
+            this.name = name;
+            this.link = link;
+            this.manifesto = manifesto;
         }
 
         public String getName()

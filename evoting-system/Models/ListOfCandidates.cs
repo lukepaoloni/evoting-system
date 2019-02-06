@@ -17,5 +17,18 @@ namespace evotingsystem.Models
             this.Add(candidate);
         }
 
+        public void removeCandidate(Candidate candidate)
+        {
+            this.Remove(candidate);
+        }
+
+        public ListOfCandidates findCandidatesByName(String firstName,
+                                         String lastName)
+        {
+            
+        }
+
+
+
     }
 }
