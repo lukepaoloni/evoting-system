@@ -20,16 +20,6 @@ namespace evotingsystem.Models
         public void incrementVote()
         {
             this.NumVotes++;
-
         }
-
-
-
-
-
-
-
-
-
     }
 }

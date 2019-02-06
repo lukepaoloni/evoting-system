@@ -22,16 +22,26 @@ namespace evotingsystem.Models
         public ListOfCandidates findCandidatesByName(String firstName,
                                                    String lastName)
         {
-            //needs implementing -HW
-            ListOfCandidates searchList = new ListOfCandidates();
+            //UnitTest2
+            ListOfCandidates foundList = new ListOfCandidates();
 
-            //searchList = this.FindAll(x => (x.FirstName == firstName) && (x.LastName == lastName));
+            //foundList = 
+            //    (ListOfCandidates)FindAll(x => (x.FirstName == firstName) && (x.LastName == lastName));
 
-            return new ListOfCandidates();
+            foreach (Candidate candidate in this)
+            {
+                if (candidate.FirstName == firstName && candidate.LastName == lastName)
+                {
+                    foundList.Add(candidate);
+                }
+            }
+
+            return foundList;
         }
 
         public Candidate findCandidateByID(int id)
         {
+            //UnitTest3
             Candidate foundCandidate = new Candidate();
 
             foundCandidate = this.Find(x => x.Id == id);

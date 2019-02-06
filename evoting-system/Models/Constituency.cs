@@ -12,8 +12,6 @@ namespace evotingsystem.Models
         public Candidate ElectedCandidate { get; set; }
         public ListOfCandidates ListOfCandidates { get; set; }
 
-        //private List<Vote> numVotes;
-
         public Constituency() { }
 
         public void electCandidate(Candidate candidate)
