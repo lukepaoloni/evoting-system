@@ -8,53 +8,30 @@ namespace evotingsystem.Models
     public class Constituency
     {
 
-        private String name;
-        private Candidate electedCandidate;
-        private ListOfCandidates listOfCandidates;
+        public String Name { get; set; }
+        public Candidate ElectedCandidate { get; set; }
+        public ListOfCandidates ListOfCandidates { get; set; }
 
         //private List<Vote> numVotes; (needs vote class from Jake)
 
-        
         public Constituency(String name)
         {
-            this.name = name;    
+            this.Name = name;    
         }
 
         public void electCandidate(Candidate candidate)
         {
-            this.electedCandidate = candidate;   
+            this.ElectedCandidate = candidate;   
         } 
-
-        public String getName()
-        {
-            return this.name;
-        }
-
-        public Candidate getElectedCandidate()
-        {
-            return this.electedCandidate;
-        }
-
-        public ListOfCandidates getCandidates()
-        {
-            return this.listOfCandidates;
-        }
 
         public void removeCandidate(Candidate candidate)
         {
-            this.listOfCandidates.Remove(candidate);
+            this.ListOfCandidates.Remove(candidate);
         }
 
         public void addCandidate(Candidate candidate)
         {
-            this.listOfCandidates.Add(candidate);
+            this.ListOfCandidates.Add(candidate);
         }
-
-
-
-
-
-
-
     }
 }

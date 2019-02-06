@@ -7,10 +7,7 @@ namespace evotingsystem.Models
 {
     public class ListOfCandidates:List<Candidate>
     {
-        public ListOfCandidates()
-        {
-
-        }
+        public ListOfCandidates() { }
 
         public void addCandidate(Candidate candidate)
         {
@@ -23,9 +20,23 @@ namespace evotingsystem.Models
         }
 
         public ListOfCandidates findCandidatesByName(String firstName,
-                                         String lastName)
+                                                   String lastName)
         {
-            
+            //needs implementing -HW
+            ListOfCandidates searchList = new ListOfCandidates();
+
+            //searchList = this.Find(x => (x.FirstName == firstName) && (x.LastName == lastName));
+
+            return new ListOfCandidates();
+        }
+
+        public Candidate findCandidateByID(int id)
+        {
+            Candidate foundCandidate = new Candidate();
+
+            foundCandidate = this.Find(x => x.Id == id);
+
+            return foundCandidate;
         }
 
 

@@ -7,32 +7,10 @@ namespace evotingsystem.Models
 {
     public class Party
     {
-        private String name;
-        private String link;
-        private String manifesto;
+        public String Name { get; set; }
+        public String Link { get; set; }
+        public String Manifesto { get; set; } 
 
-        public Party(String name,
-                     String link,
-                     String manifesto)
-        {
-            this.name = name;
-            this.link = link;
-            this.manifesto = manifesto;
-        }
-
-        public String getName()
-        {
-            return this.name;
-        }
-
-        public String getLink()
-        {
-            return this.link;
-        }
-
-        public String getManifesto()
-        {
-            return this.manifesto;
-        }
+        public Party() { }
     }
 }

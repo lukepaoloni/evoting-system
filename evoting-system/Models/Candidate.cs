@@ -7,48 +7,24 @@ namespace evotingsystem.Models
 {
     public class Candidate
     {
-        private String firstName,
-                       lastName;
 
-        private Constituency constituency;
+        public String FirstName { get; set; }
+        public String LastName { get; set; }
+        public Constituency Constituency { get; set; }
+        public Party Party { get; set; }
+        public int Id { get; set; }
+        public int NumVotes { get; set; }
 
-        private Party party;
+        public Candidate() { }
 
-        public Candidate(String fistName,
-                        String lastName,
-                        Constituency constituency,
-                        Party party)
-        {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.constituency = constituency;
-            this.party = party;
-        }
-
-        public Constituency getConstituency()
-        {
-            return this.constituency;
-        }
-
-        public String getFirstName()
-        {
-            return this.firstName;
-        }
-
-        public String getLastName()
-        {
-            return this.lastName;
-        }
-
-        public void incrementVote()
+        public void incrementVote(Vote vote)
         {
             //needs the Vote class committed
+
+
+
         }
 
-        private Party getParty()
-        {
-            return this.party;
-        }
 
 
 
