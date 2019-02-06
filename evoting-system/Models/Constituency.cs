@@ -23,7 +23,7 @@ namespace evotingsystem.Models
         public void electCandidate(Candidate candidate)
         {
             this.electedCandidate = candidate;   
-        }
+        } 
 
         public String getName()
         {
