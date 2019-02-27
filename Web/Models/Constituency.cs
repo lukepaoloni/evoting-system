@@ -16,8 +16,8 @@ namespace Web.Models
 
         public void electCandidate(Candidate candidate)
         {
-            this.ElectedCandidate = candidate;   
-        } 
+            this.ElectedCandidate = candidate;
+        }
 
         public void removeCandidate(Candidate candidate)
         {

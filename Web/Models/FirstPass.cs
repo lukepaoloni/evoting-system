@@ -5,7 +5,7 @@
 
         public void FindCandidateWithMostVotes() //this should return Candidate when that class is created
         {
-        
+
         }
     }
 }

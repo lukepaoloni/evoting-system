@@ -9,7 +9,7 @@ namespace Web.Models
     {
         public String Name { get; set; }
         public String Link { get; set; }
-        public String Manifesto { get; set; } 
+        public String Manifesto { get; set; }
 
         public Party() { }
     }

@@ -15,7 +15,7 @@
 
         public void RemoveLastCandidate()
         {
-        
+
         }
     }
 }

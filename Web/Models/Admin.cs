@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Web.Models
 {
-    public class Admin: AbstractUser
+    public class Admin : AbstractUser
     {
         private static Vote vote;
 
@@ -11,7 +11,7 @@ namespace Web.Models
 
         public void ConfigureVote(VoteType type)
         {
-            switch(type)
+            switch (type)
             {
                 case VoteType.Preferential:
                     vote = new Preferential();

@@ -17,10 +17,10 @@ namespace Web.Models
         //this is shezan, i am testing if the unit testing is working
         public bool IsPrime(int candidate)
         {
-        	if(candidate == 1)
-        	{
+            if (candidate == 1)
+            {
                 return true;
-        	}
+            }
             throw new NotImplementedException("Please create a test first");
         }
     }

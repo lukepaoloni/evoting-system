@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Web.Models
 {
-    public class Voter: AbstractUser
+    public class Voter : AbstractUser
     {
         public int NumOfVote { get; set; }
         public string Postcode { get; set; }
