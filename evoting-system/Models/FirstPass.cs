@@ -1,11 +1,16 @@
-﻿namespace evotingsystem.Models
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore.Storage;
+using NUnit.Framework.Internal;
+
+namespace evotingsystem.Models
 {
     public class FirstPass : Vote
     {
 
-        public void FindCandidateWithMostVotes() //this should return Candidate when that class is created
+        public ListOfCandidates FindCandidateWithMostVotes(ListOfCandidates cons)
         {
-        
+           cons.Sort();
+           return cons;
         }
     }
 }

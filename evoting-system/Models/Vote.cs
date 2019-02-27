@@ -1,4 +1,7 @@
-﻿namespace evotingsystem.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace evotingsystem.Models
 {
     public class Vote
     {
@@ -6,7 +9,7 @@
 
         public void SaveData()
         {
-
+            Console.WriteLine("vote ++ for candidate(s)");
         }
 
         public void Apply()

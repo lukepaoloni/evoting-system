@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
     <PackageReference Include="MongoDB.Driver" Version="2.7.2" />
     <PackageReference Include="FirebaseDatabase.net" Version="3.3.3" />
     <PackageReference Include="NUnit" Version="3.11.0" />

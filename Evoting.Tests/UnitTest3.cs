@@ -11,11 +11,13 @@ namespace Evoting.Tests
         {
             _primeService = new ListOfCandidates();
 
-            Candidate candidate1 = new Candidate();
-
-            candidate1.Id = 9999;
+            Candidate candidate1 = new Candidate
+            {
+                Id = 9999
+            };
 
             _primeService.addCandidate(candidate1);
+
         }
 
         [Fact]
