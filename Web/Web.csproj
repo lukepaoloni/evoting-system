@@ -83,6 +83,7 @@
     <Folder Include="Content\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
+    <Folder Include="DAL\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -101,6 +102,8 @@
     <Compile Include="Models\Preferential.cs" />
     <Compile Include="Models\Transferable.cs" />
     <Compile Include="Models\Vote.cs" />
+    <Compile Include="DAL\EvotingContext.cs" />
+    <Compile Include="DAL\EvotingInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
