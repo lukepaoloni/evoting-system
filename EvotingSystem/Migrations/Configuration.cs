@@ -4,6 +4,7 @@ namespace EvotingSystem.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using EvotingSystem.Seeds;
 
     internal sealed class Configuration : DbMigrationsConfiguration<EvotingSystem.Models.EvotingSystemContext>
     {
@@ -15,6 +16,7 @@ namespace EvotingSystem.Migrations
 
         protected override void Seed(EvotingSystem.Models.EvotingSystemContext context)
         {
+            VoterSeed.Seed(context);
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

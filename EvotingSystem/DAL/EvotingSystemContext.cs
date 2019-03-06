@@ -19,6 +19,7 @@ namespace EvotingSystem.Models
         {
         }
 
-        public System.Data.Entity.DbSet<EvotingSystem.Models.Vote> Votes { get; set; }
+        public DbSet<Vote> Votes { get; set; }
+        public DbSet<Voter> Voters { get; set; }
     }
 }

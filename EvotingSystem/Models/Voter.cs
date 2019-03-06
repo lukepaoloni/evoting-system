@@ -5,7 +5,7 @@ using System.Web;
 
 namespace EvotingSystem.Models
 {
-    public class Voter// : abstractUser
+    public class Voter : AbstractUser
     {
         public int NumOfVote { get; set; }
         public string Postcode { get; set; }
