@@ -132,13 +132,21 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Content\FirstPass.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VoteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AbstractUser.cs" />
+    <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\Candidate.cs" />
+    <Compile Include="Models\Constituency.cs" />
     <Compile Include="Models\EvotingSystemContext.cs" />
+    <Compile Include="Models\FirstPass.cs" />
+    <Compile Include="Models\Party.cs" />
+    <Compile Include="Models\Preferential.cs" />
     <Compile Include="Models\Transferable.cs" />
     <Compile Include="Models\Vote.cs" />
     <Compile Include="Models\Voter.cs" />

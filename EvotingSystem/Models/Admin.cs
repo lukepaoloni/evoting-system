@@ -5,15 +5,11 @@ using System.Web;
 
 namespace EvotingSystem.Models
 {
-    public class Admin
+    public class Admin : AbstractUser
     {
         private static object vote;
 
         public enum VoteType { Preferential, Transferable, FirstPass }
-
-        public AdminAccount()
-        {
-        }
 
         public void ConfigureVote(VoteType type)
         {
