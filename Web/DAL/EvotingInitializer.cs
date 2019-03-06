@@ -11,7 +11,16 @@ namespace Web.DAL
         {
             var voters = new List<Voter>
             {
-                new Voter{ FirstName="John", LastName="Wick" }
+                new Voter{ 
+                    FirstName="John", 
+                    LastName="Wick",
+                    UserId="fdasfdsa",
+                    Role="User",
+                    IsLoggedIn=false,
+                    NumOfVote=1,
+                    Password="test",
+                    Postcode="see"
+                }
             };
         }
     }
