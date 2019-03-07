@@ -123,6 +123,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\PartiesController.cs" />
     <Compile Include="Controllers\Api\VotersController.cs" />
     <Compile Include="DAL\EvotingContext.cs" />
     <Compile Include="DAL\EvotingInitializer.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Models\Vote.cs" />
     <Compile Include="Models\Voter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seeds\PartySeed.cs" />
     <Compile Include="Seeds\VoterSeed.cs" />
   </ItemGroup>
   <ItemGroup>

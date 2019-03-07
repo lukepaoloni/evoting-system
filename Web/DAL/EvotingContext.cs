@@ -21,5 +21,7 @@ namespace Web.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
+        public System.Data.Entity.DbSet<Web.Models.Party> Parties { get; set; }
     }
 }

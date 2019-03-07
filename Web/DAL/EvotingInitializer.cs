@@ -12,6 +12,7 @@ namespace Web.DAL
         protected override void Seed(EvotingContext context)
         {
             VoterSeed.Seed(context);
+            PartySeed.Seed(context);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Web.Tests
             var controller = new VotersController(); // Might fail due to need to init with TestContext
             var result = controller.GetVoters();
             Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.Count());
+            Assert.AreEqual(5, result.Count());
         }
     }
 }

@@ -102,15 +102,6 @@ namespace Web.Controllers.API
             return Ok(voter);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         private bool VoterExists(int id)
         {
             return db.Voters.Count(e => e.Id == id) > 0;
