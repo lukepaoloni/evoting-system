@@ -17,7 +17,7 @@ namespace Web.Controllers.API
     public class VotersController : ApiController
     {
         private EvotingContext db = new EvotingContext();
-        private IUserRepository userRepository;
+        private IUserRepository<Voters> userRepository;
 
         public VotersController()
         {
