@@ -21,6 +21,5 @@ namespace Web.Tests
 
         public DbSet<Voter> Voter { get; set; }
 
-        public void Dispose() { }
     }
 }

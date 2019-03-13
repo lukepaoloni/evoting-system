@@ -17,17 +17,17 @@ namespace Web.Controllers.API
     public class VotersController : ApiController
     {
         private EvotingContext db = new EvotingContext();
-        private readonly IUserRepository<Voter> _userRepository;
+        private readonly VoterRepository _voterRepository;
 
         public VotersController()
         {
-            this._userRepository = new UserRepository<Voter>(this.db);
+           _voterRepository = new VoterRepository(db);
         }
 
         // GET: api/Voters
         public IEnumerable<Voter> GetVoters()
         {
-            return _userRepository.GetUsers();
+            return _voterRepository.GetVoters();
         }
 
         // GET: api/Voters/5

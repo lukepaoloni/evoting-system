@@ -8,12 +8,13 @@ namespace Web.Tests
     [TestClass]
     public class TestVotersController
     {
+        private readonly VotersController _controller = new VotersController();
+
         [TestMethod]
         public void GetAllVoters_ShouldReturnAllVoters()
         {
             // https://docs.microsoft.com/en-us/aspnet/web-api/overview/testing-and-debugging/mocking-entity-framework-when-unit-testing-aspnet-web-api-2
-            var controller = new VotersController(); // Might fail due to need to init with TestContext
-            var result = controller.GetVoters();
+            var result = _controller.GetVoters();
             Assert.IsNotNull(result);
             Assert.AreEqual(5, result.Count());
         }
