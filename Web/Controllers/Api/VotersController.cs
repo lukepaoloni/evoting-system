@@ -10,17 +10,24 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Web.DAL;
 using Web.Models;
+using Web.DAL.Repository;
 
 namespace Web.Controllers.API
 {
     public class VotersController : ApiController
     {
         private EvotingContext db = new EvotingContext();
+        private IUserRepository userRepository;
+
+        public VotersController()
+        {
+            this.userRepository = new UserRepository<Voter>(this.db);
+        }
 
         // GET: api/Voters
         public IQueryable<Voter> GetVoters()
         {
-            return db.Voters;
+            return this.userRepository.GetUsers();
         }
 
         // GET: api/Voters/5

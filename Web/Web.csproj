@@ -127,6 +127,10 @@
     <Compile Include="Controllers\Api\VotersController.cs" />
     <Compile Include="DAL\EvotingContext.cs" />
     <Compile Include="DAL\EvotingInitializer.cs" />
+    <Compile Include="DAL\Repository\IRepository.cs" />
+    <Compile Include="DAL\Repository\IUserRepository.cs" />
+    <Compile Include="DAL\Repository\Repository.cs" />
+    <Compile Include="DAL\Repository\UserRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
