@@ -9,7 +9,7 @@ using Web.Models;
 
 namespace Web.Seeds
 {
-    public class PreferentialSeed
+    public class VotingSeed
     {
         public static void Seed(EvotingContext context)
         {

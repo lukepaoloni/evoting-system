@@ -129,6 +129,7 @@
     <Compile Include="DAL\EvotingContext.cs" />
     <Compile Include="DAL\EvotingInitializer.cs" />
     <Compile Include="DAL\Repository\AbstractRepository.cs" />
+    <Compile Include="DAL\Repository\CandidateRepository.cs" />
     <Compile Include="DAL\Repository\VoterRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -147,7 +148,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seeds\AdminSeed.cs" />
     <Compile Include="Seeds\PartySeed.cs" />
-    <Compile Include="Seeds\PreferentialSeed.cs" />
+    <Compile Include="Seeds\VotingSeed.cs" />
     <Compile Include="Seeds\VoterSeed.cs" />
   </ItemGroup>
   <ItemGroup>
