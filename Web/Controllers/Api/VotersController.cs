@@ -17,24 +17,24 @@ namespace Web.Controllers.API
     public class VotersController : ApiController
     {
         private EvotingContext db = new EvotingContext();
-        private IUserRepository<Voters> userRepository;
+        private readonly VoterRepository _voterRepository;
 
         public VotersController()
         {
-            this.userRepository = new UserRepository<Voter>(this.db);
+           _voterRepository = new VoterRepository(db);
         }
 
         // GET: api/Voters
-        public IQueryable<Voter> GetVoters()
+        public IEnumerable<Voter> GetVoters()
         {
-            return this.userRepository.GetUsers();
+            return _voterRepository.GetVoters();
         }
 
         // GET: api/Voters/5
         [ResponseType(typeof(Voter))]
         public IHttpActionResult GetVoter(int id)
         {
-            Voter voter = db.Voters.Find(id);
+            Voter voter = _voterRepository.GetById(id);
             if (voter == null)
             {
                 return NotFound();
@@ -87,8 +87,8 @@ namespace Web.Controllers.API
                 return BadRequest(ModelState);
             }
 
-            db.Voters.Add(voter);
-            db.SaveChanges();
+            _voterRepository.CreateVoter(voter);
+            _voterRepository.Save();
 
             return CreatedAtRoute("DefaultApi", new { id = voter.Id }, voter);
         }
@@ -97,21 +97,15 @@ namespace Web.Controllers.API
         [ResponseType(typeof(Voter))]
         public IHttpActionResult DeleteVoter(int id)
         {
-            Voter voter = db.Voters.Find(id);
-            if (voter == null)
-            {
-                return NotFound();
-            }
+            _voterRepository.DeleteVoter(id);
+            _voterRepository.Save();
 
-            db.Voters.Remove(voter);
-            db.SaveChanges();
-
-            return Ok(voter);
+            return Ok();
         }
 
         private bool VoterExists(int id)
         {
-            return db.Voters.Count(e => e.Id == id) > 0;
+            return db.Users.Count(e => e.Id == id) > 0;
         }
     }
 }

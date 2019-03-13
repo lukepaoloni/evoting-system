@@ -123,14 +123,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\AdminsController.cs" />
+    <Compile Include="Controllers\Api\ConstituenciesController.cs" />
     <Compile Include="Controllers\Api\PartiesController.cs" />
     <Compile Include="Controllers\Api\VotersController.cs" />
     <Compile Include="DAL\EvotingContext.cs" />
     <Compile Include="DAL\EvotingInitializer.cs" />
-    <Compile Include="DAL\Repository\IRepository.cs" />
-    <Compile Include="DAL\Repository\IUserRepository.cs" />
-    <Compile Include="DAL\Repository\Repository.cs" />
-    <Compile Include="DAL\Repository\UserRepository.cs" />
+    <Compile Include="DAL\Repository\AbstractRepository.cs" />
+    <Compile Include="DAL\Repository\AdminRepository.cs" />
+    <Compile Include="DAL\Repository\CandidateRepository.cs" />
+    <Compile Include="DAL\Repository\VoterRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -144,8 +146,12 @@
     <Compile Include="Models\Transferable.cs" />
     <Compile Include="Models\Vote.cs" />
     <Compile Include="Models\Voter.cs" />
+    <Compile Include="Models\VoterCandidate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seeds\AdminSeed.cs" />
+    <Compile Include="Seeds\ConsituencySeed.cs" />
     <Compile Include="Seeds\PartySeed.cs" />
+    <Compile Include="Seeds\PreferentialVotingSeed.cs" />
     <Compile Include="Seeds\VoterSeed.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,11 +6,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Web.Models
 {
-    public class Vote
+    public abstract class Vote
     {
+        public static int Limit = 1;
+
         [Key]
-        public int VoteID { get; set; }
-        public int VoteLimit { get; set; }
+        public int VoteId { get; set; }
 
         public void SaveData()
         {
