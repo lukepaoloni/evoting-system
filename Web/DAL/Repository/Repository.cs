@@ -2,62 +2,65 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Data.Entity;
 using Web.DAL;
 
 namespace Web.DAL.Repository
 {
-    public class Repository<T> : IRepository<T>, IDisposable
+    public class Repository<T> : IRepository<T> where T : class, IDisposable
     {
-        private EvotingContext context;
+        public readonly EvotingContext Context;
+        private readonly DbSet<T> _entitySet;
 
         public Repository(EvotingContext context)
         {
-            this.context = context;
+            Context = context;
+            _entitySet = Context.Set<T>();
         }
 
         public IEnumerable<T> GetAll()
         {
-            return context.T.toList();
+            return _entitySet.ToList();
         }
 
         public T GetById(int id)
         {
-            return context.T.Find(id);
+            return _entitySet.Find(id);
         }
 
         public void Create(T entity)
         {
-            context.T.Add(entity);
+            _entitySet.Add(entity);
         }
 
         public void Delete(int id)
         {
             T entity = GetById(id);
-            context.T.Remove(entity);
+            _entitySet.Remove(entity);
         }
 
         public void Update(T entity)
         {
-            context.Entry(T).State = EntityState.Modified;
+            Context.Entry(_entitySet).State = EntityState.Modified;
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            Context.SaveChanges();
         }
 
-        private bool disposed = false;
+        private bool _disposed = false;
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!this._disposed)
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    Context.Dispose();
                 }
             }
-            this.disposed = false;
+            this._disposed = false;
         }
 
         public void Dispose()

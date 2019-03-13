@@ -6,13 +6,11 @@ using Web.DAL;
 
 namespace Web.DAL.Repository
 {
-    public class UserRepository<T> : IUserRepository<T>, Repository<T>
+    public class UserRepository<T> : Repository<T> where T : class, IUserRepository<T>
     {
-        private EvotingContext context;
-
-        public UserRepository(EvotingContext context)
+        public UserRepository(EvotingContext Context)
         {
-            this.context = context;
+            
         }
 
         public IEnumerable<T> GetUsers()
