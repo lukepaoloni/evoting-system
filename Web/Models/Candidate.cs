@@ -5,6 +5,7 @@ using System.Web;
 
 namespace Web.Models
 {
+
     public class Candidate
     {
         public String FirstName { get; set; }

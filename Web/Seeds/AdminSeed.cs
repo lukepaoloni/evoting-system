@@ -7,54 +7,48 @@ using Web.Models;
 
 namespace Web.Seeds
 {
-    public class VoterSeed
+    public class AdminSeed
     {
         public static void Seed(EvotingContext context)
         {
-            var voters = new List<Voter>
+            var admins = new List<Admin>
             {
-                new Voter
+                new Admin
                 {
                     FirstName = Faker.Name.First(),
                     LastName = Faker.Name.Last(),
-                    Postcode = Faker.Address.UkPostCode(),
                     Username = Faker.Internet.UserName(),
-                    Role = "voter"
+                    Role = "admin"
                 },
-                new Voter
+                new Admin
                 {
                     FirstName = Faker.Name.First(),
                     LastName = Faker.Name.Last(),
-                    Postcode = Faker.Address.UkPostCode(),
                     Username = Faker.Internet.UserName(),
-                    Role = "voter"
+                    Role = "admin"
                 },
-                new Voter
+                new Admin
                 {
                     FirstName = Faker.Name.First(),
                     LastName = Faker.Name.Last(),
-                    Postcode = Faker.Address.UkPostCode(),
                     Username = Faker.Internet.UserName(),
-                    Role = "voter"
+                    Role = "admin"
                 },
-                new Voter
+                new Admin
                 {
                     FirstName = Faker.Name.First(),
                     LastName = Faker.Name.Last(),
-                    Postcode = Faker.Address.UkPostCode(),
-                    Role = "voter"
+                    Role = "admin"
                 },
-                new Voter
+                new Admin
                 {
                     FirstName = Faker.Name.First(),
                     LastName = Faker.Name.Last(),
-                    Postcode = Faker.Address.UkPostCode(),
                     Username = Faker.Internet.UserName(),
-                    Role = "voter"
+                    Role = "admin"
                 }
             };
-
-            voters.ForEach(v => context.Voters.Add(v));
+            admins.ForEach(a => context.Admins.Add(a));
             context.SaveChanges();
         }
     }

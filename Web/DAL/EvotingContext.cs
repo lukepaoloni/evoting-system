@@ -16,12 +16,14 @@ namespace Web.DAL
         }
 
         public DbSet<Voter> Voters { get; set; }
+        public DbSet<Preferential> Preferentials { get; set; }
+        public DbSet<Party> Parties { get; set; }
+        public DbSet<Admin> Admins { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-        public System.Data.Entity.DbSet<Web.Models.Party> Parties { get; set; }
     }
 }

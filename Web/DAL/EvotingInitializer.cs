@@ -13,6 +13,7 @@ namespace Web.DAL
         {
             VoterSeed.Seed(context);
             PartySeed.Seed(context);
+            AdminSeed.Seed(context);
         }
     }
 }
