@@ -12,7 +12,7 @@ namespace Web.Models
         public int Partyid { get; set; }
         public string Name { get; set; }
         public string Link { get; set; }
-        public string Manifesto { get; set; } 
+        public IEnumerable<string> Manifesto { get; set; } 
 
         public Party() { }
     }

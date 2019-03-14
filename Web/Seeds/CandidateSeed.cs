@@ -17,7 +17,8 @@ namespace Web.Seeds
             var constituencyRepository = new ConstituencyRepository(context);
             var partyRepository = new PartyRepository(context);
 
-            for (var i = 0; i < count; i++)
+
+            for (var i = 1; i <= count; i++)
             {
                 var constituency = constituencyRepository.GetConstituencyById(Faker.RandomNumber.Next(1, 5));
                 var party = partyRepository.GetPartyById(Faker.RandomNumber.Next(1, 5));

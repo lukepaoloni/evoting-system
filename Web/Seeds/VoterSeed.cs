@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Web.DAL;
 using Web.Models;
+using Web.DAL.Repository;
 
 namespace Web.Seeds
 {
@@ -11,46 +12,53 @@ namespace Web.Seeds
     {
         public static void Seed(EvotingContext context)
         {
+            var constituencyRepository = new ConstituencyRepository(context);
             var voters = new List<Voter>
             {
                 new Voter
                 {
                     FirstName = Faker.Name.First(),
                     LastName = Faker.Name.Last(),
-                    Postcode = Faker.Address.UkPostCode(),
                     Username = Faker.Internet.UserName(),
-                    Role = "voter"
+                    Role = Voter.ROLE,
+                    Password = "password",
+                    Constituency = constituencyRepository.GetConstituencyById(Faker.RandomNumber.Next(1, 5))
                 },
                 new Voter
                 {
                     FirstName = Faker.Name.First(),
                     LastName = Faker.Name.Last(),
-                    Postcode = Faker.Address.UkPostCode(),
                     Username = Faker.Internet.UserName(),
-                    Role = "voter"
+                    Role = Voter.ROLE,
+                    Password = "password",
+                    Constituency = constituencyRepository.GetConstituencyById(Faker.RandomNumber.Next(1, 5))
                 },
                 new Voter
                 {
                     FirstName = Faker.Name.First(),
                     LastName = Faker.Name.Last(),
-                    Postcode = Faker.Address.UkPostCode(),
                     Username = Faker.Internet.UserName(),
-                    Role = "voter"
+                    Role = Voter.ROLE,
+                    Password = "password",
+                    Constituency = constituencyRepository.GetConstituencyById(Faker.RandomNumber.Next(1, 5))
                 },
                 new Voter
                 {
                     FirstName = Faker.Name.First(),
                     LastName = Faker.Name.Last(),
-                    Postcode = Faker.Address.UkPostCode(),
-                    Role = "voter"
+                    Username = Faker.Internet.UserName(),
+                    Role = Voter.ROLE,
+                    Password = "password",
+                    Constituency = constituencyRepository.GetConstituencyById(Faker.RandomNumber.Next(1, 5))
                 },
                 new Voter
                 {
                     FirstName = Faker.Name.First(),
                     LastName = Faker.Name.Last(),
-                    Postcode = Faker.Address.UkPostCode(),
                     Username = Faker.Internet.UserName(),
-                    Role = "voter"
+                    Role = Voter.ROLE,
+                    Password = "password",
+                    Constituency = constituencyRepository.GetConstituencyById(Faker.RandomNumber.Next(1, 5))
                 }
             };
 

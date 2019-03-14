@@ -11,10 +11,10 @@ namespace Web.DAL
     {
         protected override void Seed(EvotingContext context)
         {
-            VoterSeed.Seed(context);
-            PartySeed.Seed(context);
-            AdminSeed.Seed(context);
             ConsituencySeed.Seed(context);
+            VoterSeed.Seed(context);
+            AdminSeed.Seed(context);
+            PartySeed.Seed(context);
         }
     }
 }

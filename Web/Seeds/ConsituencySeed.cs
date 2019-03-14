@@ -15,11 +15,28 @@ namespace Web.Seeds
             {
                 new Constituency
                 {
-                    Name = "Bedford"
+                    Name = Faker.Address.UkCounty()
+                },
+                new Constituency
+                {
+                    Name = Faker.Address.UkCounty(),
+                },
+                new Constituency
+                {
+                    Name = Faker.Address.UkCounty()
+                },
+                new Constituency
+                {
+                    Name = Faker.Address.UkCounty()
+                },
+                new Constituency
+                {
+                    Name = Faker.Address.UkCounty()
                 }
             };
 
             constituencies.ForEach(c => context.Constituencies.Add(c));
+            context.SaveChanges();
         }
     }
 }
