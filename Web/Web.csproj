@@ -124,6 +124,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\AdminsController.cs" />
+    <Compile Include="Controllers\Api\CandidatesController.cs" />
     <Compile Include="Controllers\Api\ConstituenciesController.cs" />
     <Compile Include="Controllers\Api\PartiesController.cs" />
     <Compile Include="Controllers\Api\VotersController.cs" />
