@@ -15,12 +15,12 @@ namespace Web.Seeds
         {
             var voterRepository = new VoterRepository(context);
 
+            // Get a voter
+            var voter = voterRepository.GetVoterById(Faker.RandomNumber.Next(1, 5));
+            
             // Reoccur for three votes
             for (int i = 0; i < Preferential.Limit; i++)
             {
-                // Get a voter
-                Voter voter = voterRepository.GetVoterById(Faker.RandomNumber.Next(1, 5));
-
                 // Get the constituency the voter is registered to
                 var constituency = voter.Constituency;
 
