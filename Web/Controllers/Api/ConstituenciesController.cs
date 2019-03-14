@@ -10,24 +10,32 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Web.DAL;
 using Web.Models;
+using Web.DAL.Repository;
 
 namespace Web.Controllers.Api
 {
     public class ConstituenciesController : ApiController
     {
-        private EvotingContext db = new EvotingContext();
+        private readonly EvotingContext db = new EvotingContext();
+        private readonly ConstituencyRepository _constituencyRepository;
+
+        public ConstituenciesController()
+        {
+            _constituencyRepository = new ConstituencyRepository(db);
+        }
 
         // GET: api/Constituencies
         public IQueryable<Constituency> GetConstituencies()
         {
-            return db.Constituencies;
+            return _constituencyRepository.GetAllConstituencies();
         }
 
         // GET: api/Constituencies/5
         [ResponseType(typeof(Constituency))]
         public IHttpActionResult GetConstituency(int id)
         {
-            Constituency constituency = db.Constituencies.Find(id);
+            var constituency = _constituencyRepository.GetConstituencyById(id);
+
             if (constituency == null)
             {
                 return NotFound();
@@ -45,7 +53,7 @@ namespace Web.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            if (id != constituency.Constituencyid)
+            if (id != constituency.Id)
             {
                 return BadRequest();
             }
@@ -80,26 +88,20 @@ namespace Web.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            db.Constituencies.Add(constituency);
-            db.SaveChanges();
+            _constituencyRepository.Create(constituency);
+            _constituencyRepository.Save();
 
-            return CreatedAtRoute("DefaultApi", new { id = constituency.Constituencyid }, constituency);
+            return CreatedAtRoute("DefaultApi", new { id = constituency.Id }, constituency);
         }
 
         // DELETE: api/Constituencies/5
         [ResponseType(typeof(Constituency))]
         public IHttpActionResult DeleteConstituency(int id)
         {
-            Constituency constituency = db.Constituencies.Find(id);
-            if (constituency == null)
-            {
-                return NotFound();
-            }
+            _constituencyRepository.Delete(id);
+            _constituencyRepository.Save();
 
-            db.Constituencies.Remove(constituency);
-            db.SaveChanges();
-
-            return Ok(constituency);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)
@@ -113,7 +115,7 @@ namespace Web.Controllers.Api
 
         private bool ConstituencyExists(int id)
         {
-            return db.Constituencies.Count(e => e.Constituencyid == id) > 0;
+            return db.Constituencies.Count(e => e.Id == id) > 0;
         }
     }
 }

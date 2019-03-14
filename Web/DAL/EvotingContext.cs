@@ -19,6 +19,7 @@ namespace Web.DAL
         public DbSet<VoterCandidate> VoterCandidates { get; set; }
         public DbSet<Party> Parties { get; set; }
         public DbSet<Constituency> Constituencies { get; set; }
+        public DbSet<Candidate> Candidates { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

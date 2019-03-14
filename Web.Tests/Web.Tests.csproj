@@ -66,11 +66,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestDbSet.cs" />
-    <Compile Include="TestVoterDbSet.cs" />
     <Compile Include="TestVotersController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestPartiesController.cs" />
+    <Compile Include="TestAdminsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
