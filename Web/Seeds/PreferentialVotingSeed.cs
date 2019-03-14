@@ -18,15 +18,15 @@ namespace Web.Seeds
             // Get a voter
             var voter = voterRepository.GetVoterById(Faker.RandomNumber.Next(1, 5));
             
+            // Get the constituency the voter is registered to
+            var constituency = voter.Constituency;
+            
+            // Get the candidates in the constituency
+            var candidates = constituency.Candidates;
+            
             // Reoccur for three votes
             for (int i = 0; i < Preferential.Limit; i++)
             {
-                // Get the constituency the voter is registered to
-                var constituency = voter.Constituency;
-
-                // Get the candidates in the constituency
-                var candidates = constituency.Candidates;
-
                 // Get a random candidate in the list of candidates
                 var candidate = candidates.ElementAt(Faker.RandomNumber.Next(1, 5));
 
