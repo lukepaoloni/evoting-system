@@ -29,7 +29,7 @@ namespace Web.Seeds
                 {
                     // Get a random candidate in the list of candidates
                     var candidates = candidateRepostiory.GetCandidatesByConstituency(constituency);
-                    var candidate = candidates.ElementAt(Faker.RandomNumber.Next(1, 5));
+                    var candidate = candidates.ElementAt(Faker.RandomNumber.Next(1, candidates.Count()));
 
                     // Create a preferential vote
                     var vote = new VoterCandidate

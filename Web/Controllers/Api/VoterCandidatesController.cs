@@ -18,9 +18,10 @@ namespace Web.Controllers.Api
         private EvotingContext db = new EvotingContext();
 
         // GET: api/VoterCandidates
-        public IQueryable<VoterCandidate> GetVoterCandidates()
+        public IEnumerable<VoterCandidate> GetVoterCandidates()
         {
-            return db.VoterCandidates;
+            var results = db.VoterCandidates.ToList();
+            return results;
         }
 
         // GET: api/VoterCandidates/5

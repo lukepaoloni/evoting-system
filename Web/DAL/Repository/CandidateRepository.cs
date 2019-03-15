@@ -40,7 +40,7 @@ namespace Web.DAL.Repository
 
         public ICollection<Candidate> GetCandidatesByConstituency(Constituency constituency)
         {
-            return Context.Candidates.Include("Constituency").Where(c => c.Constituency == constituency).ToList();
+            return Context.Candidates.ToList();
         }
 
         public void DeleteCandidate(int candidateId)

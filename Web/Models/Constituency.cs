@@ -11,7 +11,7 @@ namespace Web.Models
     {
         [Key]
         public int Id { get; set; }
-        public String Name { get; set; }
-        public virtual Candidate ElectedCandidate { get; set; }
+
+        public string Name { get; set; }
     }
 }
