@@ -19,6 +19,7 @@ namespace Web.DAL
         public DbSet<Preferential> Preferentials { get; set; }
         public DbSet<Party> Parties { get; set; }
         public DbSet<Admin> Admins { get; set; }
+        public DbSet<Config> Config { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

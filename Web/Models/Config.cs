@@ -6,15 +6,16 @@ using Web.DAL.Factory;
 
 namespace Web.Models
 {
-    public class FirstPass : Vote , IVoteType
+    public class Config
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int Limit { get; }
+        public VoteType VoteType { get; set; }
 
-        //public override IVoteType Create(DateTime startDate, DateTime endDate)
-        //{
-        //    return new FirstPass(startDate, endDate);
-        //}
+        public Config(VoteType type)
+        {
+            VoteType = type;
+        }
     }
+    
 }

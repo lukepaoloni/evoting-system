@@ -13,20 +13,20 @@ namespace Web.Models
 
         public void ConfigureVote(VoteType type)
         {
-            switch (type)
-            {
-                case VoteType.Preferential:
-                    vote = new Preferential();
-                    break;
-                case VoteType.Transferable:
-                    vote = new Transferable();
-                    break;
-                case VoteType.FirstPass:
-                    vote = new FirstPass();
-                    break;
-            }
-            Console.WriteLine(vote.ToString());
-            Console.WriteLine("Called ConfigureVote");
+            //switch (type)
+            //{
+            //    case VoteType.Preferential:
+            //        vote = new Preferential();
+            //        break;
+            //    case VoteType.Transferable:
+            //        vote = new Transferable();
+            //        break;
+            //    case VoteType.FirstPass:
+            //        vote = new FirstPass();
+            //        break;
+            //}
+            //Console.WriteLine(vote.ToString());
+            //Console.WriteLine("Called ConfigureVote");
         }
 
         public void GenerateResults()

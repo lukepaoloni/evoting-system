@@ -128,6 +128,7 @@
     <Compile Include="Controllers\Api\VotersController.cs" />
     <Compile Include="DAL\EvotingContext.cs" />
     <Compile Include="DAL\EvotingInitializer.cs" />
+    <Compile Include="DAL\Factory\VoteTypeFactory.cs" />
     <Compile Include="DAL\Repository\AbstractRepository.cs" />
     <Compile Include="DAL\Repository\CandidateRepository.cs" />
     <Compile Include="DAL\Repository\VoterRepository.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Models\AbstractUser.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Candidate.cs" />
+    <Compile Include="Models\Config.cs" />
     <Compile Include="Models\Constituency.cs" />
     <Compile Include="Models\FirstPass.cs" />
     <Compile Include="Models\Party.cs" />
@@ -147,6 +149,7 @@
     <Compile Include="Models\VoterCandidate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seeds\AdminSeed.cs" />
+    <Compile Include="Seeds\ConfigSeed.cs" />
     <Compile Include="Seeds\PartySeed.cs" />
     <Compile Include="Seeds\VotingSeed.cs" />
     <Compile Include="Seeds\VoterSeed.cs" />
