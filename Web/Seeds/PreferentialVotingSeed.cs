@@ -15,29 +15,32 @@ namespace Web.Seeds
         {
             var voterRepository = new VoterRepository(context);
 
-            // Get a voter
-            var voter = voterRepository.GetVoterById(Faker.RandomNumber.Next(1, 5));
-            
-            // Get the constituency the voter is registered to
-            var constituency = voter.Constituency;
-            
-            // Get the candidates in the constituency
-            var candidates = constituency.Candidates;
-            
-            // Reoccur for three votes
-            for (int i = 0; i < Preferential.Limit; i++)
+            for (var i = 1; i <= 5; i++)
             {
-                // Get a random candidate in the list of candidates
-                var candidate = candidates.ElementAt(Faker.RandomNumber.Next(1, 5));
+                // Get a voter
+                var voter = voterRepository.GetVoterById(i);
 
-                // Create a preferential vote
-                var vote = new VoterCandidate
+                // Get the constituency the voter is registered to
+                var constituency = voter.Constituency;
+
+                // Get the candidates in the constituency
+                var candidates = constituency.Candidates;
+
+                // Reoccur for three votes
+                for (var t = 0; t < Preferential.Limit; t++)
                 {
-                    Candidate = candidate,
-                    Voter = voter,
-                    Priority = (Priority) i
-                };
-                context.VoterCandidates.Add(vote);
+                    // Get a random candidate in the list of candidates
+                    var candidate = candidates.ElementAt(Faker.RandomNumber.Next(1, 5));
+
+                    // Create a preferential vote
+                    var vote = new VoterCandidate
+                    {
+                        Candidate = candidate,
+                        Voter = voter,
+                        Priority = (Priority) t
+                    };
+                    context.VoterCandidates.Add(vote);
+                }
             }
             context.SaveChanges();
         }

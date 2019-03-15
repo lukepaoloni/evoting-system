@@ -22,6 +22,7 @@ namespace Web.Seeds
             {
                 var constituency = constituencyRepository.GetConstituencyById(Faker.RandomNumber.Next(1, 5));
                 var party = partyRepository.GetPartyById(Faker.RandomNumber.Next(1, 5));
+
                 var candidate = new Candidate
                 {
                     Constituency = constituency,
@@ -32,7 +33,6 @@ namespace Web.Seeds
                 };
                 candidates.Add(candidate);
             }
-
             candidates.ForEach(c => context.Candidates.Add(c));
             context.SaveChanges();
         }

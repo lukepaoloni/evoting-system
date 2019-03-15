@@ -127,6 +127,7 @@
     <Compile Include="Controllers\Api\CandidatesController.cs" />
     <Compile Include="Controllers\Api\ConstituenciesController.cs" />
     <Compile Include="Controllers\Api\PartiesController.cs" />
+    <Compile Include="Controllers\Api\VoterCandidatesController.cs" />
     <Compile Include="Controllers\Api\VotersController.cs" />
     <Compile Include="DAL\EvotingContext.cs" />
     <Compile Include="DAL\EvotingInitializer.cs" />

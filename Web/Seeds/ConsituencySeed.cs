@@ -15,7 +15,7 @@ namespace Web.Seeds
             {
                 new Constituency
                 {
-                    Name = Faker.Address.UkCounty()
+                    Name = Faker.Address.UkCounty(),
                 },
                 new Constituency
                 {
