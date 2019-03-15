@@ -14,6 +14,7 @@ namespace Web.Seeds
         public static void Seed(EvotingContext context)
         {
             var voterRepository = new VoterRepository(context);
+            var candidateRepostiory = new CandidateRepository(context);
 
             for (var i = 1; i <= 5; i++)
             {
@@ -23,13 +24,11 @@ namespace Web.Seeds
                 // Get the constituency the voter is registered to
                 var constituency = voter.Constituency;
 
-                // Get the candidates in the constituency
-                var candidates = constituency.Candidates;
-
                 // Reoccur for three votes
-                for (var t = 0; t < Preferential.Limit; t++)
+                for (var t = 0; t < Preferential.MAX_VOTES; t++)
                 {
                     // Get a random candidate in the list of candidates
+                    var candidates = candidateRepostiory.GetCandidatesByConstituency(constituency);
                     var candidate = candidates.ElementAt(Faker.RandomNumber.Next(1, 5));
 
                     // Create a preferential vote

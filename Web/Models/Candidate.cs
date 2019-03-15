@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace Web.Models
 {
@@ -10,6 +11,7 @@ namespace Web.Models
     {
         public String FirstName { get; set; }
         public String LastName { get; set; }
+        //[Foreign()]
         public Constituency Constituency { get; set; }
         public Party Party { get; set; }
         public int Id { get; set; }
