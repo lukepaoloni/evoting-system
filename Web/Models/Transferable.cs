@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Web.DAL.Factory;
 
 namespace Web.Models
 { 
-    public class Transferable : Vote
+    public class Transferable : Vote , IVoteType
     {
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public int Limit { get; }
+        public VoteType VoteType { get; set; }
+
         private int Quota { get; set; }
         private int NumberOfSeatRemaining { get; set; }
-        private bool FirstPref { get; set; }
-        private bool SecondPref { get; set; }
-        private bool ThirdPref { get; set; }
 
         public bool HasQuotaReached() 
         {
@@ -22,5 +25,10 @@ namespace Web.Models
         {
 
         }
+
+        //public override IVoteType Create(DateTime startDate, DateTime endDate)
+        //{
+        //    return new Transferable();
+        //}
     }
 }

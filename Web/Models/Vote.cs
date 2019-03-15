@@ -3,10 +3,11 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Web.DAL.Factory;
 
 namespace Web.Models
 {
-    public abstract class Vote
+    public abstract class Vote : VoteFactory
     {
         public static int Limit = 1;
 

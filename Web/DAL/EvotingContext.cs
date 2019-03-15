@@ -18,6 +18,8 @@ namespace Web.DAL
         public DbSet<AbstractUser> Users { get; set; }
         public DbSet<VoterCandidate> VoterCandidates { get; set; }
         public DbSet<Party> Parties { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Config> Config { get; set; }
         public DbSet<Constituency> Constituencies { get; set; }
         public DbSet<Candidate> Candidates { get; set; }
 
