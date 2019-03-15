@@ -10,24 +10,32 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Web.DAL;
 using Web.Models;
+using Web.DAL.Repository;
 
 namespace Web.Controllers.Api
 {
     public class AdminsController : ApiController
     {
         private EvotingContext db = new EvotingContext();
+        private AdminRepository _adminRepository;
+
+        public AdminsController()
+        {
+            _adminRepository = new AdminRepository(db);
+        }
 
         // GET: api/Admins
         public IQueryable<Admin> GetAdmins()
         {
-            return db.Admins;
+            return _adminRepository.GetAdmins();
         }
 
         // GET: api/Admins/5
         [ResponseType(typeof(Admin))]
         public IHttpActionResult GetAdmin(int id)
         {
-            Admin admin = db.Admins.Find(id);
+            Admin admin = _adminRepository.GetAdminById(id);
+
             if (admin == null)
             {
                 return NotFound();
@@ -79,9 +87,8 @@ namespace Web.Controllers.Api
             {
                 return BadRequest(ModelState);
             }
-
-            db.Admins.Add(admin);
-            db.SaveChanges();
+            _adminRepository.CreateAdmin(admin);
+            _adminRepository.Save();
 
             return CreatedAtRoute("DefaultApi", new { id = admin.Id }, admin);
         }
@@ -90,16 +97,9 @@ namespace Web.Controllers.Api
         [ResponseType(typeof(Admin))]
         public IHttpActionResult DeleteAdmin(int id)
         {
-            Admin admin = db.Admins.Find(id);
-            if (admin == null)
-            {
-                return NotFound();
-            }
-
-            db.Admins.Remove(admin);
-            db.SaveChanges();
-
-            return Ok(admin);
+            _adminRepository.DeleteAdmin(id);
+            _adminRepository.Save();
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)
@@ -113,7 +113,7 @@ namespace Web.Controllers.Api
 
         private bool AdminExists(int id)
         {
-            return db.Admins.Count(e => e.Id == id) > 0;
+            return db.Users.Count(e => e.Id == id) > 0;
         }
     }
 }

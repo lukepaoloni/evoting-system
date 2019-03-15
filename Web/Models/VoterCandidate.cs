@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Web.Models
 {
-    public enum Priority { FirstPass, SecondPass, ThirdPass }
+    public enum Priority { Low, Medium, High }
     public class VoterCandidate
     {
         [Key]

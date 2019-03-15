@@ -7,6 +7,7 @@ namespace Web.Models
 {
     public class Admin : AbstractUser
     {
+        public static string ROLE = "admin";
         private static object vote;
 
         public enum VoteType { Preferential, Transferable, FirstPass }
