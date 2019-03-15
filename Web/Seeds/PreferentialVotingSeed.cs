@@ -32,7 +32,7 @@ namespace Web.Seeds
                     var candidate = candidates.ElementAt(Faker.RandomNumber.Next(1, candidates.Count()));
 
                     // Create a preferential vote
-                    var vote = new VoterCandidate
+                    var vote = new Votes
                     {
                         Candidate = candidate,
                         Voter = voter,

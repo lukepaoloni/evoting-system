@@ -151,7 +151,7 @@
     <Compile Include="Controllers\Api\CandidatesController.cs" />
     <Compile Include="Controllers\Api\ConstituenciesController.cs" />
     <Compile Include="Controllers\Api\PartiesController.cs" />
-    <Compile Include="Controllers\Api\VoterCandidatesController.cs" />
+    <Compile Include="Controllers\Api\VotesController.cs" />
     <Compile Include="Controllers\Api\VotersController.cs" />
     <Compile Include="DAL\EvotingContext.cs" />
     <Compile Include="DAL\EvotingInitializer.cs" />
@@ -176,7 +176,7 @@
     <Compile Include="Models\Transferable.cs" />
     <Compile Include="Models\Vote.cs" />
     <Compile Include="Models\Voter.cs" />
-    <Compile Include="Models\VoterCandidate.cs" />
+    <Compile Include="Models\Votes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seeds\AdminSeed.cs" />
     <Compile Include="Seeds\ConfigSeed.cs" />

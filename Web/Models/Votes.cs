@@ -8,7 +8,7 @@ using System.Web;
 namespace Web.Models
 {
     public enum Priority { Low, Medium, High }
-    public class VoterCandidate
+    public class Votes
     {
         [Key]
         public int Id { get; set; }

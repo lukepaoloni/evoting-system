@@ -13,22 +13,22 @@ using Web.Models;
 
 namespace Web.Controllers.Api
 {
-    public class VoterCandidatesController : ApiController
+    public class VotesController : ApiController
     {
         private EvotingContext db = new EvotingContext();
 
         // GET: api/VoterCandidates
-        public IEnumerable<VoterCandidate> GetVoterCandidates()
+        public IEnumerable<Votes> GetVoterCandidates()
         {
             var results = db.VoterCandidates.ToList();
             return results;
         }
 
         // GET: api/VoterCandidates/5
-        [ResponseType(typeof(VoterCandidate))]
+        [ResponseType(typeof(Votes))]
         public IHttpActionResult GetVoterCandidate(int id)
         {
-            VoterCandidate voterCandidate = db.VoterCandidates.Find(id);
+            Votes voterCandidate = db.VoterCandidates.Find(id);
             if (voterCandidate == null)
             {
                 return NotFound();
@@ -39,7 +39,7 @@ namespace Web.Controllers.Api
 
         // PUT: api/VoterCandidates/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutVoterCandidate(int id, VoterCandidate voterCandidate)
+        public IHttpActionResult PutVoterCandidate(int id, Votes voterCandidate)
         {
             if (!ModelState.IsValid)
             {
@@ -73,8 +73,8 @@ namespace Web.Controllers.Api
         }
 
         // POST: api/VoterCandidates
-        [ResponseType(typeof(VoterCandidate))]
-        public IHttpActionResult PostVoterCandidate(VoterCandidate voterCandidate)
+        [ResponseType(typeof(Votes))]
+        public IHttpActionResult PostVoterCandidate(Votes voterCandidate)
         {
             if (!ModelState.IsValid)
             {
@@ -88,10 +88,10 @@ namespace Web.Controllers.Api
         }
 
         // DELETE: api/VoterCandidates/5
-        [ResponseType(typeof(VoterCandidate))]
+        [ResponseType(typeof(Votes))]
         public IHttpActionResult DeleteVoterCandidate(int id)
         {
-            VoterCandidate voterCandidate = db.VoterCandidates.Find(id);
+            Votes voterCandidate = db.VoterCandidates.Find(id);
             if (voterCandidate == null)
             {
                 return NotFound();
