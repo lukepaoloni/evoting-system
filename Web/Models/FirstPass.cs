@@ -11,10 +11,5 @@ namespace Web.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int Limit { get; }
-
-        //public override IVoteType Create(DateTime startDate, DateTime endDate)
-        //{
-        //    return new FirstPass(startDate, endDate);
-        //}
     }
 }

@@ -27,6 +27,11 @@ namespace Web.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Entity<AbstractUser>().ToTable("Users", "dbo");
+
+            //modelBuilder.Entity<Voter>()
+            //        .HasRequired(v => v.Constituency)
+            //        .WithRequiredDependent();
+
         }
 
     }

@@ -12,7 +12,7 @@ namespace Web.Models
         public static int Limit = 1;
 
         [Key]
-        public int VoteId { get; set; }
+        public int Id { get; set; }
 
         public void SaveData()
         {

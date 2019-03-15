@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -11,8 +12,8 @@ namespace Web.Models
     {
         [Key]
         public int Id { get; set; }
-        public Voter Voter { get; set; }
-        public Candidate Candidate { get; set; }
+        public virtual Voter Voter { get; set; }
+        public virtual Candidate Candidate { get; set; }
         public Priority? Priority { get; set; }
     }
 }

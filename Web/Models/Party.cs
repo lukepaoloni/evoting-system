@@ -13,7 +13,5 @@ namespace Web.Models
         public string Name { get; set; }
         public string Link { get; set; }
         public IEnumerable<string> Manifesto { get; set; } 
-
-        public Party() { }
     }
 }
