@@ -16,7 +16,8 @@ namespace Web.DAL
             AdminSeed.Seed(context);
             PartySeed.Seed(context);
             CandidateSeed.Seed(context);
-            PreferentialVotingSeed.Seed(context);
+          //  PreferentialVotingSeed.Seed(context);
+            FirstPassSeed.Seed(context);
         }
     }
 }

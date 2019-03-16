@@ -9,7 +9,7 @@ namespace Web.Models
 {
     public class Preferential : Vote, IVoteType
     {
-        public static new int MAX_VOTES = 3;
+        public static int MAX_VOTES = 3;
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public new int Limit { get; }

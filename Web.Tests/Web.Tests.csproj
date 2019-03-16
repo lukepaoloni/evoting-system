@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestFirstPassController.cs" />
     <Compile Include="TestVotersController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestPartiesController.cs" />
