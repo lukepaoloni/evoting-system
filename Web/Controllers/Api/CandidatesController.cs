@@ -16,25 +16,25 @@ namespace Web.Controllers.Api
 {
     public class CandidatesController : ApiController
     {
-        private EvotingContext db = new EvotingContext();
-        private CandidateRepository candidateRepository;
+        private readonly EvotingContext _db = new EvotingContext();
+        private readonly CandidateRepository _candidateRepository;
 
         public CandidatesController()
         {
-            candidateRepository = new CandidateRepository(db);
+            _candidateRepository = new CandidateRepository(_db);
         }
 
         // GET: api/Candidates
-        public IQueryable<Candidate> GetCandidates()
+        public ICollection<Candidate> GetCandidates()
         {
-            return candidateRepository.GetCandidates();
+            return _candidateRepository.GetCandidates();
         }
 
         // GET: api/Candidates/5
         [ResponseType(typeof(Candidate))]
         public IHttpActionResult GetCandidate(int id)
         {
-            Candidate candidate = db.Candidates.Find(id);
+            Candidate candidate = _db.Candidates.Find(id);
             if (candidate == null)
             {
                 return NotFound();
@@ -57,11 +57,11 @@ namespace Web.Controllers.Api
                 return BadRequest();
             }
 
-            db.Entry(candidate).State = EntityState.Modified;
+            _db.Entry(candidate).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                _db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -87,8 +87,8 @@ namespace Web.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            db.Candidates.Add(candidate);
-            db.SaveChanges();
+            _db.Candidates.Add(candidate);
+            _db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = candidate.Id }, candidate);
         }
@@ -97,14 +97,14 @@ namespace Web.Controllers.Api
         [ResponseType(typeof(Candidate))]
         public IHttpActionResult DeleteCandidate(int id)
         {
-            Candidate candidate = db.Candidates.Find(id);
+            Candidate candidate = _db.Candidates.Find(id);
             if (candidate == null)
             {
                 return NotFound();
             }
 
-            db.Candidates.Remove(candidate);
-            db.SaveChanges();
+            _db.Candidates.Remove(candidate);
+            _db.SaveChanges();
 
             return Ok(candidate);
         }
@@ -113,14 +113,14 @@ namespace Web.Controllers.Api
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool CandidateExists(int id)
         {
-            return db.Candidates.Count(e => e.Id == id) > 0;
+            return _db.Candidates.Count(e => e.Id == id) > 0;
         }
     }
 }

@@ -8,12 +8,11 @@ namespace Web.DAL.Repository
 {
     public interface ICandidateRepository
     {
-        IQueryable<Candidate> GetCandidates();
+        ICollection<Candidate> GetCandidates();
         Candidate GetCandidateById(int candidateId);
         void CreateCandidate(Candidate candidate);
         void DeleteCandidate(int candidateId);
         void UpdateCandidate(Candidate candidate);
-        void Save();
     }
 
     public class CandidateRepository : AbstractRepository<Candidate>, ICandidateRepository
@@ -23,9 +22,9 @@ namespace Web.DAL.Repository
 
         }
 
-        public IQueryable<Candidate> GetCandidates()
+        public ICollection<Candidate> GetCandidates()
         {
-            return GetAll();
+            return Context.Candidates.ToList();
         }
 
         public Candidate GetCandidateById(int candidateId)
@@ -52,5 +51,6 @@ namespace Web.DAL.Repository
         {
             Update(candidate);
         }
+
     }
 }

@@ -17,18 +17,18 @@ namespace Web.Controllers.Api
     {
         private EvotingContext db = new EvotingContext();
 
-        // GET: api/VoterCandidates
-        public IEnumerable<Votes> GetVoterCandidates()
+        // GET: api/Votes
+        public IEnumerable<Votes> GetVotes()
         {
-            var results = db.VoterCandidates.ToList();
+            var results = db.Votes.ToList();
             return results;
         }
 
-        // GET: api/VoterCandidates/5
+        // GET: api/Votes/5
         [ResponseType(typeof(Votes))]
-        public IHttpActionResult GetVoterCandidate(int id)
+        public IHttpActionResult GetVote(int id)
         {
-            Votes voterCandidate = db.VoterCandidates.Find(id);
+            Votes voterCandidate = db.Votes.Find(id);
             if (voterCandidate == null)
             {
                 return NotFound();
@@ -37,21 +37,21 @@ namespace Web.Controllers.Api
             return Ok(voterCandidate);
         }
 
-        // PUT: api/VoterCandidates/5
+        // PUT: api/Votes/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutVoterCandidate(int id, Votes voterCandidate)
+        public IHttpActionResult PutVote(int id, Votes vote)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != voterCandidate.Id)
+            if (id != vote.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(voterCandidate).State = EntityState.Modified;
+            db.Entry(vote).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace Web.Controllers.Api
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VoterCandidateExists(id))
+                if (!VoteExists(id))
                 {
                     return NotFound();
                 }
@@ -72,35 +72,35 @@ namespace Web.Controllers.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/VoterCandidates
+        // POST: api/Votes
         [ResponseType(typeof(Votes))]
-        public IHttpActionResult PostVoterCandidate(Votes voterCandidate)
+        public IHttpActionResult PostVote(Votes vote)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.VoterCandidates.Add(voterCandidate);
+            db.Votes.Add(vote);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = voterCandidate.Id }, voterCandidate);
+            return CreatedAtRoute("DefaultApi", new { id = vote.Id }, vote);
         }
 
-        // DELETE: api/VoterCandidates/5
+        // DELETE: api/Votes/5
         [ResponseType(typeof(Votes))]
-        public IHttpActionResult DeleteVoterCandidate(int id)
+        public IHttpActionResult DeleteVote(int id)
         {
-            Votes voterCandidate = db.VoterCandidates.Find(id);
-            if (voterCandidate == null)
+            Votes vote = db.Votes.Find(id);
+            if (vote == null)
             {
                 return NotFound();
             }
 
-            db.VoterCandidates.Remove(voterCandidate);
+            db.Votes.Remove(vote);
             db.SaveChanges();
 
-            return Ok(voterCandidate);
+            return Ok(vote);
         }
 
         protected override void Dispose(bool disposing)
@@ -112,9 +112,9 @@ namespace Web.Controllers.Api
             base.Dispose(disposing);
         }
 
-        private bool VoterCandidateExists(int id)
+        private bool VoteExists(int id)
         {
-            return db.VoterCandidates.Count(e => e.Id == id) > 0;
+            return db.Votes.Count(e => e.Id == id) > 0;
         }
     }
 }

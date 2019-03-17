@@ -9,7 +9,7 @@ namespace Web.Models
     public class Party
     {
         [Key]
-        public int Partyid { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Link { get; set; }
         public IEnumerable<string> Manifesto { get; set; } 

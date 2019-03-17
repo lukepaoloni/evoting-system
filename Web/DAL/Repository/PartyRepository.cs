@@ -8,7 +8,7 @@ namespace Web.DAL.Repository
 {
     public interface IPartyRepository
     {
-        IQueryable<Party> GetAllParties();
+        ICollection<Party> GetAllParties();
         Party GetPartyById(int id);
     }
 
@@ -18,9 +18,9 @@ namespace Web.DAL.Repository
         {
         }
 
-        public IQueryable<Party> GetAllParties()
+        public ICollection<Party> GetAllParties()
         {
-            return GetAll();
+            return GetAll().ToList();
         }
 
         public Party GetPartyById(int id)

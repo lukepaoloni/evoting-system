@@ -14,11 +14,6 @@ namespace Web.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public VoteType VoteType { get; set; }
-
-        public Config(VoteType type)
-        {
-            VoteType = type;
-        }
     }
     
 }

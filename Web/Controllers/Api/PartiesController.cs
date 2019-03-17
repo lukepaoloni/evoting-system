@@ -9,25 +9,33 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Web.DAL;
+using Web.DAL.Repository;
 using Web.Models;
 
 namespace Web.Controllers.Api
 {
     public class PartiesController : ApiController
     {
-        private EvotingContext db = new EvotingContext();
+        private readonly EvotingContext _db = new EvotingContext();
+
+        private readonly PartyRepository _partyRepository;
+
+        public PartiesController()
+        {
+            _partyRepository = new PartyRepository(_db);
+        }
 
         // GET: api/Parties
-        public IQueryable<Party> GetParties()
+        public ICollection<Party> GetParties()
         {
-            return db.Parties;
+            return _partyRepository.GetAllParties();
         }
 
         // GET: api/Parties/5
         [ResponseType(typeof(Party))]
         public IHttpActionResult GetParty(int id)
         {
-            Party party = db.Parties.Find(id);
+            Party party = _db.Parties.Find(id);
             if (party == null)
             {
                 return NotFound();
@@ -45,16 +53,16 @@ namespace Web.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            if (id != party.Partyid)
+            if (id != party.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(party).State = EntityState.Modified;
+            _db.Entry(party).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                _db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -80,24 +88,24 @@ namespace Web.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            db.Parties.Add(party);
-            db.SaveChanges();
+            _db.Parties.Add(party);
+            _db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = party.Partyid }, party);
+            return CreatedAtRoute("DefaultApi", new { id = party.Id }, party);
         }
 
         // DELETE: api/Parties/5
         [ResponseType(typeof(Party))]
         public IHttpActionResult DeleteParty(int id)
         {
-            Party party = db.Parties.Find(id);
+            Party party = _db.Parties.Find(id);
             if (party == null)
             {
                 return NotFound();
             }
 
-            db.Parties.Remove(party);
-            db.SaveChanges();
+            _db.Parties.Remove(party);
+            _db.SaveChanges();
 
             return Ok(party);
         }
@@ -106,14 +114,14 @@ namespace Web.Controllers.Api
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool PartyExists(int id)
         {
-            return db.Parties.Count(e => e.Partyid == id) > 0;
+            return _db.Parties.Count(e => e.Id == id) > 0;
         }
     }
 }

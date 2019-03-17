@@ -19,14 +19,10 @@ namespace Web.Controllers.API
     {
         private EvotingContext db = new EvotingContext();
         private readonly VoterRepository _voterRepository;
-        private IVoteType VoteType;
-        private readonly Config Config = new Config(DAL.Factory.VoteType.FirstPass);
-        public VoteFactory VoteFactory = new VoteFactory();
 
         public VotersController()
         {
            _voterRepository = new VoterRepository(db);
-           VoteType = VoteFactory.Create(Config.VoteType);
         }
 
         // GET: api/Voters

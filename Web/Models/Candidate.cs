@@ -12,11 +12,14 @@ namespace Web.Models
 
     public class Candidate
     {
-        [Key, ForeignKey("Constituency")]
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        [Key, ForeignKey("Constituency")]
         public virtual Constituency Constituency { get; set; }
+
+        [Key, ForeignKey("Party")]
         public Party Party { get; set; }
         public int NumVotes { get; set; }
         public bool IsElected { get; set; }

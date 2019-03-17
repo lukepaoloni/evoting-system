@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Web;
 using Web.DAL;
 using Web.DAL.Repository;
@@ -9,7 +8,7 @@ using Web.Models;
 
 namespace Web.Seeds
 {
-    public class PreferentialVotingSeed
+    public class TransferableVotingSeed
     {
         public static void Seed(EvotingContext context)
         {
@@ -24,8 +23,7 @@ namespace Web.Seeds
                 // Get the constituency the voter is registered to
                 var constituency = voter.Constituency;
 
-                // Reoccur for three votes
-                for (var t = 0; t < Preferential.MAX_VOTES; t++)
+                for (var t = 0; t < Transferable.MAX_VOTES; t++)
                 {
                     // Get a random candidate in the list of candidates
                     var candidates = candidateRepository.GetCandidatesByConstituency(constituency);
@@ -36,7 +34,7 @@ namespace Web.Seeds
                     {
                         Candidate = candidate,
                         Voter = voter,
-                        Priority = (Priority) t
+                        Priority = (Priority)t
                     };
                     context.Votes.Add(vote);
                 }

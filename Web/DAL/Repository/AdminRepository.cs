@@ -6,17 +6,7 @@ using Web.Models;
 
 namespace Web.DAL.Repository
 {
-    public interface IAdminRepository
-    {
-        IQueryable<Admin> GetAdmins();
-        Admin GetAdminById(int adminId);
-        void CreateAdmin(Admin admin);
-        void DeleteAdmin(int adminId);
-        void UpdateAdmin(Admin admin);
-        void Save();
-    }
-
-    public class AdminRepository : AbstractRepository<Admin>, IAdminRepository
+    public class AdminRepository : AbstractRepository<Admin>
     {
         public AdminRepository(EvotingContext context) : base(context)
         {

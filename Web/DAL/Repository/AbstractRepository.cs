@@ -7,19 +7,9 @@ using Web.DAL;
 
 namespace Web.DAL.Repository
 {
-    public interface IRepository<T> : IDisposable
+    public abstract class AbstractRepository<T> where T : class
     {
-        IQueryable<T> GetAll();
-        T GetById(int id);
-        void Create(T entity);
-        void Delete(int id);
-        void Update(T entity);
-        void Save();
-    }
-
-    public abstract class AbstractRepository<T> : IRepository<T> where T : class
-    {
-        public readonly EvotingContext Context;
+        protected readonly EvotingContext Context;
         private readonly DbSet<T> _entitySet;
 
         protected AbstractRepository(EvotingContext context)

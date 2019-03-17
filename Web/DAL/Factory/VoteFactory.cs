@@ -32,7 +32,7 @@ namespace Web.DAL.Factory
                 case VoteType.Transferable:
                     return new Transferable();
                 case VoteType.FirstPass:
-                    return new FirstPass();
+                    return new FirstPast();
                 default:
                     throw new NotImplementedException();
             }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using Web.DAL.Factory;
 using Web.Seeds;
 
 namespace Web.DAL
@@ -16,8 +17,7 @@ namespace Web.DAL
             AdminSeed.Seed(context);
             PartySeed.Seed(context);
             CandidateSeed.Seed(context);
-          //  PreferentialVotingSeed.Seed(context);
-            FirstPassSeed.Seed(context);
+            ConfigSeed.Seed(context);
         }
     }
 }

@@ -170,7 +170,7 @@
     <Compile Include="Models\Candidate.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\Constituency.cs" />
-    <Compile Include="Models\FirstPass.cs" />
+    <Compile Include="Models\FirstPast.cs" />
     <Compile Include="Models\Party.cs" />
     <Compile Include="Models\Preferential.cs" />
     <Compile Include="Models\Transferable.cs" />
@@ -185,6 +185,7 @@
     <Compile Include="Seeds\FirstPassSeed.cs" />
     <Compile Include="Seeds\PartySeed.cs" />
     <Compile Include="Seeds\PreferentialVotingSeed.cs" />
+    <Compile Include="Seeds\TransferableVotingSeed.cs" />
     <Compile Include="Seeds\VoterSeed.cs" />
   </ItemGroup>
   <ItemGroup>

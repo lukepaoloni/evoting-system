@@ -10,7 +10,8 @@ namespace Web.Models
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int Limit { get; }
+        public static int MAX_VOTES = 1;
+        public new int Limit { get; }
         public VoteType VoteType { get; set; }
 
         private int Quota { get; set; }

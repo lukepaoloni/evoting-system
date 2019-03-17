@@ -12,7 +12,7 @@ namespace Web.Seeds
     {
         public static void Seed(EvotingContext context)
         {
-            var count = 5;
+            const int count = 5;
             var candidates = new List<Candidate>();
             var constituencyRepository = new ConstituencyRepository(context);
             var partyRepository = new PartyRepository(context);

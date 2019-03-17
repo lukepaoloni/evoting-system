@@ -6,7 +6,7 @@ using Web.DAL.Factory;
 
 namespace Web.Models
 {
-    public class FirstPass : Vote , IVoteType
+    public class FirstPast : Vote , IVoteType
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
