@@ -28,9 +28,9 @@ class App extends Component {
                      <Header/> 
                    {/* <Navigation/> */}
                     <Switch>
-                        {/* <Route path="/" exact render={()=>(
+                         {/* <Route path="/" exact render={()=>(
                             (sessionStorage.getItem('user')) ? (<HomePage/>):  (<Redirect to='/login' />)
-                        )}/> */}
+                        )}/>  */}
                         <Route path="/login" component={LoginPage}/>
                         <Route path="/" exact component={HomePage}/>
                         {/* <Route path="/vote"  render={()=>(
