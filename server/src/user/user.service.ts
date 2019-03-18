@@ -18,7 +18,6 @@ export class UserService {
       relations: ['constituency'],
     });
   }
-
   public async getOne(id: number) {
     return await this.userRepository.findOne({
       where: {
