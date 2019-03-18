@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Container, Form, FormControl, FormGroup, Input, FormFeedback, Label, FormText, Col, Button } from 'reactstrap';
+import { Container, Form, FormGroup, Input, FormFeedback, Label, FormText, Button } from 'reactstrap';
+
 
 export default class AdminConfig extends Component {
 
@@ -41,7 +42,7 @@ export default class AdminConfig extends Component {
       event.preventDefault();
       event.stopPropagation();
     }
-    this.setState({ validated: true });
+    // this.setState({ validated: true });
 
     if (form.checkValidity() === true) {
       event.preventDefault();
@@ -50,7 +51,7 @@ export default class AdminConfig extends Component {
   }
 
     render() {
-    const { validated } = this.state;
+    // const { validated } = this.state;
 
     return (
       <div>

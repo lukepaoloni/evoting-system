@@ -64,11 +64,17 @@ export default class LoginView extends Component{
                 username: this.state.username,
                 password: this.state.password
             }
-            
-            console.log(Loginuserdetails);
-            this.setState({loginSucc:true})
-            console.log(this.state.loginSucc);
-            sessionStorage.setItem('user', 'Blanc')
+            if(Loginuserdetails.username !== "Blanc" && Loginuserdetails.password !== "password")
+            {
+                alert("username or password incorrect!");
+                console.log(Loginuserdetails);
+            }
+            else {
+                console.log(Loginuserdetails);
+                this.setState({loginSucc:true})
+                console.log(this.state.loginSucc);
+                sessionStorage.setItem('user', 'Blanc')
+            }
           } else {
             alert("FORM INVALID")
             console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
@@ -78,12 +84,12 @@ export default class LoginView extends Component{
     
     render(){
         if(this.state.loginSucc)
-            return <Redirect to={'/'}/>
+            return <Redirect to={'/vote'}/>
         const { formErrors } = this.state;
         return(
             <div className="wrapper">
                 <div className="form-wrapper">
-                <img className="centerImg" src="https://cdn3.iconfinder.com/data/icons/city-lifestyle-glyph-black/2048/6496_-_Voting-512.png" width="200px" height="200px"></img>
+                <p className="fas fa-person-booth centerImg fa-8x"></p>
                     <h1>Login</h1>
                     <div >
                         <div className="evoting">

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import HomePage from './Pages/HomePage';
 import LoginPage from './Pages/LoginPage'
- import Header from './components/Header';
- import Footer from './components/Footer';
-
+import Header from './components/Header';
+import Footer from './components/Footer';
+import VotePage from './Pages/CandidatePage';
 import AdminConfig from './components/Admin/AdminConfig';
 
 import {BrowserRouter, 
@@ -31,9 +31,9 @@ class App extends Component {
                      <Header/> 
                    {/* <Navigation/> */}
                     <Switch>
-                         {/* <Route path="/" exact render={()=>(
-                            (sessionStorage.getItem('user')) ? (<HomePage/>):  (<Redirect to='/login' />)
-                        )}/>  */}
+                         <Route path="/vote" exact render={()=>(
+                            (sessionStorage.getItem('user')) ? (<VotePage/>):  (<Redirect to='/login' />)
+                        )}/> 
                         <Route path="/login" component={LoginPage}/>
                         <Route path="/" exact component={HomePage}/>
 
