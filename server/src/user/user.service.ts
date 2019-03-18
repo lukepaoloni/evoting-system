@@ -11,6 +11,12 @@ export class UserService {
   ) {}
 
   public async getAll() {
-    return await this.userRepository.find();
+    return await this.userRepository.find({
+      relations: ['constituency'],
+    });
+  }
+
+  public async getOne(id: number) {
+    return await this.userRepository.findOne(id);
   }
 }

@@ -4,7 +4,10 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BeforeInsert,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
+import { Constituency } from '../constituency/constituency.model';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -18,6 +21,10 @@ export class User extends BaseEntity {
 
   @Column()
   password: string;
+
+  @OneToOne(type => Constituency)
+  @JoinColumn()
+  constituency: Constituency;
 
   @BeforeInsert()
   hashPassword() {
