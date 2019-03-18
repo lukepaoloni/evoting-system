@@ -10,7 +10,7 @@ import {BrowserRouter,
         Route, 
         Switch, 
         Redirect} from 'react-router-dom'
-        
+
 import './App.css';
 const err = () =>{
   return(
@@ -36,8 +36,9 @@ class App extends Component {
                         )}/> 
                         <Route path="/login" component={LoginPage}/>
                         <Route path="/" exact component={HomePage}/>
-
-                        <Route path="/admin" exact component={AdminConfig}/>
+                        <Route path="/admin" exact render={()=>(
+                            (sessionStorage.getItem('user')) ? (<AdminConfig/>):  (<Redirect to='/login' />)
+                        )}/> 
                         {/* <Route path="/vote"  render={()=>(
                             (sessionStorage.getItem('user')) ? (<DownloadView/>):  (<Redirect to='/login' />)
                         )}/>

@@ -19,7 +19,6 @@ export default class AdminConfig extends Component {
      this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
   async handleInputChange(event) {
       const target = event.target;
 
