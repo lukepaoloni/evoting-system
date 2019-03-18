@@ -1,4 +1,12 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { CandidateService } from './candidate.service';
 
-@Controller('candidate')
-export class CandidateController {}
+@Controller('api/rest/candidates')
+export class CandidateController {
+  constructor(private readonly candidateService: CandidateService) {}
+
+  @Get()
+  public async getAll() {
+    return await this.candidateService.getAll();
+  }
+}

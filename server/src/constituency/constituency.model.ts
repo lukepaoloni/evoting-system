@@ -1,4 +1,12 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
+import {
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
+import { Candidate } from 'src/candidate/candidate.model';
 
 @Entity('constituencies')
 export class Constituency extends BaseEntity {
@@ -11,4 +19,7 @@ export class Constituency extends BaseEntity {
     length: 255,
   })
   name: string;
+
+  @OneToMany(type => Candidate, candidate => candidate.constituency)
+  candidates: Candidate[];
 }
