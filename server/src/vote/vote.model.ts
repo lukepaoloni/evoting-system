@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
+  Column,
 } from 'typeorm';
 import { Candidate } from 'src/candidate/candidate.model';
 import { User } from '../user/user.model';
@@ -20,4 +21,13 @@ export class Vote extends BaseEntity {
   @OneToOne(type => User)
   @JoinColumn()
   voter: User;
+
+  @Column('varchar')
+  priority: Priority;
+}
+
+export enum Priority {
+  Low = 'low',
+  Medium = 'medium',
+  High = 'high',
 }
