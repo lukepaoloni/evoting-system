@@ -14,7 +14,7 @@ export default class HomeView extends Component{
                         <h1 className="display-3">About Online Voting</h1>
                         <p>As technology advances and more transactions become electronic, many wonder when voting will truly enter the digital age. There are many issues to consider when it comes to exercising the right to vote through a computer. This includes building trust in the process, preserving secrecy of the ballot and ensuring citizens are not coerced or intimidated when using technology to vote.</p>
                         <p className="lead">
-                            <Button block color="primary">Vote Now</Button>
+                            <Button block color="primary">Login and Vote Now</Button>
                         </p>
                     </Jumbotron>
                 
