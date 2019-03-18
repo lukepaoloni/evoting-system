@@ -12,17 +12,15 @@ export default class HomeView extends Component{
             <div>
                 <Jumbotron fluid>
                     <Container fluid>
-                        <h1 classNameName="display-3">E-Voting</h1>
-                        <p classNameName="lead">Voting has started now. Voting will close at ...</p>
-                        <hr classNameName="my-2" />
-                            <p>Voting has started now. Voting will close at ...</p>
-                        <p classNameName="lead">
+                        <h1 className="display-3">E-Voting</h1>
+                        <p className="lead">Voting has started now. Voting will close at ...</p>
+                        <p className="lead">
                             <Button color="primary">Vote Now</Button>
                         </p>
                     </Container>
                 </Jumbotron>
 
-                <div className="container">
+                <div className="container-fluid">
                     <div className="row">
                     <div className="col-md-4">
                         <h2>Heading</h2>
