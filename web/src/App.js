@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import HomePage from './Pages/HomePage'
 import LoginPage from './Pages/LoginPage'
+import Navigation from './Component/Navigation'
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
+
 
 import './App.css';
 const err = () =>{
@@ -20,7 +22,7 @@ class App extends Component {
     return (
       <BrowserRouter>
                    <div>
-                   {/* <Navigation/> */}
+                   <Navigation/>
                    <Switch>
                     <Route path="/" exact render={()=>(
                         (sessionStorage.getItem('user')) ? (<HomePage/>):  (<Redirect to='/login' />)

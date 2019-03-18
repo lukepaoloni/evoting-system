@@ -64,7 +64,11 @@ export default class LoginView extends Component{
                 username: this.state.username,
                 password: this.state.password
             }
+            
             console.log(Loginuserdetails);
+            this.setState({loginSucc:true})
+            console.log(this.state.loginSucc);
+            sessionStorage.setItem('user', 'Blanc')
           } else {
             alert("FORM INVALID")
             console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
@@ -79,10 +83,11 @@ export default class LoginView extends Component{
         return(
             <div className="wrapper">
                 <div className="form-wrapper">
+                <img className="centerImg" src="https://cdn3.iconfinder.com/data/icons/city-lifestyle-glyph-black/2048/6496_-_Voting-512.png" width="200px" height="200px"></img>
                     <h1>Login</h1>
                     <div >
                         <div className="evoting">
-                            <label htmlFor="username">{"username"}</label>
+                            <label htmlFor="username">{"Username"}</label>
                             <input
                                 placeholder={"username"}
                                 type="text"
@@ -95,7 +100,7 @@ export default class LoginView extends Component{
                             )}
                         </div>
                         <div className="evoting">
-                            <label htmlFor="password">{"password"}</label>
+                            <label htmlFor="password">{"Password"}</label>
                             <input
                                 placeholder={"Password"}
                                 type="password"
