@@ -5,6 +5,7 @@ import { CandidateModule } from './candidate/candidate.module';
 import { ConfigModule } from './config/config.module';
 import { ConstituencyModule } from './constituency/constituency.module';
 import { VoteModule } from './vote/vote.module';
+import { PartyModule } from './party/party.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { VoteModule } from './vote/vote.module';
     ConfigModule,
     ConstituencyModule,
     VoteModule,
+    PartyModule,
   ],
 })
 export class AppModule {}

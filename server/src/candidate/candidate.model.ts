@@ -7,6 +7,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { Constituency } from '../constituency/constituency.model';
+import { Party } from '../party/party.model';
 
 @Entity('candidates')
 export class Candidate extends BaseEntity {
@@ -14,19 +15,35 @@ export class Candidate extends BaseEntity {
   readonly id: number;
 
   @Column({
-    type: 'varchar',
     length: 255,
   })
   firstName: string;
 
   @Column({
-    type: 'varchar',
     length: 255,
   })
   lastName: string;
 
   @ManyToOne(type => Constituency, constituency => constituency.candidates)
   constituency: Constituency;
+
+  @ManyToOne(type => Party, party => party.candidates)
+  party: Party;
+
+  @Column({
+    unsigned: true,
+  })
+  numOfVotes: number;
+
+  @Column({
+    unsigned: true,
+    default: false,
+  })
+  isElected: boolean;
+
+  public incrementVote() {
+    this.numOfVotes++;
+  }
 
   get name() {
     return `${this.firstName} ${this.lastName}`;
