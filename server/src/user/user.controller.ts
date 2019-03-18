@@ -18,11 +18,18 @@ export class UserController {
 
   @Post()
   public async create(@Body() data: UserDto) {
-    await this.userService.create(data);
+    try {
+      await this.userService.create(data);
 
-    return {
-      success: true,
-      message: 'Successfully created a new user.',
-    };
+      return {
+        success: true,
+        message: 'Successfully created a new user.',
+      };
+    } catch (err) {
+      return {
+        success: false,
+        ...err,
+      };
+    }
   }
 }

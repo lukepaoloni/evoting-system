@@ -5,6 +5,7 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './guards/roles.guard';
+import { ConstituencyModule } from '../constituency/constituency.module';
 
 /**
  * This declares the module files that the application must listen to.
@@ -12,7 +13,7 @@ import { RolesGuard } from './guards/roles.guard';
  */
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
+  imports: [TypeOrmModule.forFeature([User]), ConstituencyModule],
   controllers: [UserController],
   providers: [
     UserService,

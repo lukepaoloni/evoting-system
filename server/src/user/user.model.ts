@@ -6,11 +6,18 @@ import {
   BeforeInsert,
   OneToOne,
   JoinColumn,
+  Index,
 } from 'typeorm';
 import { Constituency } from '../constituency/constituency.model';
+import * as bcrypt from 'bcryptjs';
 
 @Entity('users')
 export class User extends BaseEntity {
+  constructor(data: any) {
+    super();
+    Object.assign(this, data);
+  }
+
   @PrimaryGeneratedColumn()
   readonly id: number;
 
@@ -22,12 +29,25 @@ export class User extends BaseEntity {
   @Column()
   password: string;
 
+  @Column({
+    type: 'varchar',
+    default: 'voter',
+  })
+  role: Roles;
+
   @OneToOne(type => Constituency)
   @JoinColumn()
+  @Index({ unique: false })
   constituency: Constituency;
 
   @BeforeInsert()
-  hashPassword() {
-    this.password = 'hashPassword';
+  async hashPassword() {
+    const salt = await bcrypt.genSalt(12);
+    this.password = await bcrypt.hash(this.password, salt);
   }
+}
+
+export enum Roles {
+  Voter = 'voter',
+  Admin = 'admin',
 }

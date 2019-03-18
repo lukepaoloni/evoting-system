@@ -3,12 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.model';
 import { Repository, DeepPartial } from 'typeorm';
 import { UserDto } from './dto/user.dto';
+import { ConstituencyService } from '../constituency/constituency.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly constituencyService: ConstituencyService,
   ) {}
 
   public async getAll() {
@@ -18,11 +20,21 @@ export class UserService {
   }
 
   public async getOne(id: number) {
-    return await this.userRepository.findOne(id);
+    return await this.userRepository.findOne({
+      where: {
+        id,
+      },
+      relations: ['constituency'],
+    });
   }
 
   public async create(data: DeepPartial<UserDto>) {
-    const user = await this.userRepository.create(data as any);
+    const constituency = await this.constituencyService.getOneById(
+      data.constituencyId,
+    );
+    let user = new User(data);
+    user.constituency = constituency;
+    user = await this.userRepository.create(user);
     return await this.userRepository.save(user);
   }
 }

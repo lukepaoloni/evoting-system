@@ -8,5 +8,6 @@ import { Constituency } from './constituency.model';
   imports: [TypeOrmModule.forFeature([Constituency])],
   controllers: [ConstituencyController],
   providers: [ConstituencyService],
+  exports: [ConstituencyService],
 })
 export class ConstituencyModule {}
