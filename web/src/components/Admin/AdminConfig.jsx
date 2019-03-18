@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container, Form, FormControl, FormGroup, Input, FormFeedback, Label, FormText, Col, Button } from 'reactstrap';
+import { Container, Form, FormGroup, Input, FormFeedback, Label, FormText, Button } from 'reactstrap';
 
 export default class AdminConfig extends Component {
 
@@ -17,7 +17,6 @@ export default class AdminConfig extends Component {
      this.handleInputChange = this.handleInputChange.bind(this);
      this.handleSubmit = this.handleSubmit.bind(this);
   }
-
 
   async handleInputChange(event) {
       const target = event.target;
@@ -50,7 +49,7 @@ export default class AdminConfig extends Component {
   }
 
     render() {
-    const { validated } = this.state;
+    // const { validated } = this.state;
 
     return (
       <div>

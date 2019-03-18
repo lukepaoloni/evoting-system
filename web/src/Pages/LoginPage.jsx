@@ -83,7 +83,8 @@ export default class LoginView extends Component{
         return(
             <div className="wrapper">
                 <div className="form-wrapper">
-                <img className="centerImg" src="https://cdn3.iconfinder.com/data/icons/city-lifestyle-glyph-black/2048/6496_-_Voting-512.png" width="200px" height="200px"></img>
+                <img className="centerImg" alt="login" 
+                    src="https://cdn3.iconfinder.com/data/icons/city-lifestyle-glyph-black/2048/6496_-_Voting-512.png" width="200px" height="200px"></img>
                     <h1>Login</h1>
                     <div >
                         <div className="evoting">
