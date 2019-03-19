@@ -11,6 +11,10 @@ import { Party } from '../party/party.model';
 
 @Entity('candidates')
 export class Candidate extends BaseEntity {
+  constructor(data: any) {
+    super();
+    Object.assign(this, data);
+  }
   @PrimaryGeneratedColumn()
   readonly id: number;
 

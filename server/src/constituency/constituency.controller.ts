@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body } from '@nestjs/common';
 import { ConstituencyService } from './constituency.service';
 import { ApiUseTags } from '@nestjs/swagger';
 
@@ -28,4 +28,22 @@ export class ConstituencyController {
     console.log("reached here");
     return await  this.constituencyService.getOneByName(constituencyName);
   }
+
+  @Post()
+  public async create(@Body() body:any) { 
+    try {
+      await this.constituencyService.create(body.name)
+
+      return {
+        success: true,
+        message: 'Successfully created a new user.',
+      };
+    } catch (err) {
+      return {
+        success: false,
+        ...err,
+      };
+    }
+  }
+
 }

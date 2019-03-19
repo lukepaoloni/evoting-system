@@ -35,4 +35,11 @@ export class ConstituencyService {
       }
     })
   }
+
+  public async create(name: string) {
+
+    let constituency = await this.constituencyRepository.create({name});
+    await this.constituencyRepository.save(constituency);
+  }
 }
+
