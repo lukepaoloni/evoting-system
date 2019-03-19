@@ -66,7 +66,8 @@ export default class HomePage extends React.Component {
           }
         }
       );
-      this.setState({ data: res });
+      // console.log(res.data[0]);
+      this.setState({ data: res.data });
     } catch (error) {
       console.log("failed to get Constituencies");
       console.log(error);
@@ -84,9 +85,8 @@ export default class HomePage extends React.Component {
 
   _onCheckboxClick = e => {
     checkboxIds.push(e.target.value);
-    console.log(e.target.value);
-    let candidate = data.find(i => {
-      return i.id == e.target.value ? i : null;
+    let candidate = this.state.data.find(i => {
+      return i.id === e.target.value ? i : null;
     });
     this.setState({});
     candidateSeleted += 1;
@@ -119,7 +119,7 @@ export default class HomePage extends React.Component {
             </p>
           </Col>
         </Row>
-        {data.map(e => {
+        {this.state.data.map(e => {
           return (
             <Candidate data={e} key={e.id}>
               <input
