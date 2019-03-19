@@ -13,8 +13,7 @@ export class ConstituencyController {
   }
 
   @Post()
-  public async create(@Body() body:any) {
-    console.log("hello")    
+  public async create(@Body() body:any) { 
     try {
       await this.constituencyService.create(body.name)
 

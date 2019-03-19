@@ -1,29 +1,29 @@
 import { Length, MinLength, IsInt, IsBoolean } from 'class-validator';
-import { ApiResponseModelProperty } from '@nestjs/swagger';
+import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 
 export class CandidateDto {
-  @ApiResponseModelProperty()
+  @ApiModelProperty()
   @Length(3)
   firstName: string;
 
-  @ApiResponseModelProperty()
+  @ApiModelProperty()
   @MinLength(3)
   lastName: string;
 
-  @ApiResponseModelProperty()
+  @ApiModelProperty()
   @IsInt()
   constituency: number;
 
-  @ApiResponseModelProperty()
+  @ApiModelPropertyOptional()
   @IsInt()
-  party: number;
+  party?: number;
 
-  @ApiResponseModelProperty()
+  @ApiModelPropertyOptional()
   @IsInt()
-  numOfVotes: number;
+  numOfVotes?: number;
 
-  @ApiResponseModelProperty()
+  @ApiModelPropertyOptional()
   @IsBoolean()
-  isElected: boolean;
+  isElected?: boolean;
 
 }

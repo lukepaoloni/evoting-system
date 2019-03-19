@@ -7,8 +7,11 @@ import { PartyModule } from 'src/party/party.module';
 import { ConstituencyModule } from 'src/constituency/constituency.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Candidate, PartyModule, ConstituencyModule])],
+  imports: [
+    TypeOrmModule.forFeature([Candidate]),
+    PartyModule, ConstituencyModule
+  ],
   controllers: [CandidateController],
-  providers: [CandidateService],
+  providers: [CandidateService]
 })
 export class CandidateModule {}

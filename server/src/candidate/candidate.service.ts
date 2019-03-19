@@ -11,8 +11,8 @@ export class CandidateService {
   constructor(
     @InjectRepository(Candidate)
     private readonly candidateRepository: Repository<Candidate>,
-    private readonly partyRepository:PartyService,
-    private readonly constituencyRepository: ConstituencyService
+    private readonly partyService:PartyService,
+    private readonly constituencyService: ConstituencyService
   ) {}
 
   public async getAll() {
@@ -22,8 +22,8 @@ export class CandidateService {
   }
 
   public async create(data: DeepPartial<CandidateDto>) {
-    let party = await this.partyRepository.getOneById(data.party);
-    let constituency = await this.constituencyRepository.getOneById(data.constituency)
+    let party = await this.partyService.getOneById(data.party);
+    let constituency = await this.constituencyService.getOneById(data.constituency)
     const candidate = new Candidate({...data, party, constituency});
     await this.candidateRepository.save(candidate);
   }

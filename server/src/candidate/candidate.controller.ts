@@ -14,7 +14,20 @@ export class CandidateController {
   }
 
   @Post()
-  public async create(@Body() body: Partial<CandidateDto>) {
-    return await this.candidateService.create(body);
+  public async create(@Body() body: CandidateDto) {
+    
+    try {
+      await this.candidateService.create(body);
+
+      return {
+        success: true,
+        message: 'Successfully created a new user.',
+      };
+    } catch (err) {
+      return {
+        success: false,
+        ...err,
+      };
+    }
   }
 }
