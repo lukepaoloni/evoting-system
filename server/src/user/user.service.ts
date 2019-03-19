@@ -11,8 +11,10 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-  ) // private readonly constituencyService: ConstituencyService,
-  // private readonly candidateService: CandidateService
+    private readonly candidateService: CandidateService,
+    // private readonly constituencyService: ConstituencyService,
+  )
+  
   {}
 
   public async getAll() {
@@ -36,9 +38,10 @@ export class UserService {
       },
       relations: ['constituency'],
     });
-    return null;
-    //  const candidates = await this.candidateService.getCandidatesByConstituency(user.constituency.id);
-    //  return candidates;
+    // return null;
+    // console.log(user.constituency.id);
+     const candidates = await this.candidateService.getCandidatesByConstituency(user.constituency.id);
+     return candidates;
   }
 
   public async login(username: string, password: string) {
