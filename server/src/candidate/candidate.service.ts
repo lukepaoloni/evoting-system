@@ -15,4 +15,15 @@ export class CandidateService {
       relations: ['constituency'],
     });
   }
+
+  public async getCandidatesByConstituency(id : number) {
+    return await this.candidateRepository.find({
+      where:{
+        constituency: {
+          id
+        }
+      },
+      relations: ['party']
+    })
+  }
 }
