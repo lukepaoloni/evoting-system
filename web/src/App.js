@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import VotePage from './Pages/CandidatePage';
 import AdminConfig from './components/Admin/AdminConfig';
+import SuccessPage from './Pages/SuccessPage'
 
 import {BrowserRouter, 
         Route, 
@@ -36,6 +37,7 @@ class App extends Component {
                         )}/> 
                         <Route path="/login" component={LoginPage}/>
                         <Route path="/" exact component={HomePage}/>
+                        <Route path="/success" exact component={SuccessPage}/>
                         <Route path="/admin" exact render={()=>(
                             (sessionStorage.getItem('user')) ? (<AdminConfig/>):  (<Redirect to='/login' />)
                         )}/> 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../styles/form.css';
-import {Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom';
 const formValid = ({ formErrors, ...rest }) => {
     let valid = true;
     // validate form errors being empty
@@ -83,8 +83,10 @@ export default class LoginView extends Component{
     }
     
     render(){
-        if(this.state.loginSucc)
-            return <Redirect to={'/vote'}/>
+        if(this.state.loginSucc){
+          window.location.reload(); 
+          return <Redirect to={'/vote'}/>
+        }
         const { formErrors } = this.state;
         return(
             <div className="wrapper">

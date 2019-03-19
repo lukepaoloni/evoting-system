@@ -28,6 +28,9 @@ export default class Header extends Component{
       collapsed: !this.state.collapsed
     });
   }
+  _handleLogout(){
+    sessionStorage.removeItem("user")
+  }
 
     render() {
     return (
@@ -54,7 +57,10 @@ export default class Header extends Component{
                 </DropdownMenu>
               </UncontrolledDropdown>
               <NavItem>
-                <NavLink href="/login">Logout <b>{sessionStorage.getItem('user')}</b></NavLink>
+                {
+                  sessionStorage.getItem("user")?<NavLink onClick={this._handleLogout} href="/login">Logout <b>{sessionStorage.getItem('user')}</b></NavLink>: null
+                }
+                
               </NavItem>
             </Nav>
           </Collapse>
