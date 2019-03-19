@@ -1,7 +1,11 @@
-import { BaseEntity,
-         Entity,
-         PrimaryGeneratedColumn,
-         Column } from 'typeorm';
+import {
+  BaseEntity,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BeforeUpdate,
+  BeforeInsert,
+} from 'typeorm';
 import { VoteTypeFactory, VoteTypes } from 'src/factory/VoteFactory';
 
 @Entity('configurations')
@@ -9,25 +13,27 @@ export class Config extends BaseEntity {
   @PrimaryGeneratedColumn()
   readonly id: number;
 
-  @Column ({
-    type: 'date'
-  })
-  startDate: Date;
+  @Column()
+  startDate: string;
 
-  @Column ({
-    type: 'date'
-  })
-  endDate: Date; 
+  @Column()
+  endDate: string;
 
-  @Column ({
-    type: 'int'
+  @Column({
+    type: 'int',
   })
   limit: number;
 
-  @Column ({
-    type: 'varchar'
+  @Column({
+    type: 'varchar',
   })
-  voteType : VoteTypes;
+  voteType: VoteTypes;
 
-  //VoteType to implement.
+  // @BeforeInsert()
+  // @BeforeUpdate()
+  // convertDates() {
+  //   console.log('dates', new Date(this.startDate).toString());
+  //   this.startDate = new Date(this.startDate).toUTCString();
+  //   this.endDate = new Date(this.endDate).toUTCString();
+  // }
 }

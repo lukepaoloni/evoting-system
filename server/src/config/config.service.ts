@@ -11,6 +11,19 @@ export class ConfigService {
   ) {}
 
   public async getAll() {
-    return this.configRepository.find({});
+    return await this.configRepository.find();
+  }
+
+  public async updateConfig({ startDate, endDate, limit, voteType }: any) {
+    let config = await this.configRepository.findOne({ id: 1 });
+    config = await this.configRepository.create({
+      ...config,
+      startDate,
+      endDate,
+      limit,
+      voteType,
+    });
+
+    return await this.configRepository.save(config);
   }
 }

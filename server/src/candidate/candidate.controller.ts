@@ -15,7 +15,6 @@ export class CandidateController {
 
   @Post()
   public async create(@Body() body: CandidateDto) {
-    
     try {
       await this.candidateService.create(body);
 

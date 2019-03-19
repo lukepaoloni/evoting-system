@@ -22,6 +22,14 @@ export class CandidateService {
     });
   }
 
+  public async getOneById(id: number) {
+    return await this.candidateRepository.findOneOrFail({
+      where: {
+        id,
+      },
+    });
+  }
+
   public async getCandidatesByConstituency(id: number) {
     return await this.candidateRepository.find({
       where: {

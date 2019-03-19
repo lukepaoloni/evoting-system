@@ -22,7 +22,10 @@ export class Vote extends BaseEntity {
   @JoinColumn()
   voter: User;
 
-  @Column('varchar')
+  @Column({
+    type: 'varchar',
+    default: null,
+  })
   priority: Priority;
 }
 

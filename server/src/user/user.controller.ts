@@ -16,6 +16,7 @@ import { CurrentUser } from './decorators/user.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { LoginDto } from './dto/login.dto';
 import { Roles } from './decorators/roles.decorator';
+import { RolesGuard } from './guards/roles.guard';
 
 @ApiUseTags('Users')
 @Controller('api/rest/users')
@@ -23,7 +24,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  @UseGuards(new JwtAuthGuard())
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('voter')
   public async getAll() {
     return await this.userService.getAll();
