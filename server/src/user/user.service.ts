@@ -4,6 +4,7 @@ import { User } from './user.model';
 import { Repository, DeepPartial } from 'typeorm';
 import { UserDto } from './dto/user.dto';
 import { ConstituencyService } from '../constituency/constituency.service';
+import { CandidateService } from 'src/candidate/candidate.service';
 
 @Injectable()
 export class UserService {
@@ -11,6 +12,7 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly constituencyService: ConstituencyService,
+    private readonly candidateService: CandidateService
   ) {}
 
   public async getAll() {
@@ -25,6 +27,17 @@ export class UserService {
       },
       relations: ['constituency'],
     });
+  }
+
+  public async getAllForVoteById(id: number) {
+    const user = await this.userRepository.findOne({
+      where: {
+        id,
+      },
+      relations: ['constituency'],
+    });
+     const candidates = await this.candidateService.getCandidatesByConstituency(user.constituency.id);
+     return candidates;
   }
 
   public async login(username: string, password: string) {

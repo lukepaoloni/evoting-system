@@ -5,6 +5,7 @@ import { Credentials } from './dto/credentials.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { CurrentUser } from '@user/decorators/user.decorator';
 import { UserService } from '../user/user.service';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('api/rest/auth')
 export class AuthController {
@@ -25,6 +26,13 @@ export class AuthController {
       .replace('Bearer', '')
       .replace(/\s/g, '');
     return this.authService.verifyToken(token);
+  }
+
+  @ApiBearerAuth()
+  @Get('me/constituency')
+  @UseGuards(new JwtAuthGuard())
+  public async getByConstituency(@CurrentUser('id') id: number) {
+    return await this.userService.getAllForVoteById(id);
   }
 
   @Get('me')
