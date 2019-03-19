@@ -1,43 +1,37 @@
-import {
-  Injectable,
-  forwardRef,
-  Inject,
-  ForbiddenException,
-} from '@nestjs/common';
-import { UserService } from '../user/user.service';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { JwtPayload } from './interfaces/jwt-payload.interface';
+import { UserService } from '../user/user.service';
+import { Credentials } from './dto/credentials.dto';
+import * as jwt from 'jsonwebtoken';
 import Config from '@app/config';
-import * as bcrypt from 'bcryptjs';
-import { RegisterDto } from '@user/dto/register.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @Inject(forwardRef(() => UserService))
-    readonly userService: UserService,
     private readonly jwtService: JwtService,
+    private readonly userService: UserService,
   ) {}
 
-  async validatePayload(payload: { username: string }) {
-    return await this.userService.getOneByUsername(payload.username);
-  }
-
-  async login(username: string, password: string) {
-    const user = await this.userService.getOneByUsername(username);
-    const passwordIsValid = await bcrypt.compare(password, user.password);
-    if (!passwordIsValid) {
-      throw new ForbiddenException('Password is incorrect!');
-    }
-    const accessToken = this.jwtService.sign({ id: user.id });
+  public async createToken(credentials: Credentials) {
+    const user = await this.userService.login(
+      credentials.username,
+      credentials.password,
+    );
+    const accessToken = this.jwtService.sign(user);
     return {
       expiresIn: Config.SESSION_EXPIRES_IN,
       accessToken,
     };
   }
 
-  async register(data: RegisterDto) {
-    const user = await this.userService.create(data);
+  public async verifyToken(token: string) {
+    return new Promise(resolve => {
+      resolve(jwt.verify(token, Config.JWT_SECRET_KEY));
+    });
+  }
 
-    return await this.login(user.username, data.password);
+  public async validateUser(payload: JwtPayload) {
+    return await this.userService.getOne(payload.id);
   }
 }

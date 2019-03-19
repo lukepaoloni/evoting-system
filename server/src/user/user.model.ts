@@ -9,6 +9,8 @@ import {
 } from 'typeorm';
 import { Constituency } from '../constituency/constituency.model';
 import * as bcrypt from 'bcryptjs';
+import * as jwt from 'jsonwebtoken';
+import Config from '@app/config';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -42,6 +44,33 @@ export class User extends BaseEntity {
   async hashPassword() {
     const salt = await bcrypt.genSalt(12);
     this.password = await bcrypt.hash(this.password, salt);
+  }
+
+  async comparePassword(attempt: string) {
+    return await bcrypt.compare(attempt, this.password);
+  }
+
+  private get token() {
+    const { id } = this;
+    return jwt.sign(
+      {
+        id,
+      },
+      Config.JWT_SECRET_KEY,
+      {
+        expiresIn: Config.SESSION_EXPIRES_IN,
+      },
+    );
+  }
+
+  toJson(showToken = true) {
+    const { username, role, token } = this;
+
+    return {
+      username,
+      role,
+      token,
+    };
   }
 }
 
