@@ -6,13 +6,17 @@ import {
   Body,
   forwardRef,
   Inject,
+  UseGuards,
+  Logger,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
-import { ApiResponse, ApiUseTags } from '@nestjs/swagger';
+import { ApiResponse, ApiUseTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from '@auth/auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
+import { CurrentUser } from './decorators/user.decorator';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiUseTags('Users')
 @Controller('api/rest/users')
@@ -42,6 +46,21 @@ export class UserController {
   @Post('register')
   public async register(@Body() body: RegisterDto) {
     return await this.authService.register(body);
+  }
+
+  @Get('test')
+  public test() {
+    console.log('test');
+  }
+
+  // @ApiBearerAuth()
+  // @UseGuards(AuthGuard())
+  @Get('me')
+  public getCurrentLoggedInUser() {
+    console.log('test');
+    return {
+      message: 'hello',
+    };
   }
 
   @Post()

@@ -5,7 +5,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.stategy';
 import Config from '@app/config';
-
+console.log('Expires', Config.SESSION_EXPIRES_IN);
 @Global()
 @Module({
   imports: [
