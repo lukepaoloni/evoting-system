@@ -17,17 +17,18 @@ export default class Header extends Component{
     super(props);
 
     this.state = {
-      collapsed: true
+      isOpen: false
     };
 
-    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
-  toggleNavbar() {
+  toggle() {
     this.setState({
-      collapsed: !this.state.collapsed
+      isOpen: !this.state.isOpen
     });
   }
+
   _handleLogout(){
     sessionStorage.removeItem("user")
   }
