@@ -17,7 +17,9 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "start:server": "node dist/server",
+    "webpack": "webpack --config webpack.config.js"
   },
   "dependencies": {
     "@nestjs/common": "^5.4.0",
@@ -47,7 +49,10 @@
     "stringcaster": "^0.3.1",
     "typeorm": "^0.2.15",
     "typescript": "^3.0.1",
-    "typescript-stringcaster": "^1.1.0"
+    "typescript-stringcaster": "^1.1.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
     "@nestjs/testing": "^5.1.0",
