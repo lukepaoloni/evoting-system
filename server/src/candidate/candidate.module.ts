@@ -8,5 +8,6 @@ import { Candidate } from './candidate.model';
   imports: [TypeOrmModule.forFeature([Candidate])],
   controllers: [CandidateController],
   providers: [CandidateService],
+  exports: [CandidateService],
 })
 export class CandidateModule {}

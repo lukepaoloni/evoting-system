@@ -71,7 +71,7 @@ export default class LoginView extends Component{
               url: '/api/rest/users/login',
               data: Loginuserdetails
           }).then((req,res)=>{
-            alert("succ")
+       //     alert("succ")
             console.log(req.data)
             sessionStorage.setItem('user',  JSON.stringify({token: req.data.accessToken, username: this.state.username, expire: req.data.expiresIn, role:req.data.role}));
             this.setState({loginSucc:true, role: req.data.role})

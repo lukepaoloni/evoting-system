@@ -2,6 +2,7 @@ import React from 'react'
 import {Container, Row, Col, Button} from 'reactstrap'
 import Candidate from '../components/Voting/Candidate'
 import {Redirect} from 'react-router-dom';
+import axios from 'axios'
 import Popup from '../components/Voting/Popup'
 let   data = [{
   id:1,
@@ -41,11 +42,36 @@ export default class HomePage extends React.Component{
     super(props)
 
     this.state = {
+      data: [],
       disable: false,
       showPopup:false,
       selectedCandidate: {},
       VoteSuccess: false
     }
+  }
+
+  async componentWillMount() {
+    const id = 5;
+    try {
+      const res = await axios.post(`/api/rest/constituency`,{ 'constituencyid' : id}); //dunno why this is running twice?!
+      console.log(res);
+    } catch (error) {
+      alert("failed to get Constituencies")
+        console.log(error)
+    }
+
+  //   await axios({
+  //     method: 'post',
+  //     url: `/api/rest/constituency/${id}`,
+  // }).then((req,res)=>{
+  //   alert("succ")
+  //   console.log(req);
+  //   console.log(res);
+  // }).catch((err)=>{
+  //       alert("WRONG USERNAME OR PASSWORD")
+  //       console.log(err)
+  //   });
+
   }
   togglePopup() {
     this.setState({
