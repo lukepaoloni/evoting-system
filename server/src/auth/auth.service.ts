@@ -32,6 +32,7 @@ export class AuthService {
     return {
       expiresIn: Config.SESSION_EXPIRES_IN,
       accessToken,
+      role: user.role
     };
   }
 

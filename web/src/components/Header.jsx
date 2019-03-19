@@ -58,7 +58,7 @@ export default class Header extends Component{
               </UncontrolledDropdown>
               <NavItem>
                 {
-                  sessionStorage.getItem("user")?<NavLink onClick={this._handleLogout} href="/login">Logout <b>{sessionStorage.getItem('user')}</b></NavLink>: null
+                  sessionStorage.getItem("user")?<NavLink onClick={this._handleLogout} href='/login'>Logout <b>{JSON.parse(sessionStorage.getItem('user')).username}</b></NavLink>: null
                 }
                 
               </NavItem>

@@ -83,7 +83,7 @@ _vote = () =>{
         return(
         <Container>
             <Row>
-          <Col sm="12" md={{ size: 12 }}  style={{backgroundColor:'silver'}}>
+          <Col sm="12" md={{ size: 12 }}  style={{backgroundColor:'silver', textAlign:'center'}}>
           <h1>All Candidates</h1>
           <p>vote for one candidate by clicking the check box next to it,
             scroll down and click "Vote Now" button to confirm

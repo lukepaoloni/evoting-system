@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../styles/form.css';
 import {Redirect} from 'react-router-dom';
+import axios from 'axios'
 const formValid = ({ formErrors, ...rest }) => {
     let valid = true;
     // validate form errors being empty
@@ -27,7 +28,8 @@ export default class LoginView extends Component{
             formErrors: {
               username: "",
               password: "",
-            }
+            },
+            role: ""
           };
           this.handleSubmit = this.handleSubmit.bind(this)
           this.handleChange = this.handleChange.bind(this)
@@ -64,17 +66,19 @@ export default class LoginView extends Component{
                 username: this.state.username,
                 password: this.state.password
             }
-            if(Loginuserdetails.username !== "Blanc" && Loginuserdetails.password !== "password")
-            {
-                alert("username or password incorrect!");
-                console.log(Loginuserdetails);
-            }
-            else {
-                console.log(Loginuserdetails);
-                this.setState({loginSucc:true})
-                console.log(this.state.loginSucc);
-                sessionStorage.setItem('user', 'Blanc')
-            }
+            await axios({
+              method: 'post',
+              url: '/api/rest/users/login',
+              data: Loginuserdetails
+          }).then((req,res)=>{
+            alert("succ")
+            console.log(req.data)
+            sessionStorage.setItem('user',  JSON.stringify({token: req.data.accessToken, username: this.state.username, expire: req.data.expiresIn, role:req.data.role}));
+            this.setState({loginSucc:true, role: req.data.role})
+          }).catch((err)=>{
+                alert("WRONG USERNAME OR PASSWORD")
+                console.log(err)
+            });
           } else {
             alert("FORM INVALID")
             console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
@@ -84,8 +88,12 @@ export default class LoginView extends Component{
     
     render(){
         if(this.state.loginSucc){
-          window.location.reload(); 
-          return <Redirect to={'/vote'}/>
+          window.location.reload();
+          if(this.state.role === 'voter') 
+            return <Redirect to={'/vote'}/>
+            else
+            return <Redirect to={'/admin'}/>
+
         }
         const { formErrors } = this.state;
         return(
