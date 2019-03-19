@@ -1,5 +1,7 @@
 **/node_modules/
 node_modules/
+**/yarn.lock/
+yarn.lock/
 
 # Created by https://www.gitignore.io/api/node,macos,windows
 # Edit at https://www.gitignore.io/?templates=node,macos,windows
