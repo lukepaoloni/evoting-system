@@ -15,6 +15,7 @@ import { ApiResponse, ApiUseTags, ApiBearerAuth } from '@nestjs/swagger';
 import { CurrentUser } from './decorators/user.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { LoginDto } from './dto/login.dto';
+import { Roles } from './decorators/roles.decorator';
 
 @ApiUseTags('Users')
 @Controller('api/rest/users')
@@ -22,6 +23,8 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
+  @UseGuards(new JwtAuthGuard())
+  @Roles('voter')
   public async getAll() {
     return await this.userService.getAll();
   }
@@ -42,6 +45,11 @@ export class UserController {
     return {
       ...user.constituency,
     };
+  }
+
+  @Get('role')
+  public getRole() {
+    console.log('get role');
   }
 
   @Post()

@@ -51,10 +51,11 @@ export class User extends BaseEntity {
   }
 
   private get token() {
-    const { id } = this;
+    const { id, role } = this;
     return jwt.sign(
       {
         id,
+        roles: [role],
       },
       Config.JWT_SECRET_KEY,
       {

@@ -8,7 +8,7 @@ import { PartyDto } from './dto/party.dto';
 export class PartyService {
   constructor(
     @InjectRepository(Party)
-    private readonly partyRepository: Repository<Party>
+    private readonly partyRepository: Repository<Party>,
   ) {}
 
   public async getAll() {
@@ -19,7 +19,7 @@ export class PartyService {
     return await this.partyRepository.findOneOrFail(id);
   }
   public async create(data: DeepPartial<PartyDto>) {
-    let party =await this.partyRepository.create(data)
+    const party = await this.partyRepository.create(data);
     return await this.partyRepository.save(party);
   }
 }

@@ -87,6 +87,8 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
+dist
+
 # dotenv environment variables file
 .env.test
 

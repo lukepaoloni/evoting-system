@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject, forwardRef } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Constituency } from './constituency.model';
 import { Repository } from 'typeorm';
@@ -9,6 +9,7 @@ export class ConstituencyService {
   constructor(
     @InjectRepository(Constituency)
     private readonly constituencyRepository: Repository<Constituency>,
+    @Inject(forwardRef(() => CandidateService))
     private readonly candidateService: CandidateService,
   ) {}
 
@@ -21,25 +22,23 @@ export class ConstituencyService {
   public async getOneById(id: number) {
     return await this.constituencyRepository.findOneOrFail(id);
   }
-  
+
   public async getCandidates(id: number) {
     return await this.candidateService.getCandidatesByConstituency(id);
   }
 
-  public async getOneByName(name :string) {
+  public async getOneByName(name: string) {
     return await this.constituencyRepository.find({
-      where:{
+      where: {
         name: {
-          name
-        }
-      }
-    })
+          name,
+        },
+      },
+    });
   }
 
   public async create(name: string) {
-
-    let constituency = await this.constituencyRepository.create({name});
+    const constituency = await this.constituencyRepository.create({ name });
     await this.constituencyRepository.save(constituency);
   }
 }
-
