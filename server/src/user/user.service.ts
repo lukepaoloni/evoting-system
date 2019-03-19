@@ -4,13 +4,15 @@ import { User } from './user.model';
 import { Repository, DeepPartial } from 'typeorm';
 import { UserDto } from './dto/user.dto';
 import { ConstituencyService } from '../constituency/constituency.service';
+import { CandidateService } from 'src/candidate/candidate.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    private readonly constituencyService: ConstituencyService,
+    // private readonly constituencyService: ConstituencyService,
+    // private readonly candidateService: CandidateService
   ) {}
 
   public async getAll() {
@@ -25,6 +27,17 @@ export class UserService {
       },
       relations: ['constituency'],
     });
+  }
+
+  public async getAllForVoteById(id: number) {
+    const user = await this.userRepository.findOne({
+      where: {
+        id,
+      },
+      relations: ['constituency'],
+    });
+     const candidates = await this.candidateService.getCandidatesByConstituency(user.constituency.id);
+     return candidates;
   }
 
   public async login(username: string, password: string) {
@@ -44,13 +57,12 @@ export class UserService {
   }
 
   public async create(data: DeepPartial<UserDto>) {
-    const constituency = await this.constituencyService.getOneById(
-      data.constituencyId,
-    );
-    let user = new User(data);
-    user.constituency = constituency;
-    user = await this.userRepository.create(user);
-    return await this.userRepository.save(user);
+    // const constituency = await this.constituencyService.getOneById(
+    //   data.constituencyId,
+    // );
+    // let user = await this.userRepository.create({...data});
+    // user.constituency = constituency;
+    // return await this.userRepository.save(user);
   }
 
   public async getOneByUsername(username: string) {

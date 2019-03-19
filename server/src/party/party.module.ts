@@ -8,5 +8,6 @@ import { Party } from './party.model';
   imports: [TypeOrmModule.forFeature([Party])],
   providers: [PartyService],
   controllers: [PartyController],
+  exports:[PartyService]
 })
 export class PartyModule {}

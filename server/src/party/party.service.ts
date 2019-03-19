@@ -15,9 +15,11 @@ export class PartyService {
     return await this.partyRepository.find({ relations: ['candidate'] });
   }
 
+  public async getOneById(id: number) {
+    return await this.partyRepository.findOneOrFail(id);
+  }
   public async create(data: DeepPartial<PartyDto>) {
-    let party = new Party(data);
-    party = await this.partyRepository.create(party);
+    let party =await this.partyRepository.create(data)
     return await this.partyRepository.save(party);
   }
 }

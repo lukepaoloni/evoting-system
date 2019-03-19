@@ -7,6 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   swagger(app);
   app.useGlobalPipes(new ValidationPipe());
+  app.enableCors();
   await app.listen(4000);
   Logger.log('Go to http://localhost:4000/swagger');
 }

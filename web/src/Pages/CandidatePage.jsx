@@ -2,6 +2,7 @@ import React from 'react'
 import {Container, Row, Col, Button} from 'reactstrap'
 import Candidate from '../components/Voting/Candidate'
 import {Redirect} from 'react-router-dom';
+import axios from 'axios'
 import Popup from '../components/Voting/Popup'
 let   data = [{
   id:1,
@@ -41,11 +42,30 @@ export default class HomePage extends React.Component{
     super(props)
 
     this.state = {
+      data: [],
       disable: false,
       showPopup:false,
       selectedCandidate: {},
       VoteSuccess: false
     }
+  }
+
+  async componentWillMount() {
+    const token = JSON.parse(sessionStorage.getItem('user')).token;
+    let res;
+    //console.log(token);
+    try {
+      res = await axios.get(`http://localhost:4000/api/rest/auth/me/constituency`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      this.setState({data : res});
+    } catch (error) {
+      console.log("failed to get Constituencies")
+        console.log(error)
+    }
+    
   }
   togglePopup() {
     this.setState({
@@ -60,8 +80,11 @@ export default class HomePage extends React.Component{
 _onCheckboxClick = (e) =>{
   checkboxIds.push(e.target.value)
   console.log(e.target.value)
-  let candidate = data.find(i=>{
+  let candidate = this.state.dthis.state.ata.find(i=>{
     return i.id == e.target.value ? i : null
+  })
+  this.setState({
+
   })
   candidateSeleted +=1
   if(candidateSeleted >= 1)
@@ -91,7 +114,7 @@ _vote = () =>{
           </Col>
           </Row>
           {
-            data.map(e=>{
+            this.state.data.map(e=>{
               
               return(
                 <Candidate data = {e} key={e.id}> 
@@ -104,7 +127,7 @@ _vote = () =>{
                   onClick={this._onCheckboxClick}
                   value={e.id}
             />
-          </Candidate>
+                </Candidate>
               )
           
             })
