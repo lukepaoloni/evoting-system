@@ -12,20 +12,14 @@ import {
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
 import { ApiResponse, ApiUseTags, ApiBearerAuth } from '@nestjs/swagger';
-import { AuthService } from '@auth/auth.service';
-import { LoginDto } from './dto/login.dto';
-import { RegisterDto } from './dto/register.dto';
 import { CurrentUser } from './decorators/user.decorator';
-import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { LoginDto } from './dto/login.dto';
 
 @ApiUseTags('Users')
 @Controller('api/rest/users')
 export class UserController {
-  constructor(
-    private readonly userService: UserService,
-    @Inject(forwardRef(() => AuthService))
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly userService: UserService) {}
 
   @Get()
   public async getAll() {
@@ -38,31 +32,15 @@ export class UserController {
   }
 
   @Post('login')
-  @ApiResponse({ status: 200, description: `You've successfully logged in.` })
-  public async login(@Body() body: LoginDto) {
-    return await this.authService.login(body.username, body.password);
+  public async login(@Body() data: LoginDto) {
+    return await this.userService.login(data.username, data.password);
   }
 
-  @Post('register')
-  public register(@Body() body: any) {
-    console.log('test');
+  @Get('constituency')
+  public async getConstituency() {
+    const user = await this.userService.getOne(1);
     return {
-      message: 'test',
-    };
-  }
-
-  @Get('test')
-  public test() {
-    console.log('test');
-  }
-
-  // @ApiBearerAuth()
-  // @UseGuards(AuthGuard())
-  @Get('me')
-  public getCurrentLoggedInUser() {
-    console.log('test');
-    return {
-      message: 'hello',
+      ...user.constituency,
     };
   }
 

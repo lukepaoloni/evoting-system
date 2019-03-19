@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Party } from './party.model';
-import { Repository } from 'typeorm';
+import { Repository, DeepPartial } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { PartyDto } from './dto/party.dto';
 
 @Injectable()
 export class PartyService {
   constructor(
     @InjectRepository(Party)
-    private readonly partyRepository: Repository<Party>,
+    private readonly partyRepository: Repository<Party>
   ) {}
 
   public async getAll() {
@@ -16,5 +17,9 @@ export class PartyService {
 
   public async getOneById(id: number) {
     return await this.partyRepository.findOneOrFail(id);
+  }
+  public async create(data: DeepPartial<PartyDto>) {
+    let party =await this.partyRepository.create(data)
+    return await this.partyRepository.save(party);
   }
 }

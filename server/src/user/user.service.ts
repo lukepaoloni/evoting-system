@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.model';
 import { Repository, DeepPartial } from 'typeorm';
@@ -25,6 +25,22 @@ export class UserService {
       },
       relations: ['constituency'],
     });
+  }
+
+  public async login(username: string, password: string) {
+    const user = await this.userRepository.findOneOrFail({
+      where: {
+        username,
+      },
+    });
+
+    if (!user || !(await user.comparePassword(password))) {
+      throw new NotFoundException(
+        `Unable to find the user with that username (${username}) & password.`,
+      );
+    }
+
+    return user.toJson();
   }
 
   public async create(data: DeepPartial<UserDto>) {

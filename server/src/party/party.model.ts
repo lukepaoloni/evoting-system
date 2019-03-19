@@ -9,11 +9,15 @@ import { Candidate } from '../candidate/candidate.model';
 
 @Entity('parties')
 export class Party extends BaseEntity {
+  constructor(data: any) {
+    super();
+    Object.assign(this, data);
+  }
   @PrimaryGeneratedColumn()
   readonly id: number;
 
   @Column()
-  name: string;
+  name: string; 
 
   @Column()
   link: string;
