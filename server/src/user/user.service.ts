@@ -11,8 +11,8 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    private readonly constituencyService: ConstituencyService,
-    private readonly candidateService: CandidateService
+    // private readonly constituencyService: ConstituencyService,
+    // private readonly candidateService: CandidateService
   ) {}
 
   public async getAll() {
@@ -57,12 +57,12 @@ export class UserService {
   }
 
   public async create(data: DeepPartial<UserDto>) {
-    const constituency = await this.constituencyService.getOneById(
-      data.constituencyId,
-    );
-    let user = await this.userRepository.create({...data});
-    user.constituency = constituency;
-    return await this.userRepository.save(user);
+    // const constituency = await this.constituencyService.getOneById(
+    //   data.constituencyId,
+    // );
+    // let user = await this.userRepository.create({...data});
+    // user.constituency = constituency;
+    // return await this.userRepository.save(user);
   }
 
   public async getOneByUsername(username: string) {

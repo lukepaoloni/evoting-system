@@ -14,7 +14,7 @@ import { CandidateModule } from 'src/candidate/candidate.module';
  */
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), ConstituencyModule, CandidateModule],
+  imports: [TypeOrmModule.forFeature([User])/*, ConstituencyModule, CandidateModule*/],
   controllers: [UserController],
   providers: [
     UserService,

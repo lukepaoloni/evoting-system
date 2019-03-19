@@ -12,12 +12,12 @@ import { AuthModule } from '../auth/auth.module';
   imports: [
     TypeOrmModule.forRoot(),
     UserModule,
-    CandidateModule,
-    ConfigModule,
-    ConstituencyModule,
-    VoteModule,
-    PartyModule,
-    AuthModule,
+    // CandidateModule,
+    // ConfigModule,
+    // ConstituencyModule,
+    // VoteModule,
+    // PartyModule,
+    // AuthModule,
   ],
 })
 export class AppModule {}
