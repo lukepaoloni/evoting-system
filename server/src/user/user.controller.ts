@@ -44,8 +44,11 @@ export class UserController {
   }
 
   @Post('register')
-  public async register(@Body() body: RegisterDto) {
-    return await this.authService.register(body);
+  public register(@Body() body: any) {
+    console.log('test');
+    return {
+      message: 'test',
+    };
   }
 
   @Get('test')
