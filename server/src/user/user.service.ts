@@ -36,4 +36,12 @@ export class UserService {
     user = await this.userRepository.create(user);
     return await this.userRepository.save(user);
   }
+
+  public async getOneByUsername(username: string) {
+    return await this.userRepository.findOneOrFail({
+      where: {
+        username,
+      },
+    });
+  }
 }

@@ -37,7 +37,6 @@ export class User extends BaseEntity {
 
   @OneToOne(type => Constituency)
   @JoinColumn()
-  @Index({ unique: false })
   constituency: Constituency;
 
   @BeforeInsert()

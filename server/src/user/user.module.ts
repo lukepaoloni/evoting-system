@@ -22,5 +22,6 @@ import { ConstituencyModule } from '../constituency/constituency.module';
       useClass: RolesGuard,
     },
   ],
+  exports: [UserService],
 })
 export class UserModule {}

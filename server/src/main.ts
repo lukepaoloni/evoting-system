@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { AppModule } from './app/app.module';
 import { swagger } from './shared/swagger';
 import { Logger, ValidationPipe } from '@nestjs/common';
 
