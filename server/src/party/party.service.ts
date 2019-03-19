@@ -13,4 +13,8 @@ export class PartyService {
   public async getAll() {
     return await this.partyRepository.find({ relations: ['candidate'] });
   }
+
+  public async getOneById(id: number) {
+    return await this.partyRepository.findOneOrFail(id);
+  }
 }

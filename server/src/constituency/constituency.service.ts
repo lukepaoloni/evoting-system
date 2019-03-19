@@ -19,4 +19,10 @@ export class ConstituencyService {
   public async getOneById(id: number) {
     return await this.constituencyRepository.findOneOrFail(id);
   }
+
+  public async create(name: string) {
+
+    let constituency = await this.constituencyRepository.create({name});
+    await this.constituencyRepository.save(constituency);
+  }
 }

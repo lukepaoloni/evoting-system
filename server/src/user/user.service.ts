@@ -31,9 +31,8 @@ export class UserService {
     const constituency = await this.constituencyService.getOneById(
       data.constituencyId,
     );
-    let user = new User(data);
+    let user = await this.userRepository.create({...data});
     user.constituency = constituency;
-    user = await this.userRepository.create(user);
     return await this.userRepository.save(user);
   }
 

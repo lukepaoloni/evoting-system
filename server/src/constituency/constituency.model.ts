@@ -11,6 +11,10 @@ import { User } from '@user/user.model';
 
 @Entity('constituencies')
 export class Constituency extends BaseEntity {
+  constructor(data: any) {
+    super();
+    Object.assign(this, data);
+  }
   @PrimaryGeneratedColumn()
   readonly id: number;
 
