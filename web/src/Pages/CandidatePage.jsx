@@ -30,7 +30,7 @@ let   data = [{
   constituency:"Bath",
   party:"Liberal Democrat",
   image:"https://assets3.parliament.uk/ext/mnis-bio-person/www.dodspeople.com/photos/62700.jpg.jpg",
-  manifesto: "Wrong do point avoid by fruit learn or in death. So passage however besides invited comfort elderly be me. Walls began of child civil am heard hoped my. Satisfied pretended mr on do determine by. Old post took and ask seen fact rich. Man entrance settling believed eat joy. Money as drift begin on to. Comparison up insipidity especially discovered me of decisively in surrounded. Points six way enough she its father. Folly sex downs tears ham green forty. "
+  manifesto: "Liberal Democrats are open and outward-looking. We passionately believe that Britain’s relationship with its neighbours is stronger as part of the European Union. Whatever its imperfections, the EU remains the best framework for working effectively and co-operating in the pursuit of our shared aims. It has led directly to greater prosperity, increased trade, investment and jobs, better security, and a greener environment. Britain is better off in the EU."
 
 
 }]
