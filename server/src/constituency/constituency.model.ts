@@ -7,6 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Candidate } from 'src/candidate/candidate.model';
+import { User } from '@user/user.model';
 
 @Entity('constituencies')
 export class Constituency extends BaseEntity {
@@ -22,4 +23,7 @@ export class Constituency extends BaseEntity {
 
   @OneToMany(type => Candidate, candidate => candidate.constituency)
   candidates: Candidate[];
+
+  @OneToMany(type => User, user => user.constituency)
+  voters: User[];
 }

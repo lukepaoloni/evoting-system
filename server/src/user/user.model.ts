@@ -4,9 +4,8 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BeforeInsert,
-  OneToOne,
   JoinColumn,
-  Index,
+  ManyToOne,
 } from 'typeorm';
 import { Constituency } from '../constituency/constituency.model';
 import * as bcrypt from 'bcryptjs';
@@ -35,7 +34,7 @@ export class User extends BaseEntity {
   })
   role: Roles;
 
-  @OneToOne(type => Constituency)
+  @ManyToOne(type => Constituency, constituency => constituency.voters)
   @JoinColumn()
   constituency: Constituency;
 
