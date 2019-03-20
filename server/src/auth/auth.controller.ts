@@ -34,7 +34,6 @@ export class AuthController {
   @UseGuards(new JwtAuthGuard())
   public async getByConstituency(@CurrentUser('id') id: number) {
     return await this.userService.getAllForVoteByUserId(id);
-
   }
 
   @Get('me')
