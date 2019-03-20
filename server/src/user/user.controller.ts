@@ -17,6 +17,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { LoginDto } from './dto/login.dto';
 import { Roles } from './decorators/roles.decorator';
 import { RolesGuard } from './guards/roles.guard';
+import { RegisterDto } from './dto/register.dto';
 
 @ApiUseTags('Users')
 @Controller('api/rest/users')
@@ -31,6 +32,15 @@ export class UserController {
   @Get(':id')
   public async getOne(@Param('id') id: number) {
     return await this.userService.getOne(id);
+  }
+
+  @Post()
+  public async create(@Body() body: RegisterDto) {
+    const user = this.userService.create(body);
+    return {
+      success: true,
+      message: 'Successfully created a new user.',
+    };
   }
 
   @Post('login')

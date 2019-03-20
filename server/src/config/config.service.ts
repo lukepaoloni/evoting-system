@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Config } from './config.model';
 import { Repository } from 'typeorm';
+import * as moment from 'moment';
 
 @Injectable()
 export class ConfigService {
@@ -16,6 +17,9 @@ export class ConfigService {
 
   public async updateConfig({ startDate, endDate, limit, voteType }: any) {
     let config = await this.configRepository.findOne({ id: 1 });
+    // if (config.endDate) {
+
+    // }
     config = await this.configRepository.create({
       ...config,
       startDate,
