@@ -85,8 +85,8 @@ export class UserService {
 
   /**
    * Finds the user by the credentials and compares the password with the hashed one.
-   * @param  username string
-   * @param  password string
+   * @param username string
+   * @param password string
    * @returns Promise
    * @throws NotFoundException
    */
