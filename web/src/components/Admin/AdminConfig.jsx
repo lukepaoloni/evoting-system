@@ -14,7 +14,7 @@ export default class AdminConfig extends Component {
     this.state = {
       startDate : new Date(),
       endDate : new Date(),
-      voteType : '',
+      voteType : 'first_pass',
       limit : ''
     };
 
@@ -27,6 +27,8 @@ export default class AdminConfig extends Component {
 
   async handleInputChange(event) {
       const target = event.target;
+      console.log(target.value);
+      console.log(target.name);
       if (target.value === null) {
         target.valid = true;
         console.log("test");
@@ -34,7 +36,6 @@ export default class AdminConfig extends Component {
         target.valid = false;
       }
       const name = target.name;
-
       this.setState({ [name]: target.value });
   }
 
@@ -43,20 +44,20 @@ export default class AdminConfig extends Component {
     const endDates = this.state.endDate.toString('yyyy-MM-dd HH:mm:ss');
     const token =JSON.parse(sessionStorage.getItem('user')).id;
     console.log(this.state);
-//     await Axios({
-//       method: 'put',
-//       url: 'http://localhost:4000/api/rest/configurations',
-//       headers: {
-//         "token" : token
-//       },
-//       data: {'startDate' : startdates, 'endDate' : endDates, 'voteType' : this.state.voteType, 'limit' : this.state.limit}
-//   }).then((req,res)=>{
-// //     alert("succ")
-// console.log(res);
-//   }).catch((err)=>{
-//         alert("WRONG USERNAME OR PASSWORD")
-//         console.log(err)
-//     });
+    await Axios({
+      method: 'put',
+      url: 'http://localhost:4000/api/rest/configurations',
+      headers: {
+        "token" : token
+      },
+      data: {'startDate' : startdates, 'endDate' : endDates, 'voteType' : this.state.voteType, 'limit' : this.state.limit}
+  }).then((req,res)=>{
+//     alert("succ")
+console.log(res);
+  }).catch((err)=>{
+        alert("WRONG USERNAME OR PASSWORD")
+        console.log(err)
+    });
   }
 
   handleChange(date) {
@@ -106,9 +107,9 @@ export default class AdminConfig extends Component {
               </FormGroup>
               <FormGroup>
                 <Input type="select" name="voteType" onChange={this.handleInputChange} id="exampleSelectMulti">
-                  <option>First Past</option>
-                  <option>Preferencial</option>
-                  <option>Transferrable</option>
+                  <option value="first_pass">First Past</option>
+                  <option value="preferential">Preferencial</option>
+                  <option value="transferable">Transferrable</option>
                 </Input>
               </FormGroup>
               <FormGroup>
