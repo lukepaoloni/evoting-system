@@ -8,5 +8,6 @@ import { UserModule } from '../user/user.module';
   imports: [TypeOrmModule.forFeature([Config]), UserModule],
   providers: [ConfigService],
   controllers: [ConfigController],
+  exports: [ConfigService],
 })
 export class ConfigModule {}

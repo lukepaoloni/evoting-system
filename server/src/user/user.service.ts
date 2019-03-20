@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  Inject,
+  forwardRef,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.model';
 import { Repository, DeepPartial } from 'typeorm';
@@ -12,8 +17,9 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly candidateService: CandidateService,
+    @Inject(forwardRef(() => ConstituencyService))
     private readonly constituencyService: ConstituencyService,
-  ) { }
+  ) {}
 
   public async getAll() {
     return await this.userRepository.find({
@@ -36,7 +42,9 @@ export class UserService {
       },
       relations: ['constituency'],
     });
-    return await this.candidateService.getCandidatesByConstituency(user.constituency.id);
+    return await this.candidateService.getCandidatesByConstituency(
+      user.constituency.id,
+    );
   }
 
   public async login(username: string, password: string) {

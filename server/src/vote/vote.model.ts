@@ -14,11 +14,12 @@ export class Vote extends BaseEntity {
   @PrimaryGeneratedColumn()
   readonly id: number;
 
+  @Column()
   candidateId: number;
 
+  @Column()
   voterId: number;
 
-  
   @Column({
     type: 'varchar',
     default: null,

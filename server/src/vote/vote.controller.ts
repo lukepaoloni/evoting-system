@@ -1,35 +1,41 @@
-import { Controller, Get, Post, UseGuards, Body, ForbiddenException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  Body,
+  ForbiddenException,
+} from '@nestjs/common';
 import { VoteService } from './vote.service';
 import { ApiUseTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CurrentUser } from '../user/decorators/user.decorator';
-import { UserService } from '../user/user.service';
+import { CreateVoteDto } from './dto/create-vote.dto';
+import { CreateVoteBodyDto } from './dto/create-vote-body.dto';
 
 @ApiUseTags('Votes')
 @Controller('api/rest/votes')
 export class VoteController {
-  constructor(private readonly voteService: VoteService,
-              private readonly userService: UserService) {}
+  constructor(private readonly voteService: VoteService) {}
 
   @Get()
-  public async getAll() { 
+  public async getAll() {
     return await this.voteService.getAll();
   }
 
   @Post()
   @UseGuards(new JwtAuthGuard())
-  public async createVote(@CurrentUser('id') id: number, @Body() body: any) {
-    const user = await this.userService.getOne(id);
-    if (user.isAdmin()) {
-      throw new ForbiddenException(
-        'Only voters can vote.',
-      );
+  public async createVote(
+    @CurrentUser('id') id: number,
+    @Body() body: CreateVoteBodyDto,
+  ) {
+    for (const vote of body.votes) {
+      await this.voteService.create({
+        voterId: id,
+        candidateId: vote.candidateId,
+        priority: vote.priority,
+      });
     }
-    const vote = await this.voteService.create({
-      userId: id,
-      candidateId: body.candidateId,
-      priority: body.priority,
-    });
 
     return {
       success: true,
