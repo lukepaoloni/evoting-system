@@ -62,11 +62,11 @@ export default class Header extends Component{
         console.log("failed to get Constituencies");
         console.log(error);
       }
-
+      let p = new Date(t - l);
+      let date = p.toString('mm:ss');
+      this.setState({date : date});
   }
-    let p = new Date(t - l);
-    let date = p.toString('mm:ss');
-    this.setState({date : date});
+    
   }, 1000);
 
 _onSetLanguageToGerman() {
