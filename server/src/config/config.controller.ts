@@ -12,6 +12,7 @@ import { ConfigService } from './config.service';
 import { CurrentUser } from '@user/decorators/user.decorator';
 import { UserService } from '../user/user.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { ConfigDto } from './dto/config.dto';
 
 @ApiUseTags('Configurations')
 @Controller('api/rest/configurations')
@@ -28,8 +29,10 @@ export class ConfigController {
 
   @Put()
   @UseGuards(new JwtAuthGuard())
-  public async amendConfig(@CurrentUser('id') id: number, @Body() body: any) {
-    console.log(id);
+  public async amendConfig(
+    @CurrentUser('id') id: number,
+    @Body() body: ConfigDto,
+  ) {
     const user = await this.userService.getOne(id);
     if (user.isVoter()) {
       throw new ForbiddenException(
