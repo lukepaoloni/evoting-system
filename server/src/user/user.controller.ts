@@ -21,11 +21,9 @@ import { RolesGuard } from './guards/roles.guard';
 @ApiUseTags('Users')
 @Controller('api/rest/users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   @Get()
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('voter')
   public async getAll() {
     return await this.userService.getAll();
   }
@@ -40,33 +38,15 @@ export class UserController {
     return await this.userService.login(data.username, data.password);
   }
 
+  @Get(':id/constituency')
+  public async getConstituencyById(@Param('id') id: number) {
+    return await this.userService.getAllForVoteByUserId(id);
+  }
+
   @Get('constituency')
-  public async getConstituency() {
-    const user = await this.userService.getOne(1);
-    return {
-      ...user.constituency,
-    };
-  }
-
-  @Get('role')
-  public getRole() {
-    console.log('get role');
-  }
-
-  @Post()
-  public async create(@Body() data: UserDto) {
-    try {
-      await this.userService.create(data);
-
-      return {
-        success: true,
-        message: 'Successfully created a new user.',
-      };
-    } catch (err) {
-      return {
-        success: false,
-        ...err,
-      };
-    }
+  @ApiBearerAuth()
+  @UseGuards(new JwtAuthGuard())
+  public async getConstituency(@CurrentUser('id') id: number) {
+    return await this.userService.getAllForVoteByUserId(id);
   }
 }

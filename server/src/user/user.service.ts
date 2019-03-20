@@ -13,9 +13,7 @@ export class UserService {
     private readonly userRepository: Repository<User>,
     private readonly candidateService: CandidateService,
     private readonly constituencyService: ConstituencyService,
-  )
-  
-  {}
+  ) { }
 
   public async getAll() {
     return await this.userRepository.find({
@@ -31,17 +29,14 @@ export class UserService {
     });
   }
 
-  public async getAllForVoteById(id: number) {
+  public async getAllForVoteByUserId(id: number) {
     const user = await this.userRepository.findOne({
       where: {
         id,
       },
       relations: ['constituency'],
     });
-    // return null;
-    // console.log(user.constituency.id);
-     const candidates = await this.candidateService.getCandidatesByConstituency(user.constituency.id);
-     return candidates;
+    return await this.candidateService.getCandidatesByConstituency(user.constituency.id);
   }
 
   public async login(username: string, password: string) {
@@ -64,7 +59,7 @@ export class UserService {
     const constituency = await this.constituencyService.getOneById(
       data.constituencyId,
     );
-    let user = await this.userRepository.create({...data});
+    const user = await this.userRepository.create({ ...data });
     user.constituency = constituency;
     return await this.userRepository.save(user);
   }
