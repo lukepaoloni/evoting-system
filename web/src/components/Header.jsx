@@ -67,15 +67,14 @@ export default class Header extends Component{
     }
   }
 
-
-
-
-
   x = setInterval(() => {
+    if(sessionStorage.getItem('user'))
+    {
       var l = new Date();
       let p = new Date(this.state.exp - l);
       let date = p.toString('mm:ss');
       this.setState({date : date});    
+    }
   }, 1000);
 
 _onSetLanguageToGerman() {

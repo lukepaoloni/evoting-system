@@ -15,7 +15,7 @@ export default class AdminConfig extends Component {
       startDate : new Date(),
       endDate : new Date(),
       voteType : 'first_pass',
-      limit : ''
+      limit : 1
     };
 
 
@@ -27,11 +27,8 @@ export default class AdminConfig extends Component {
 
   async handleInputChange(event) {
       const target = event.target;
-      console.log(target.value);
-      console.log(target.name);
       if (target.value === null) {
         target.valid = true;
-        console.log("test");
       } else {
         target.valid = false;
       }
@@ -39,41 +36,34 @@ export default class AdminConfig extends Component {
       this.setState({ [name]: target.value });
   }
 
-  async onSubmit(event) {
-    const startdates = this.state.startDate.toString('yyyy-MM-dd HH:mm:ss');
-    const endDates = this.state.endDate.toString('yyyy-MM-dd HH:mm:ss');
-    const token =JSON.parse(sessionStorage.getItem('user')).id;
+  async onSubmit() {
+    if(this.state.startDate < this.state.endDate)
+    {
+      const startdates = this.state.startDate.toString('yyyy-MM-dd HH:mm:ss');
+      const endDates = this.state.endDate.toString('yyyy-MM-dd HH:mm:ss');
+      const token =JSON.parse(sessionStorage.getItem('user')).token;
 
-    await Axios({
-      method: 'put',
-      url: 'http://localhost:4000/api/rest/configurations',
-      headers: {
-        "Authorization" : `Bearer ${token}`
-      },
-      data: {'startDate' : startdates, 'endDate' : endDates, 'voteType' : this.state.voteType, 'limit' : this.state.limit}
-  }).then((req,res)=>{
-//     alert("succ")
-console.log(res);
-  }).catch((err)=>{
-        alert(err);
-        console.log(err)
-    });
-
-    console.log(this.state);
-    await Axios({
-      method: 'put',
-      url: 'http://localhost:4000/api/rest/configurations',
-      headers: {
-        "token" : token
-      },
-      data: {'startDate' : startdates, 'endDate' : endDates, 'voteType' : this.state.voteType, 'limit' : this.state.limit}
-  }).then((req,res)=>{
-//     alert("succ")
-console.log(res);
-  }).catch((err)=>{
-        alert("WRONG USERNAME OR PASSWORD")
-        console.log(err)
-    });
+      await Axios({
+        method: 'put',
+        url: 'http://localhost:4000/api/rest/configurations',
+        headers: {
+          "Authorization" : `Bearer ${token}`
+        },
+        data: {'startDate' : startdates, 'endDate' : endDates, 'voteType' : this.state.voteType, 'limit' : parseInt(this.state.limit)}
+        }).then((res,err)=>{
+          if (err) {
+            console.error(err)
+          } else {
+            alert(res.data.message)
+          }
+        }).catch((err)=>{
+              alert(err);
+              console.log(err)
+          });
+    }
+    else {
+      alert("Set End date after Start date");
+    }
   }
 
   handleChange(date) {
