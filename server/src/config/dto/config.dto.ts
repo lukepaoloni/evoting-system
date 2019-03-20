@@ -1,5 +1,5 @@
 import { IsString, IsInt } from 'class-validator';
-import { VoteTypes } from '../../factory/VoteFactory';
+import { VoteTypes } from '../../vote/factory/VoteFactory';
 import { ApiModelProperty } from '@nestjs/swagger';
 
 export class ConfigDto {
