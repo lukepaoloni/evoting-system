@@ -7,17 +7,16 @@ import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './guards/roles.guard';
 import { ConstituencyModule } from '../constituency/constituency.module';
 import { CandidateModule } from 'src/candidate/candidate.module';
-
-/**
- * This declares the module files that the application must listen to.
- * E.g. TypeOrmModule is creating database services for the feature entity User.s
- */
+import { ConfigModule } from '../config/config.module';
+import { VoteModule } from '../vote/vote.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
-    forwardRef(() => ConstituencyModule),
     CandidateModule,
+    forwardRef(() => ConstituencyModule),
+    forwardRef(() => ConfigModule),
+    VoteModule,
   ],
   controllers: [UserController],
   providers: [

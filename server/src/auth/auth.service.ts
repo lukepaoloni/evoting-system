@@ -33,6 +33,6 @@ export class AuthService {
   }
 
   public async validateUser(payload: JwtPayload) {
-    return await this.userService.getOne(payload.id);
+    return await this.userService.getOneById(payload.id);
   }
 }

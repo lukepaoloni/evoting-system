@@ -5,7 +5,9 @@ import {
   Put,
   Body,
   ForbiddenException,
-  UseGuards
+  UseGuards,
+  Inject,
+  forwardRef,
 } from '@nestjs/common';
 import { ApiUseTags } from '@nestjs/swagger';
 import { ConfigService } from './config.service';
@@ -19,6 +21,7 @@ import { ConfigDto } from './dto/config.dto';
 export class ConfigController {
   constructor(
     private readonly configService: ConfigService,
+    @Inject(forwardRef(() => UserService))
     private readonly userService: UserService,
   ) {}
 
@@ -33,7 +36,7 @@ export class ConfigController {
     @CurrentUser('id') id: number,
     @Body() body: ConfigDto,
   ) {
-    const user = await this.userService.getOne(id);
+    const user = await this.userService.getOneById(id);
     if (user.isVoter()) {
       throw new ForbiddenException(
         'You must be an admin to change the configurations.',
