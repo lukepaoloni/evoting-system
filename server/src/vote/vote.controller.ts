@@ -1,4 +1,11 @@
-import { Controller, Get, Post, UseGuards, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  Body,
+  ForbiddenException,
+} from '@nestjs/common';
 import { VoteService } from './vote.service';
 import { ApiUseTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -32,7 +39,7 @@ export class VoteController {
 
     return {
       success: true,
-      message: 'Successfully created a vote.',
+      message: 'User successfully voted.',
     };
   }
 }

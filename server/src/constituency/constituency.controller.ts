@@ -1,11 +1,23 @@
-import { Controller, Get, Post, Param, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  Body,
+  UseGuards,
+  ForbiddenException,
+} from '@nestjs/common';
 import { ConstituencyService } from './constituency.service';
 import { ApiUseTags } from '@nestjs/swagger';
+import { UserService } from '../user/user.service';
 
 @ApiUseTags('Constituencies')
 @Controller('api/rest/constituency')
 export class ConstituencyController {
-  constructor(private readonly constituencyService: ConstituencyService) {}
+  constructor(
+    private readonly constituencyService: ConstituencyService,
+    private readonly userService: UserService,
+  ) {}
 
   @Get()
   public async getAll() {
@@ -14,25 +26,27 @@ export class ConstituencyController {
 
   @Get(':id/getOne')
   public async getOne(@Param('id') id: number) {
-    return await  this.constituencyService.getCandidates(id);
+    return await this.constituencyService.getCandidates(id);
   }
 
   @Get(':id')
   public async getAllCandidatesByConstituency(@Param('id') id: number) {
-    console.log("reached here");
-    return await  this.constituencyService.getCandidates(id);
+    console.log('reached here');
+    return await this.constituencyService.getCandidates(id);
   }
 
   @Get(':name')
-  public async getConstituencyFromString(@Param('constituencies') constituencyName: string) {
-    console.log("reached here");
-    return await  this.constituencyService.getOneByName(constituencyName);
+  public async getConstituencyFromString(
+    @Param('constituencies') constituencyName: string,
+  ) {
+    console.log('reached here');
+    return await this.constituencyService.getOneByName(constituencyName);
   }
 
   @Post()
-  public async create(@Body() body:any) { 
+  public async create(@Body() body: any) {
     try {
-      await this.constituencyService.create(body.name)
+      await this.constituencyService.create(body.name);
 
       return {
         success: true,
@@ -45,5 +59,4 @@ export class ConstituencyController {
       };
     }
   }
-
 }
