@@ -24,8 +24,8 @@ export class VoteService {
     const user = await this.userService.getOne(data.userId);
     const candidate = await this.candidateService.getOneById(data.candidateId);
     const vote = this.voteRepository.create({
-      voter: user,
-      candidate,
+      voterId: user.id,
+      candidateId: candidate.id,
       priority: data.priority,
     });
     return await this.voteRepository.save(vote);

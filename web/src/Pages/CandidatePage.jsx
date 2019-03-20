@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Button } from "reactstrap";
+import { Container, Row, Col, Button, Alert } from "reactstrap";
 import Candidate from "../components/Voting/Candidate";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
@@ -12,6 +12,7 @@ export default class HomePage extends React.Component {
     super(props);
 
     this.state = {
+      user: null,
       data: [],
       disable: false,
       showPopup: false,
@@ -21,19 +22,29 @@ export default class HomePage extends React.Component {
   }
 
   async componentWillMount() {
-    const token = JSON.parse(sessionStorage.getItem("user")).token;
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const token = user.token;
+
     let res;
     try {
       res = await axios.get(
-        `http://localhost:4000/api/rest/auth/me/constituency`,
+        `/api/rest/auth/me/constituency`,
         {
           headers: {
             Authorization: `Bearer ${token}`
           }
-        }
-      );
+        })
+        let config = await axios.get(
+          `/api/rest/configurations`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
+          console.log(config.data[0].id)
       // console.log(res.data[0]);
-      this.setState({ data: res.data });
+      this.setState({user:user, data: res.data });
+      
     } catch (error) {
       console.log("failed to get Constituencies");
       console.log(error);
@@ -45,7 +56,20 @@ export default class HomePage extends React.Component {
     });
   }
   confirmPopup() {
-    window.location.reload();
+    console.log(this.state.user.id)
+    console.log(this.state.selectedCandidate.id)
+    console.log(this.state.user.token)
+    console.log()
+    // axios.post(
+    //   '/api/rest/votes', {
+    //     userId: this.state.user.token,
+    //     candidateId: this.state.selectedCandidate.id
+    //     }, {
+    //       headers: {
+    //           'Authorization': `Bearer ${this.state.user.token}`
+    //       }
+    //   })
+    // window.location.reload();
     this.setState({ VoteSuccess: true });
   }
 
@@ -75,6 +99,9 @@ export default class HomePage extends React.Component {
     return (
    
       <div>
+        {
+          console.log(this.state.data)
+        }
            <Container style={{marginBottom:30}}>
         <Row>
           <Col
@@ -95,7 +122,7 @@ export default class HomePage extends React.Component {
               <input
                 key={e.id}
                 name="isGoing"
-                type="checkbox"
+                type="radio"
                 style={{ height: 60, width: 50 }}
                 disabled={this.state.disable}
                 onClick={this._onCheckboxClick}
