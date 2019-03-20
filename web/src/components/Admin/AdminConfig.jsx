@@ -51,14 +51,14 @@ export default class AdminConfig extends Component {
       method: 'put',
       url: 'http://localhost:4000/api/rest/configurations',
       headers: {
-        "token" : token
+        "Authorization" : `Bearer ${token}`
       },
       data: {'startDate' : startdates, 'endDate' : endDates, 'voteType' : this.state.voteType, 'limit' : this.state.limit}
   }).then((req,res)=>{
 //     alert("succ")
 console.log(res);
   }).catch((err)=>{
-        alert("WRONG USERNAME OR PASSWORD")
+        alert(err);
         console.log(err)
     });
   }
