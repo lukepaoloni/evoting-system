@@ -7,16 +7,17 @@ import {
   BeforeInsert,
 } from 'typeorm';
 import { VoteTypeFactory, VoteTypes } from 'src/factory/VoteFactory';
+import * as moment from 'moment';
 
 @Entity('configurations')
 export class Config extends BaseEntity {
   @PrimaryGeneratedColumn()
   readonly id: number;
 
-  @Column()
+  @Column('datetime')
   startDate: string;
 
-  @Column()
+  @Column('datetime')
   endDate: string;
 
   @Column({
@@ -29,11 +30,11 @@ export class Config extends BaseEntity {
   })
   voteType: VoteTypes;
 
-  // @BeforeInsert()
-  // @BeforeUpdate()
-  // convertDates() {
-  //   console.log('dates', new Date(this.startDate).toString());
-  //   this.startDate = new Date(this.startDate).toUTCString();
-  //   this.endDate = new Date(this.endDate).toUTCString();
-  // }
+  @BeforeInsert()
+  @BeforeUpdate()
+  convertDates() {
+    console.log('dates', moment(this.startDate).utc().toString());
+    this.startDate = moment(this.startDate).utc().toString();
+    this.endDate = moment(this.endDate).toString();
+  }
 }

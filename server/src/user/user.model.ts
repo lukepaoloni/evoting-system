@@ -64,6 +64,14 @@ export class User extends BaseEntity {
     );
   }
 
+  isAdmin = () => {
+    return this.role === Roles.Admin;
+  }
+
+  isVoter = () => {
+    return this.role === Roles.Voter;
+  }
+
   toJson(showToken = true) {
     const { username, role, token } = this;
 

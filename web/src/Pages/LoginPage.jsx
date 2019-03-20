@@ -90,7 +90,7 @@ export default class LoginView extends Component{
     
     render(){
         if(this.state.loginSucc){
-          // window.location.reload();
+          window.location.reload();
           if(this.state.role === 'voter') 
             return <Redirect to={'/vote'}/>
             else
