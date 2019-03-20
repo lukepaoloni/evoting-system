@@ -9,7 +9,9 @@ import {  Collapse,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem} from 'reactstrap';
+  DropdownItem } from 'reactstrap';
+
+import strings from '../lang/strings';
 
 export default class Header extends Component{
 
@@ -21,6 +23,10 @@ export default class Header extends Component{
     };
 
     this.toggle = this.toggle.bind(this);
+    this._onSetLanguageToEnglish = this._onSetLanguageToEnglish.bind(this);
+    this._onSetLanguageToGerman = this._onSetLanguageToGerman.bind(this);
+
+    strings.setLanguage(sessionStorage.getItem("lang"));
   }
 
   toggle() {
@@ -32,6 +38,16 @@ export default class Header extends Component{
   _handleLogout(){
     sessionStorage.removeItem("user")
   }
+
+_onSetLanguageToGerman() {
+  sessionStorage.setItem("lang", "de");
+  window.location.reload();
+}
+
+_onSetLanguageToEnglish() {
+  sessionStorage.setItem("lang", "en");
+  window.location.reload();
+}
 
     render() {
     return (
@@ -45,15 +61,18 @@ export default class Header extends Component{
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/vote">Cast Vote</NavLink>
+                <NavLink href="/vote">{strings.castVote}</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Options
+                  {strings.header_options}
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>
-                    Option 1
+                  <DropdownItem onClick={this._onSetLanguageToEnglish}>
+                   {strings.header_lang} (EN)
+                  </DropdownItem>
+                  <DropdownItem onClick={this._onSetLanguageToGerman}>
+                    {strings.header_lang} (DE)
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

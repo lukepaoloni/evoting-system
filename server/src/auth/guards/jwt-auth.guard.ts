@@ -17,7 +17,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       return false;
     }
     request.user = await this.validateToken(token);
-    console.log('user:jwt', request.user);
 
     return true;
   }
