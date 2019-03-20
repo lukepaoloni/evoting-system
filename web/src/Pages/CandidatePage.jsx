@@ -4,6 +4,9 @@ import Candidate from "../components/Voting/Candidate";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import Popup from "../components/Voting/Popup";
+
+import strings from '../lang/strings';
+
 let data = [
   {
     id: 1,
@@ -51,6 +54,8 @@ export default class HomePage extends React.Component {
       selectedCandidate: {},
       VoteSuccess: false
     };
+
+    strings.setLanguage(sessionStorage.getItem("lang"))
   }
 
   async componentWillMount() {
@@ -112,10 +117,9 @@ export default class HomePage extends React.Component {
             md={{ size: 12 }}
             style={{ backgroundColor: "silver", textAlign: "center" }}
           >
-            <h1>All Candidates</h1>
+            <h1>{strings.cand_title}</h1>
             <p>
-              vote for one candidate by clicking the check box next to it,
-              scroll down and click "Vote Now" button to confirm
+                {strings.cand_voteHelp}
             </p>
           </Col>
         </Row>
@@ -134,16 +138,15 @@ export default class HomePage extends React.Component {
             </Candidate>
           );
         })}
-
         <Row>
           <Col className="col-3">
             <Button color="danger" onClick={this._onResetCandidate}>
-              Reset selected candidate
+              {strings.cand_reset}
             </Button>
           </Col>
           <Col className="offset-3 col-6">
             <Button color="primary" onClick={this._vote}>
-              Vote
+              {strings.header_castVote}
             </Button>
           </Col>
         </Row>

@@ -7,6 +7,8 @@ import VotePage from './Pages/CandidatePage';
 import AdminConfig from './components/Admin/AdminConfig';
 import SuccessPage from './Pages/SuccessPage'
 
+import strings from './lang/strings';
+
 import {BrowserRouter, 
         Route, 
         Switch, 
@@ -25,7 +27,11 @@ const err = () =>{
 // }
 
 class App extends Component {
+  
   render() {
+      if (sessionStorage.getItem("lang") === null) {
+        sessionStorage.setItem("lang","en");
+      }
     return (
       <BrowserRouter>
                    <div>
