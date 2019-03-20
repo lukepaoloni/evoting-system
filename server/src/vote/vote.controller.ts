@@ -3,7 +3,8 @@ import { VoteService } from './vote.service';
 import { ApiUseTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CurrentUser } from '../user/decorators/user.decorator';
-import { UserService } from '../user/user.service';
+import { CreateVoteDto } from './dto/create-vote.dto';
+import { CreateVoteBodyDto } from './dto/create-vote-body.dto';
 
 @ApiUseTags('Votes')
 @Controller('api/rest/votes')
@@ -17,12 +18,17 @@ export class VoteController {
 
   @Post()
   @UseGuards(new JwtAuthGuard())
-  public async createVote(@CurrentUser('id') id: number, @Body() body: any) {
-    const vote = await this.voteService.create({
-      userId: id,
-      candidateId: body.candidateId,
-      priority: body.priority,
-    });
+  public async createVote(
+    @CurrentUser('id') id: number,
+    @Body() body: CreateVoteBodyDto,
+  ) {
+    for (const vote of body.votes) {
+      await this.voteService.create({
+        voterId: id,
+        candidateId: vote.candidateId,
+        priority: vote.priority,
+      });
+    }
 
     return {
       success: true,

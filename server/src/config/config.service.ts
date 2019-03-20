@@ -14,6 +14,11 @@ export class ConfigService {
     return await this.configRepository.find();
   }
 
+  public async getLimit() {
+    const config = await this.configRepository.findOneOrFail({ id: 1 });
+    return config.limit;
+  }
+
   public async updateConfig({ startDate, endDate, limit, voteType }: any) {
     let config = await this.configRepository.findOne({ id: 1 });
     const startDateInMs = new Date(startDate).getTime();
