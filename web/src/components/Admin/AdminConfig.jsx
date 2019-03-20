@@ -43,6 +43,22 @@ export default class AdminConfig extends Component {
     const startdates = this.state.startDate.toString('yyyy-MM-dd HH:mm:ss');
     const endDates = this.state.endDate.toString('yyyy-MM-dd HH:mm:ss');
     const token =JSON.parse(sessionStorage.getItem('user')).id;
+
+    await Axios({
+      method: 'put',
+      url: 'http://localhost:4000/api/rest/configurations',
+      headers: {
+        "Authorization" : `Bearer ${token}`
+      },
+      data: {'startDate' : startdates, 'endDate' : endDates, 'voteType' : this.state.voteType, 'limit' : this.state.limit}
+  }).then((req,res)=>{
+//     alert("succ")
+console.log(res);
+  }).catch((err)=>{
+        alert(err);
+        console.log(err)
+    });
+
     console.log(this.state);
     await Axios({
       method: 'put',

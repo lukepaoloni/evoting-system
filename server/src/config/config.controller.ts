@@ -7,6 +7,7 @@ import {
   ForbiddenException,
   UseGuards
 } from '@nestjs/common';
+
 import { ApiUseTags } from '@nestjs/swagger';
 import { ConfigService } from './config.service';
 import { CurrentUser } from '@user/decorators/user.decorator';
@@ -31,9 +32,10 @@ export class ConfigController {
   @UseGuards(new JwtAuthGuard())
   public async amendConfig(
     @CurrentUser('id') id: number,
-    @Body() body: ConfigDto,
+    @Body() body: ConfigDto, 
   ) {
     const user = await this.userService.getOne(id);
+
     if (user.isVoter()) {
       throw new ForbiddenException(
         'You must be an admin to change the configurations.',
