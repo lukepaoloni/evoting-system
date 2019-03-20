@@ -80,7 +80,6 @@ _onSetLanguageToEnglish() {
                 {
                   sessionStorage.getItem("user")?<NavLink onClick={this._handleLogout} href='/login'>Logout <b>{JSON.parse(sessionStorage.getItem('user')).username}</b></NavLink>: null
                 }
-                
               </NavItem>
             </Nav>
           </Collapse>

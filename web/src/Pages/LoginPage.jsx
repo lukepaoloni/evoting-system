@@ -76,7 +76,13 @@ export default class LoginView extends Component{
               data: Loginuserdetails
           }).then((req,res)=>{
        //     alert("succ")
-            sessionStorage.setItem('user',  JSON.stringify({token: req.data.token, username: this.state.username, expire: req.data.expiresIn, role:req.data.role}));
+            sessionStorage.setItem('user',  
+            JSON.stringify({
+              token: req.data.token, 
+              username: this.state.username, 
+              expire: req.data.expiresIn, 
+              role:req.data.role
+            }));
             this.setState({loginSucc:true, role: req.data.role})
           }).catch((err)=>{
                 alert("WRONG USERNAME OR PASSWORD")
