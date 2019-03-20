@@ -1,8 +1,10 @@
 const axios = require('axios')
+var faker = require('faker');
 const token = '';
+//console.log(faker.address.country())
 axios.post(
     'http://localhost:4000/api/rest/constituency', {
-        name: 'Manchester'
+        name: faker.address.county()
     }, {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -12,9 +14,9 @@ axios.post(
     console.log("success")
     axios.post(
         'http://localhost:4000/api/rest/parties', {
-            name: "liberal democrats",
+            name: faker.company.companyName(),
             link: "https://www.libdems.org.uk/",
-            manifesto: "The Britain we want requires a successful, sustainable and balanced economy to create jobs and opportunities for everyone who is willing to play their part, and to generate the revenue needed to fund public services.But the Conservatives have consistently put their own short-term priorities above long-term prosperity. They have neglected action to improve Britains poor levels of productivity and failed to stimulate innovation in industry. They have done nothing to redress the countrys profound regional and structural economic imbalances"
+            manifesto: faker.lorem.paragraph()
         }, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -22,37 +24,20 @@ axios.post(
         }
     ).then((req,res)=>{
         console.log("success")
-        axios.post(
-            'http://localhost:4000/api/rest/candidates', {
-                firstName: "bat",
-                lastName: "man",
-                constituency: 1,
-                party: 1,
-                numOfVotes: 0,
-                isElected: false
-        }, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }
-        ).then((req,res)=>{
-            console.log("success")
-        }).catch((err)=>{
-              console.log(err.data)
-        });
-    }).catch((err)=>{
-          console.log(err.data)
-    });
-}).catch((err)=>{
-      console.log(err.data)
-});
-
+        getCandidate(1,1)
+        getCandidate(1,1)
+        getCandidate(1,1)
+        getCandidate(1,1)
+        getUser(1)
+        
+    })
+})
 
 //------------SECOND---------------------
 
 axios.post(
     'http://localhost:4000/api/rest/constituency', {
-        name: 'london'
+        name: faker.address.county()
     }, {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -62,9 +47,9 @@ axios.post(
     console.log("success")
     axios.post(
         'http://localhost:4000/api/rest/parties', {
-            name: "Conservative and Unionist Party",
+            name: faker.company.companyName(),
             link: "https://www.conservatives.com/",
-            manifesto: "Our NHS Long Term Plan: protecting the health service now and for generations to come Thanks to our investment of £20.5 billion a year in real terms by 2023-24 the plan will transform patient care and make sure every penny of taxpayers’ money is spent wisely."
+            manifesto: faker.lorem.paragraph()
         }, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -72,34 +57,50 @@ axios.post(
         }
     ).then((req,res)=>{
         console.log("success")
-        axios.post(
-            'http://localhost:4000/api/rest/candidates', {
-                firstName: "supeer",
-                lastName: "man",
-                constituency: 2,
-                party: 2,
-                numOfVotes: 0,
-                isElected: false
+        getCandidate(2,2)
+        getCandidate(2,2)
+        getCandidate(2,2)
+        getCandidate(2,2)
+        getUser(1)
+
+    })
+})
+// //-------------3 ----------------
+axios.post(
+    'http://localhost:4000/api/rest/constituency', {
+        name: faker.address.county()
+    }, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    }
+).then((req,res)=>{
+    console.log("success")
+    axios.post(
+        'http://localhost:4000/api/rest/parties', {
+            name: faker.company.companyName() ,
+            link: "https://www.conservatives.com/",
+            manifesto: faker.lorem.paragraph()
         }, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+            headers: {
+                'Authorization': `Bearer ${token}`
             }
-        ).then((req,res)=>{
-            console.log("success")
-        }).catch((err)=>{
-              console.log(err.data)
-        });
-    }).catch((err)=>{
-          console.log(err.data)
-    });
-}).catch((err)=>{
-      console.log(err.data)
-});
+        }
+    ).then((req,res)=>{
+        console.log("success")
+        getCandidate(3,3)
+        getCandidate(3,3)
+        getCandidate(3,3)
+        getCandidate(3,3)
+        getUser(1)
+    })
 
+})
+
+//--------------4-------------------
 axios.post(
     'http://localhost:4000/api/rest/constituency', {
-        name: 'sheffield'
+        name: faker.address.county()
     }, {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -107,26 +108,56 @@ axios.post(
     }
 ).then((req,res)=>{
     console.log("success")
-}).catch((err)=>{
-      console.log(err.data)
-});
-axios.post(
-    'http://localhost:4000/api/rest/constituency', {
-        name: 'leeds'
-    }, {
-        headers: {
-            'Authorization': `Bearer ${token}`
+    axios.post(
+        'http://localhost:4000/api/rest/parties', {
+            name: faker.company.companyName() ,
+            link: "https://www.conservatives.com/",
+            manifesto: faker.lorem.paragraph()
+        }, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         }
-    }
-).then((req,res)=>{
-    console.log("success")
+    ).then((req,res)=>{
+        console.log("success")
+        getCandidate(4,4)
+        getCandidate(4,4)
+        getCandidate(4,4)
+        getCandidate(4,4)
+        getUser(1)
+
+
+    })
 }).catch((err)=>{
       console.log(err.data)
 });
 
 
+function getCandidate(constituency, party){
+    axios.post(
+        'http://localhost:4000/api/rest/candidates', {
+            firstName: faker.name.findName(),
+            lastName: faker.name.lastName(),
+            constituency: constituency,
+            party: party,
+            numOfVotes: 0,
+            isElected: false
+            }, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+}
 
-
-
+function getUser(constituency){
+    axios.post(
+        'http://localhost:4000/api/rest/users', {
+            username: faker.internet.userName(),
+            password: "password",
+            constituencyId: constituency
+            }).then(()=>{
+                console.log("user success")
+            })
+}
 
 
