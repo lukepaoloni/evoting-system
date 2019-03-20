@@ -1,4 +1,4 @@
-import { Length, MinLength, IsInt, IsBoolean } from 'class-validator';
+import { Length, MinLength, IsInt, IsBoolean, IsString } from 'class-validator';
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 
 export class CandidateDto {
@@ -21,6 +21,11 @@ export class CandidateDto {
   @ApiModelPropertyOptional()
   @IsInt()
   numOfVotes?: number;
+
+  @ApiModelPropertyOptional()
+  @IsString()
+  profilePic: string;
+
 
   @ApiModelPropertyOptional()
   @IsBoolean()

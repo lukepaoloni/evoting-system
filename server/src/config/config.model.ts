@@ -33,8 +33,7 @@ export class Config extends BaseEntity {
   @BeforeInsert()
   @BeforeUpdate()
   convertDates() {
-    console.log('dates', moment(this.startDate).utc().toString());
-    this.startDate = moment(this.startDate).utc().toString();
-    this.endDate = moment(this.endDate).toString();
+    this.startDate = moment(this.startDate).format('YYYY-MM-DD HH:mm:ss');
+    this.endDate = moment(this.endDate).format('YYYY-MM-DD HH:mm:ss');
   }
 }

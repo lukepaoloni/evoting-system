@@ -7,6 +7,7 @@ import {
   forwardRef,
   Inject,
   UseGuards,
+  ForbiddenException,
   Logger,
 } from '@nestjs/common';
 import { UserService } from './user.service';
@@ -17,20 +18,45 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { LoginDto } from './dto/login.dto';
 import { Roles } from './decorators/roles.decorator';
 import { RolesGuard } from './guards/roles.guard';
+import { RegisterDto } from './dto/register.dto';
 
 @ApiUseTags('Users')
 @Controller('api/rest/users')
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
-  @Get()
-  public async getAll() {
+  @Get() 
+  @UseGuards(new JwtAuthGuard())
+  public async getAll(@CurrentUser('id') id: number) {
+    const user = await this.userService.getOne(id);
+    if (user.isVoter()) {
+      throw new ForbiddenException(
+        'You must be an admin to do this.',
+      );
+    }
     return await this.userService.getAll();
   }
 
   @Get(':id')
   public async getOne(@Param('id') id: number) {
     return await this.userService.getOne(id);
+  }
+
+  @Post()
+  // @UseGuards(new JwtAuthGuard())
+  public async create(@CurrentUser('id') id: number, @Body() body: RegisterDto) {
+    const user = await this.userService.getOne(id);
+    // if (user.isVoter()) {
+    //   throw new ForbiddenException(
+    //     'You must be an admin to do this.',
+    //   );
+    // }
+    //Commented out until the seeds have been done
+    const newUser = this.userService.create(body);
+    return {
+      success: true,
+      message: 'Successfully created a new user.',
+    };
   }
 
   @Post('login')
@@ -47,6 +73,12 @@ export class UserController {
   @ApiBearerAuth()
   @UseGuards(new JwtAuthGuard())
   public async getConstituency(@CurrentUser('id') id: number) {
+    const user = await this.userService.getOne(id);
+    if (user.isAdmin()) {
+      throw new ForbiddenException(
+        'Not allowed.',
+      );
+    }
     return await this.userService.getAllForVoteByUserId(id);
   }
 }

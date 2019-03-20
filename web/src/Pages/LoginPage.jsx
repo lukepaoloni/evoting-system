@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import '../styles/form.css';
 import {Redirect} from 'react-router-dom';
 import axios from 'axios'
+import strings from '../lang/strings';
 const formValid = ({ formErrors, ...rest }) => {
     let valid = true;
     // validate form errors being empty
@@ -33,19 +34,22 @@ export default class LoginView extends Component{
           };
           this.handleSubmit = this.handleSubmit.bind(this)
           this.handleChange = this.handleChange.bind(this)
+
+          strings.setLanguage(sessionStorage.getItem("lang"))
     }
     handleChange(e){
     const { name, value } = e.target;
     let formErrors = { ...this.state.formErrors };
+    const error = strings.login_min;
 
     switch (name) {
       case "username":
         formErrors.username =
-          value.length < 3 ? "minimum 3 characaters required" : "";
+          value.length < 3 ? error : "";
         break;
       case "password":
         formErrors.password =
-          value.length < 3 ? "minimum 3 characaters required" : "";
+          value.length < 3 ? error : "";
         break;
       default:
         break;
@@ -72,7 +76,13 @@ export default class LoginView extends Component{
               data: Loginuserdetails
           }).then((req,res)=>{
        //     alert("succ")
-            sessionStorage.setItem('user',  JSON.stringify({token: req.data.token, username: this.state.username, expire: req.data.expiresIn, role:req.data.role}));
+            sessionStorage.setItem('user',  
+            JSON.stringify({
+              token: req.data.token, 
+              username: this.state.username, 
+              expire: req.data.expiresIn, 
+              role:req.data.role
+            }));
             this.setState({loginSucc:true, role: req.data.role})
           }).catch((err)=>{
                 alert("WRONG USERNAME OR PASSWORD")
@@ -82,7 +92,6 @@ export default class LoginView extends Component{
             alert("FORM INVALID")
             console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
           }
-
     }
     
     render(){
@@ -99,12 +108,12 @@ export default class LoginView extends Component{
             <div className="wrapper">
                 <div className="form-wrapper">
                 <p className="fas fa-person-booth centerImg fa-8x"></p>
-                    <h1>Login</h1>
+                    <h1>{strings.login_login}</h1>
                     <div >
                         <div className="evoting">
-                            <label htmlFor="username">{"Username"}</label>
+                            <label htmlFor="username">{strings.login_usernmame}</label>
                             <input
-                                placeholder={"username"}
+                                placeholder={strings.login_usernmame}
                                 type="text"
                                 name="username"
                                 noValidate
@@ -115,9 +124,9 @@ export default class LoginView extends Component{
                             )}
                         </div>
                         <div className="evoting">
-                            <label htmlFor="password">{"Password"}</label>
+                            <label htmlFor="password">{strings.login_pass}</label>
                             <input
-                                placeholder={"Password"}
+                                placeholder={strings.login_pass}
                                 type="password"
                                 name="password"
                                 noValidate
@@ -132,8 +141,8 @@ export default class LoginView extends Component{
                         )}
                         
                         <div className="createAccount">
-                        <button id="login" onClick={this.handleSubmit}>{"login"}
-                        
+                        <button id="login" onClick={this.handleSubmit}>
+                            {strings.login_login}
                         </button>
                         </div>
                     </div>

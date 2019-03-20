@@ -1,14 +1,17 @@
-import { Controller, Get, Post, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, UseGuards,
+  ForbiddenException } from '@nestjs/common';
 import { ConstituencyService } from './constituency.service';
 import { ApiUseTags } from '@nestjs/swagger';
+import { UserService } from '../user/user.service';
 
 @ApiUseTags('Constituencies')
 @Controller('api/rest/constituency')
 export class ConstituencyController {
-  constructor(private readonly constituencyService: ConstituencyService) {}
+  constructor(private readonly constituencyService: ConstituencyService,
+              private readonly userService: UserService) {}
 
   @Get()
-  public async getAll() {
+  public async getAll() { 
     return await this.constituencyService.getAll();
   }
 

@@ -14,14 +14,11 @@ export class Vote extends BaseEntity {
   @PrimaryGeneratedColumn()
   readonly id: number;
 
-  @OneToOne(type => Candidate)
-  @JoinColumn()
-  candidate: Candidate;
+  candidateId: number;
 
-  @OneToOne(type => User)
-  @JoinColumn()
-  voter: User;
+  voterId: number;
 
+  
   @Column({
     type: 'varchar',
     default: null,

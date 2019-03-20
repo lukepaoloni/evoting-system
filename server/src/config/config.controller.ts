@@ -1,11 +1,26 @@
-import { Controller, Get, Post, Put, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Body,
+  ForbiddenException,
+  UseGuards
+} from '@nestjs/common';
 import { ApiUseTags } from '@nestjs/swagger';
 import { ConfigService } from './config.service';
+import { CurrentUser } from '@user/decorators/user.decorator';
+import { UserService } from '../user/user.service';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { ConfigDto } from './dto/config.dto';
 
 @ApiUseTags('Configurations')
 @Controller('api/rest/configurations')
 export class ConfigController {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly userService: UserService,
+  ) {}
 
   @Get()
   public async getConfigs() {
@@ -13,9 +28,18 @@ export class ConfigController {
   }
 
   @Put()
-  public async amendConfig(@Body() body: any) {
+  @UseGuards(new JwtAuthGuard())
+  public async amendConfig(
+    @CurrentUser('id') id: number,
+    @Body() body: ConfigDto,
+  ) {
+    const user = await this.userService.getOne(id);
+    if (user.isVoter()) {
+      throw new ForbiddenException(
+        'You must be an admin to change the configurations.',
+      );
+    }
     const config = await this.configService.updateConfig({ ...body });
-    console.log('config', config);
     return {
       success: true,
       message: 'Successfully updated the configurations.',
