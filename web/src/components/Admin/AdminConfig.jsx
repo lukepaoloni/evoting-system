@@ -39,14 +39,10 @@ export default class AdminConfig extends Component {
   }
 
   async onSubmit(event) {
-    console.log("halp");
-    // console.log(this.state);
     const startdates = this.state.startDate.toString('yyyy-MM-dd HH:mm:ss');
     const endDates = this.state.endDate.toString('yyyy-MM-dd HH:mm:ss');
- //   this.setState({startDate: startdates, endDate : endDates})
-    //console.log(this.state);
-   // const voteConfig = this.state;
     const token =JSON.parse(sessionStorage.getItem('user')).id;
+
     await Axios({
       method: 'put',
       url: 'http://localhost:4000/api/rest/configurations',
@@ -61,6 +57,22 @@ console.log(res);
         alert(err);
         console.log(err)
     });
+
+    console.log(this.state);
+//     await Axios({
+//       method: 'put',
+//       url: 'http://localhost:4000/api/rest/configurations',
+//       headers: {
+//         "token" : token
+//       },
+//       data: {'startDate' : startdates, 'endDate' : endDates, 'voteType' : this.state.voteType, 'limit' : this.state.limit}
+//   }).then((req,res)=>{
+// //     alert("succ")
+// console.log(res);
+//   }).catch((err)=>{
+//         alert("WRONG USERNAME OR PASSWORD")
+//         console.log(err)
+//     });
   }
 
   handleChange(date) {
