@@ -1,4 +1,4 @@
-import { Controller, Get, Post, UseGuards, Body } from '@nestjs/common';
+import { Controller, Get, Post, UseGuards, Body, ForbiddenException } from '@nestjs/common';
 import { VoteService } from './vote.service';
 import { ApiUseTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -8,16 +8,23 @@ import { UserService } from '../user/user.service';
 @ApiUseTags('Votes')
 @Controller('api/rest/votes')
 export class VoteController {
-  constructor(private readonly voteService: VoteService) {}
+  constructor(private readonly voteService: VoteService,
+              private readonly userService: UserService) {}
 
   @Get()
-  public async getAll() {
+  public async getAll() { 
     return await this.voteService.getAll();
   }
 
   @Post()
   @UseGuards(new JwtAuthGuard())
   public async createVote(@CurrentUser('id') id: number, @Body() body: any) {
+    const user = await this.userService.getOne(id);
+    if (user.isAdmin()) {
+      throw new ForbiddenException(
+        'Only voters can vote.',
+      );
+    }
     const vote = await this.voteService.create({
       userId: id,
       candidateId: body.candidateId,
@@ -26,7 +33,7 @@ export class VoteController {
 
     return {
       success: true,
-      message: 'Successfully created a vote.',
+      message: 'User successfully voted.',
     };
   }
 }

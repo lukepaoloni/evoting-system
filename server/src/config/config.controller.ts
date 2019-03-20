@@ -5,7 +5,7 @@ import {
   Put,
   Body,
   ForbiddenException,
-  UseGuards,
+  UseGuards
 } from '@nestjs/common';
 import { ApiUseTags } from '@nestjs/swagger';
 import { ConfigService } from './config.service';
