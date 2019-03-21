@@ -216,7 +216,7 @@ class CandidatePage extends React.Component {
           })}
           <Row>
             <Col className="offset-3 col-6">
-              <Button color="primary" onClick={this._vote}>
+              <Button id="submitVote" color="primary" onClick={this._vote}>
                 {strings.header_castVote}
               </Button>
             </Col>
@@ -280,6 +280,7 @@ const Checkbox = props => {
     return (
       <input
         key={props.id}
+        id={props.id}
         name="isGoing"
         className="candidateCheckboxes"
         type="checkbox"
@@ -293,6 +294,7 @@ const Checkbox = props => {
     return (
       <input
         key={props.id}
+        id={props.id}
         name="isGoing"
         type="radio"
         style={{ height: 60, width: 50 }}
