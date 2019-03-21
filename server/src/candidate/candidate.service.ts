@@ -16,12 +16,20 @@ export class CandidateService {
     private readonly constituencyService: ConstituencyService,
   ) {}
 
+/**
+ * Returns all of the candidates from the database
+ * with consideration to the constituency foreign key.
+ */
   public async getAll() {
     return await this.candidateRepository.find({
       relations: ['constituency'],
     });
   }
 
+/**
+ * Returns a candidate using the id param from the db.
+ * @param id 
+ */
   public async getOneById(id: number) {
     return await this.candidateRepository.findOneOrFail({
       where: {
@@ -30,6 +38,11 @@ export class CandidateService {
     });
   }
 
+/**
+ * Returns all of the candidates running for election
+ * in a constituency.
+ * @param id 
+ */
   public async getCandidatesByConstituency(id: number) {
     return await this.candidateRepository.find({
       where: {
@@ -40,6 +53,12 @@ export class CandidateService {
       relations: ['party'],
     });
   }
+
+  /**
+   * Inserts a new candidate into the database. 
+   * Party and constitunency must be initially defined.
+   * @param data 
+   */
   public async create(data: DeepPartial<CandidateDto>) {
     const party = await this.partyService.getOneById(data.party);
     const constituency = await this.constituencyService.getOneById(

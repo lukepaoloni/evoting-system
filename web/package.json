@@ -19,6 +19,7 @@
     "react-localization": "^1.0.13",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
+    "react-toastify": "^4.5.2",
     "reactstrap": "^7.1.0"
   },
   "scripts": {

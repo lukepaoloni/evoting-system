@@ -21,10 +21,11 @@ export class Vote extends BaseEntity {
   voterId: number;
 
   @Column({
-    type: 'varchar',
+    type: 'int',
     default: null,
+    unsigned: true,
   })
-  priority: Priority;
+  priority: number;
 }
 
 export enum Priority {

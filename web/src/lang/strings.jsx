@@ -26,6 +26,8 @@ let strings = new LocalizedStrings({
    cand_reset: "Reset selected candidate",
    cand_voteHelp: "Vote for one candidate by clicking the check box next to it, scroll down and click 'Vote Now button to confirm.",
    cand_party: "Party",
+   cand_total: "Total of ",
+   cand_candidates: "candidates, scroll to view more!",
 
    vote_success: "Success!",
    vote_info: "Your vote has been submitted.",
@@ -56,11 +58,13 @@ let strings = new LocalizedStrings({
    cand_title: "Alle Kandidaten",
    cand_voteHelp: "Bitte waehlen Sie einer der Kandidaten und nachdem klicken Sie auf 'Waehlen'.",
    cand_party: "Patei",
+   cand_total: "Kandidaten in Höhe von",
+   cand_candidates: ". Scrollen Sie nach unten.",
 
    vote_success: "Erfolg!",
    vote_info: "Ihre Wahl wurde eingetragen.",
-   vote_confirm: "Bestaestigen"
 
+   vote_confirm: "Bestätigen"
  }
 });
 

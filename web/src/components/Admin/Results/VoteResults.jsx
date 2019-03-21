@@ -11,7 +11,7 @@ export default class VoteResults extends Component {
     this.state = {
 
     };
-
+    
   }
 
   async componentDidMount() {
