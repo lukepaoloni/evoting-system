@@ -8,6 +8,15 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import strings from "../lang/strings";
 
+<<<<<<< HEAD
+=======
+
+import strings from '../lang/strings';
+import { string } from "postcss-selector-parser";
+
+let candidateSeleted = 0;
+let checkboxIds = [];
+>>>>>>> 106e22e247db388fe2593ccdd2d9ec2b35012826
 export default class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +24,7 @@ export default class HomePage extends React.Component {
     this.state = {
       user: null,
       data: [],
+      config: null,
       disable: false,
       showPopup: false,
       selectedCandidate: {},
@@ -67,6 +77,7 @@ export default class HomePage extends React.Component {
       console.error(error);
     }
   }
+
   togglePopup() {
     this.setState({
       showPopup: !this.state.showPopup

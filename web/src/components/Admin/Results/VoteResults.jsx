@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Container, Form, FormGroup, Input, FormFeedback, Label, FormText, Button } from 'reactstrap';
 
+import Axios from 'axios';
 
 export default class VoteResults extends Component {
 
@@ -8,14 +9,14 @@ export default class VoteResults extends Component {
     super(props);
 
     this.state = {
-      validated: false,
-      startDate : '',
-      endDate : '',
-      voteType : ''
+
     };
 
-     this.handleInputChange = this.handleInputChange.bind(this);
-     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  async componentDidMount() {
+
+
   }
   
     render() {

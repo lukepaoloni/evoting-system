@@ -102,8 +102,8 @@ export class UserService {
         `Unable to find the user with that username (${username}) & password.`,
       );
     }
-
-    if (await this.finishedVoting(user.id)) {
+  
+    if (user.isVoter() && (await this.finishedVoting(user.id))) {
       throw new ForbiddenException(`You've used up all your votes.`);
     }
 

@@ -43,10 +43,9 @@ export class UserController {
   @Post()
   // @UseGuards(new JwtAuthGuard())
   public async create(
-    @CurrentUser('id') id: number,
     @Body() body: RegisterDto,
   ) {
-    const user = await this.userService.getOneById(id);
+    //const user = await this.userService.getOne(id);
     // if (user.isVoter()) {
     //   throw new ForbiddenException(
     //     'You must be an admin to do this.',
