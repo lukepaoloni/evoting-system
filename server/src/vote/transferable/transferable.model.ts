@@ -8,4 +8,7 @@ export class Transferable implements IVoteType {
   public getResult(data: any) : Transferable {
     return null;
   }
-}
+
+} 
+
+

@@ -32,7 +32,7 @@ export class VoteTypeFactory implements IVoteType {
    * @throws NotImplementException()
    */
   public create(voteTypes: VoteTypes): FirstPast | Transferable | Preferential {
-    switch (voteTypes) {
+    switch (voteTypes) { 
       case VoteTypes.FirstPast:
         return new FirstPast();
       case VoteTypes.Transferable:
