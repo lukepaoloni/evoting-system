@@ -14,7 +14,7 @@ export default class AdminConfig extends Component {
     this.state = {
       startDate : new Date(),
       endDate : new Date(),
-      voteType : 'first_pass',
+      voteType : 'first_past',
       limit : 1
     };
 
@@ -113,7 +113,7 @@ export default class AdminConfig extends Component {
               </FormGroup>
               <FormGroup>
                 <Input type="select" name="voteType" onChange={this.handleInputChange} id="exampleSelectMulti">
-                  <option value="first_pass">First Past</option>
+                  <option value="first_past">First Past</option>
                   <option value="preferential">Preferencial</option>
                   <option value="transferable">Transferrable</option>
                 </Input>

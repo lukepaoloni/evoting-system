@@ -29,10 +29,8 @@ export default class ResultsPage extends Component {
           if (err) {
             console.error(err)
           } else {
-
-            if (res.data[0])
+            if (res.data)
               this.setState({electionInProgress: true});
-           //console.log(res.data[0].startDate);
           }
         }).catch((err)=>{
               alert(err);

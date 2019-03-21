@@ -11,7 +11,7 @@ import {  Collapse,
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
-
+import Countdown from 'react-countdown-now';
 import strings from '../lang/strings';
 
 export default class Header extends Component{
@@ -57,13 +57,9 @@ export default class Header extends Component{
             }
           }
         )
-        var t = new Date(1970, 0, 1); // Epoch
-        
-        t.setSeconds(res.data.exp);
-        this.setState({exp : t});
+        this.setState({exp : res.data.iat});
       } catch (error) {
-        // console.log("failed to ");
-        // console.log(error);
+
       }  
     }
   }
@@ -71,14 +67,9 @@ export default class Header extends Component{
   x = setInterval(() => {
     if(sessionStorage.getItem('user'))
     {
-      var l = new Date();
-      let p = new Date(this.state.exp - l);
-      let date = p.toString('mm:ss');
-      if(date === "00:00") {
-        sessionStorage.removeItem('user');
-        window.location.reload();
-      }
-      this.setState({date : date});    
+      // console.log(this.state.exp);
+      let inOneHour = new Date().getTime() + this.state.exp;
+      this.setState({date: inOneHour});
     }
   }, 1000);
 
@@ -119,7 +110,8 @@ _onSetLanguageToEnglish() {
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
-              <NavLink disabled>{this.state.date}</NavLink>
+              {/* <NavLink disabled>{this.state.date}</NavLink> */}
+              <Countdown date={new Date(this.state.date)} />,
               <NavItem>
                 {
                   sessionStorage.getItem("user")?<NavLink onClick={this._handleLogout} href='/login'>Logout <b>{JSON.parse(sessionStorage.getItem('user')).username}</b></NavLink>: null
