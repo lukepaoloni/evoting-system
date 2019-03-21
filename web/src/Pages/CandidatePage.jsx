@@ -10,11 +10,9 @@ import strings from "../lang/strings";
 
 
 
-import strings from '../lang/strings';
+
 import { string } from "postcss-selector-parser";
 
-let candidateSeleted = 0;
-let checkboxIds = [];
 
 export default class HomePage extends React.Component {
   constructor(props) {
