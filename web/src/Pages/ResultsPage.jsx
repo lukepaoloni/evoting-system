@@ -11,8 +11,7 @@ export default class ResultsPage extends Component {
     super(props);
 
     this.state = {
-      electionInProgress: false,
-      results: []
+      electionInProgress: false
     };
 
   }
@@ -33,8 +32,7 @@ export default class ResultsPage extends Component {
 
             if (res.data[0])
               this.setState({electionInProgress: true});
-
-           console.log(res.data[0].startDate);
+           //console.log(res.data[0].startDate);
           }
         }).catch((err)=>{
               alert(err);

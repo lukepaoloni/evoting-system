@@ -38,11 +38,11 @@ export default class Header extends Component{
     });
   }
 
-  _handleLogout(){
+  _handleLogout() {
     sessionStorage.removeItem("user")
   }
 
-  async componentWillMount(){
+  async componentWillMount() {
     if (sessionStorage.getItem("user"))
     {
       const token = JSON.parse(sessionStorage.getItem("user")).token;
@@ -62,8 +62,8 @@ export default class Header extends Component{
         t.setSeconds(res.data.exp);
         this.setState({exp : t});
       } catch (error) {
-        console.log("failed to get Constituencies");
-        console.log(error);
+        // console.log("failed to ");
+        // console.log(error);
       }  
     }
   }
@@ -97,7 +97,7 @@ _onSetLanguageToEnglish() {
       <div>
         <Navbar style={{backgroundColor:'#f2f3f4'}} light>
         <a href="/"><i style={{fontSize:'80px', color:'#212529'}} className="fas fa-globe-europe"></i></a>
-          <NavbarBrand href="/" style={{paddingLeft:'1%'}} className="mr-auto"> V-Online</NavbarBrand>
+          <NavbarBrand href="/" style={{paddingLeft:'1%'}} className="mr-auto"> E-Voting</NavbarBrand>
         </Navbar>
         <Navbar style={{backgroundColor:'#dfdfdf'}} light expand="md">
           <NavbarToggler onClick={this.toggle} />
