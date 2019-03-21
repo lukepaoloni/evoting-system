@@ -5,6 +5,8 @@ import axios from "axios";
 import strings from "../lang/strings";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { connect } from "react-redux";
+import { setIatDate } from "../actions/countdown";
 
 const formValid = ({ formErrors, ...rest }) => {
   let valid = true;
@@ -21,7 +23,7 @@ const formValid = ({ formErrors, ...rest }) => {
   return valid;
 };
 
-export default class LoginView extends Component {
+class LoginView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -90,7 +92,13 @@ export default class LoginView extends Component {
             role: res.data.role
           })
         );
-        console.log("response", res.data);
+        // this.props.dispatch(setIatDate(res.data.iatDate));
+        const iatDate = new Date(res.data.iatDate);
+        const diff = new Date(iatDate.getTime() + 3600000);
+        const nowInMs = new Date().getTime();
+        const diffInMs = diff - nowInMs;
+        console.log("diff", diffInMs);
+        console.log(diff.toString());
         this.setState({ loginSucc: true, role: res.data.role });
         this.notifySuccess(res.data.message);
       } catch (err) {
@@ -121,7 +129,12 @@ export default class LoginView extends Component {
           <h1>{strings.login_login}</h1>
           <div>
             <div className="evoting">
-              <label htmlFor="username">{strings.login_usernmame}</label>
+              <label
+                htmlFor="username"
+                style={{ fontSize: this.props.fontSize }}
+              >
+                {strings.login_usernmame}
+              </label>
               <input
                 placeholder={strings.login_usernmame}
                 type="text"
@@ -134,7 +147,12 @@ export default class LoginView extends Component {
               )}
             </div>
             <div className="evoting">
-              <label htmlFor="password">{strings.login_pass}</label>
+              <label
+                htmlFor="password"
+                style={{ fontSize: this.props.fontSize }}
+              >
+                {strings.login_pass}
+              </label>
               <input
                 placeholder={strings.login_pass}
                 type="password"
@@ -160,3 +178,9 @@ export default class LoginView extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  fontSize: state.accessibility.fontSize,
+  iatDate: state.countdown.iatDate
+});
+export default connect(mapStateToProps)(LoginView);

@@ -42,16 +42,13 @@ export class UserController {
 
   @Post()
   // @UseGuards(new JwtAuthGuard())
-  public async create(
-    @Body() body: RegisterDto,
-  ) {
-    //const user = await this.userService.getOne(id);
+  public async create(@Body() body: RegisterDto) {
+    // const user = await this.userService.getOne(id);
     // if (user.isVoter()) {
     //   throw new ForbiddenException(
     //     'You must be an admin to do this.',
     //   );
     // }
-    // Commented out until the seeds have been done
     const newUser = this.userService.create(body);
     return {
       success: true,

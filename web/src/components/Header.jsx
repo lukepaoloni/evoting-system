@@ -54,6 +54,7 @@ export default class Header extends Component {
             Authorization: `Bearer ${token}`
           }
         });
+        console.log(res.data);
         var t = new Date(1970, 0, 1); // Epoch
 
         t.setSeconds(res.data.exp);
@@ -127,7 +128,9 @@ export default class Header extends Component {
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
-              <NavLink disabled>{this.state.date}</NavLink>
+              <NavLink disabled>
+                {/*this.state.date*/}Your session will last for one hour.
+              </NavLink>
               <NavItem>
                 {sessionStorage.getItem("user") ? (
                   <NavLink onClick={this._handleLogout} href="/login">

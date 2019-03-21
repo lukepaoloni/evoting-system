@@ -2,8 +2,10 @@ import React from "react";
 import Slider from "rc-slider";
 import { Collapse } from "reactstrap";
 import "rc-slider/assets/index.css";
+import { connect } from "react-redux";
+import { setFontSize } from "../actions/setFontSize";
 
-export default class Accessibility extends React.Component {
+class Accessibility extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,13 +19,10 @@ export default class Accessibility extends React.Component {
     });
   };
   onSliderChange = value => {
-    console.log("slider value", value);
-    this.setState({
-      fontSize: value
-    });
+    this.props.dispatch(setFontSize(value));
   };
   render() {
-    const { showAccessbilityToolbox, fontSize } = this.state;
+    const { showAccessbilityToolbox } = this.state;
     return (
       <div className="place-bottom">
         <button
@@ -38,7 +37,7 @@ export default class Accessibility extends React.Component {
             <div className="p-3">
               <div className="row">
                 <div className="col-sm-6">
-                  <p>Font size: {fontSize}</p>
+                  <p>Font size: {this.props.fontSize}</p>
                   <Slider min={12} max={42} onChange={this.onSliderChange} />
                 </div>
               </div>
@@ -49,3 +48,7 @@ export default class Accessibility extends React.Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  fontSize: state.accessibility.fontSize
+});
+export default connect(mapStateToProps)(Accessibility);

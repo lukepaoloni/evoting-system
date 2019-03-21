@@ -8,11 +8,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import strings from "../lang/strings";
 
-
+import { connect } from "react-redux";
 import { string } from "postcss-selector-parser";
 
-
-export default class HomePage extends React.Component {
+class CandidatePage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -192,7 +191,7 @@ export default class HomePage extends React.Component {
           </Row>
           {data.map(e => {
             return (
-              <Candidate data={e} key={e.id}>
+              <Candidate data={e} key={e.id} fontSize={this.props.fontSize}>
                 {limit > 1 ? (
                   <React.Fragment>
                     <Checkbox
@@ -243,17 +242,23 @@ export default class HomePage extends React.Component {
             bottom: "0",
             height: "60px",
             width: "100%",
-            justifyItems:'justify',
-            fontSize:"20"
-        }}>
-        <span>{strings.cand_total} </span>
-         <strong>{this.state.data.length}</strong> 
-        <span>{strings.cand_candidates}</span>
+            justifyItems: "justify",
+            fontSize: "20"
+          }}
+        >
+          <span>{strings.cand_total} </span>
+          <strong>{this.state.data.length}</strong>
+          <span>{strings.cand_candidates}</span>
         </footer>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  fontSize: state.accessibility.fontSize
+});
+export default connect(mapStateToProps)(CandidatePage);
 
 const Options = props => {
   let optionsJsx = [];

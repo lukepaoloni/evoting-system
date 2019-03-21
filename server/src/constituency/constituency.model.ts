@@ -6,7 +6,7 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { Candidate } from 'src/candidate/candidate.model';
+import { Candidate } from '../candidate/candidate.model';
 import { User } from '@user/user.model';
 
 @Entity('constituencies')

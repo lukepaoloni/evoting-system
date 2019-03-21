@@ -91,7 +91,7 @@ export class UserService {
    * @throws NotFoundException
    */
   public async login(username: string, password: string) {
-    const user = await this.userRepository.findOneOrFail({
+    const user = await this.userRepository.findOne({
       where: {
         username,
       },
@@ -102,7 +102,7 @@ export class UserService {
         `Unable to find the user with that username (${username}) & password.`,
       );
     }
-  
+
     if (user.isVoter() && (await this.finishedVoting(user.id))) {
       throw new ForbiddenException(`You've used up all your votes.`);
     }
@@ -125,7 +125,6 @@ export class UserService {
     return await this.userRepository.save(user);
   }
 
- 
   public async getOneByUsername(username: string) {
     return await this.userRepository.findOneOrFail({
       where: {

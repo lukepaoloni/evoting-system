@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Jumbotron, Button, Container } from "reactstrap";
-
+import { connect } from "react-redux";
 import strings from "../lang/strings";
 
-export default class HomeView extends Component {
+class HomeView extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-
+    console.log("props", this.props);
     strings.setLanguage(sessionStorage.getItem("lang"));
   }
   render() {
@@ -15,7 +15,7 @@ export default class HomeView extends Component {
       <Container>
         <Jumbotron>
           <h1 className="display-3">{strings.home_title}</h1>
-          <p>{strings.home_body}</p>
+          <p style={{ fontSize: this.props.fontSize }}>{strings.home_body}</p>
           <p className="lead">
             <Button id="loginButton" block color="primary" href="login">
               {strings.home_voteBtn}
@@ -28,7 +28,7 @@ export default class HomeView extends Component {
                   {strings.home_security}
                   <span className="fa fa-shield-alt" />
                 </h2>
-                <p>
+                <p style={{ fontSize: this.props.fontSize }}>
                   Donec id elit non mi porta gravida at eget metus. Fusce
                   dapibus, tellus ac cursus commodo, tortor mauris condimentum
                   nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
@@ -45,7 +45,7 @@ export default class HomeView extends Component {
                   {" "}
                   {strings.home_access} <span className="fa fa-running" />
                 </h2>
-                <p>
+                <p style={{ fontSize: this.props.fontSize }}>
                   Donec id elit non mi porta gravida at eget metus. Fusce
                   dapibus, tellus ac cursus commodo, tortor mauris condimentum
                   nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
@@ -61,7 +61,7 @@ export default class HomeView extends Component {
                 <h2>
                   {strings.home_usability} <span className="fa fa-blind" />
                 </h2>
-                <p>
+                <p style={{ fontSize: this.props.fontSize }}>
                   Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
                   egestas eget quam. Vestibulum id ligula porta felis euismod
                   semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris
@@ -80,3 +80,8 @@ export default class HomeView extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  fontSize: state.accessibility.fontSize
+});
+export default connect(mapStateToProps)(HomeView);
