@@ -38,14 +38,15 @@ export default class Header extends Component{
     });
   }
 
-  _handleLogout(){
+  _handleLogout() {
     sessionStorage.removeItem("user")
   }
 
-  async componentWillMount(){
+  async componentWillMount() {
     if (sessionStorage.getItem("user"))
     {
       const token = JSON.parse(sessionStorage.getItem("user")).token;
+      console.log(token);
       let res;
       try {
         res = await Axios.get(
@@ -61,8 +62,8 @@ export default class Header extends Component{
         t.setSeconds(res.data.exp);
         this.setState({exp : t});
       } catch (error) {
-        console.log("failed to get Constituencies");
-        console.log(error);
+        // console.log("failed to ");
+        // console.log(error);
       }  
     }
   }
@@ -73,6 +74,10 @@ export default class Header extends Component{
       var l = new Date();
       let p = new Date(this.state.exp - l);
       let date = p.toString('mm:ss');
+      if(date === "00:00") {
+        sessionStorage.removeItem('user');
+        window.location.reload();
+      }
       this.setState({date : date});    
     }
   }, 1000);
@@ -92,7 +97,7 @@ _onSetLanguageToEnglish() {
       <div>
         <Navbar style={{backgroundColor:'#f2f3f4'}} light>
         <a href="/"><i style={{fontSize:'80px', color:'#212529'}} className="fas fa-globe-europe"></i></a>
-          <NavbarBrand href="/" style={{paddingLeft:'1%'}} className="mr-auto"> V-Online</NavbarBrand>
+          <NavbarBrand href="/" style={{paddingLeft:'1%'}} className="mr-auto"> E-Voting</NavbarBrand>
         </Navbar>
         <Navbar style={{backgroundColor:'#dfdfdf'}} light expand="md">
           <NavbarToggler onClick={this.toggle} />

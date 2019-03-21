@@ -17,7 +17,7 @@ import { CreateVoteBodyDto } from './dto/create-vote-body.dto';
 @Controller('api/rest/votes')
 export class VoteController {
   constructor(private readonly voteService: VoteService) {}
-
+  
   @Get()
   public async getAll() {
     return await this.voteService.getAll();
@@ -37,9 +37,16 @@ export class VoteController {
       });
     }
 
+    
+
     return {
       success: true,
       message: 'User successfully voted.',
     };
+  }
+
+  @Get('results')
+  public async getResults() {
+    return await this.voteService.getResults();
   }
 }
