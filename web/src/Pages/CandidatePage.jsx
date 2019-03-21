@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Button, Alert } from "reactstrap";
+import { Container, Row, Col, Button,Spinner } from "reactstrap";
 import Candidate from "../components/Voting/Candidate";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
@@ -7,10 +7,7 @@ import Popup from "../components/Voting/Popup";
 
 
 import strings from '../lang/strings';
-import { string } from "postcss-selector-parser";
 
-let candidateSeleted = 0;
-let checkboxIds = [];
 export default class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +16,6 @@ export default class HomePage extends React.Component {
       user: null,
       data: [],
       config: null,
-      disable: false,
       showPopup: false,
       selectedCandidates: [{
         firstName: null,
@@ -27,19 +23,21 @@ export default class HomePage extends React.Component {
         candidateId: null,
         priority: null
       }],
-      VoteSuccess: false
+      VoteSuccess: false,
+      isloading:true
     };
 
     strings.setLanguage(sessionStorage.getItem("lang"))
   }
 
+  //outout: get cadidate that belong to user constituency
+  //output: get vote config setting
   async componentWillMount() {
     const user = JSON.parse(sessionStorage.getItem("user"));
     const token = user.token;
 
-    let res;
     try {
-      res = await axios.get(`/api/rest/auth/me/constituency`,{
+      let res = await axios.get(`/api/rest/auth/me/constituency`,{
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -51,8 +49,7 @@ export default class HomePage extends React.Component {
               Authorization: `Bearer ${token}`
             }
           })
-          //console.log(config.data)
-      this.setState({user:user, data: res.data, config:config.data[0] });
+      this.setState({user:user, data: res.data, config:config.data[0], isloading:false });
       
     } catch (error) {
       console.log("failed to get Constituencies");
@@ -60,26 +57,33 @@ export default class HomePage extends React.Component {
     }
   }
 
+  //output: show vote confirmation popup
   togglePopup() {
     this.setState({
       showPopup: !this.state.showPopup
     });
   }
-  confirmPopup() {
-    // axios.post(
-    //   '/api/rest/votes', {
-    //     userId: this.state.user.token,
-    //     candidateId: this.state.selectedCandidates.id
-    //     }, {
-    //       headers: {
-    //           'Authorization': `Bearer ${this.state.user.token}`
-    //       }
-    //   })
-    // window.location.reload();
-    // this.setState({ VoteSuccess: true });
+
+  //output: sending vote to database
+  async confirmPopup() {
+    await axios.post(
+      '/api/rest/votes', {
+        votes:[ this.state.selectedCandidates]
+      }, {
+          headers: {
+              Authorization: `Bearer ${this.state.user.token}`
+          }
+      }).then((req,res)=>{
+    this.setState({ VoteSuccess: true });
+
+      }).catch((err)=>{
+        console.log(err)
+        alert("something gone wrong, please try again in few minutes")
+      })
   }
 
-  _onCheckboxClick = e => {
+//output: save user's selected candidate
+  _onRadioButtonClick = e => {
     let candidate = this.state.data.find(i => {
         return i.id === parseInt(e.target.value) ? i: null;
       });
@@ -92,79 +96,50 @@ export default class HomePage extends React.Component {
         }
       })
     }
-    
-    // checkboxIds.push(e.target.value);
-    // let candidate = this.state.data.find(i => {
-    //   return i.id === parseInt(e.target.value) ? i: null;
-    // });
-    // candidateSeleted += 1;
-    // if (candidateSeleted >= 1)
-    //   this.setState({ disable: true, selectedCandidates: candidate });
-      
   };
 
-  _onResetCandidate = e => {
-    this.setState({ disable: false });
-    window.location.reload();
-  };
-
+  // show confirmation popup box
    _vote = async() => {
-      await axios.post(
-      '/api/rest/votes', {
-        votes: this.state.selectedCandidates
-      }, {
-          headers: {
-              Authorization: `Bearer ${this.state.user.token}`
-          }
-      }
-  ).then(()=>{
-        this.setState({ showPopup: true });
-      }).catch((err)=>{
-        alert("something gone wrong, please try again in few minutes")
-      })
-    // console.log("getting and storing the votes");
+    this.setState({ showPopup: true });
   };
-
 
   render() {
-    let inputConfig = "radio";
-    if(this.state.config && this.state.config.limit>=2)
-    {
-      //if(this.state.config.limit>=2)
-        inputConfig = "checkbox"
-    }
+    // show loading screen
+    if (this.state.isloading) return <Spinner size="sm" color="primary" />
+
+    //User successfuly voted, redirect tem to success page
     if (this.state.VoteSuccess) return <Redirect to={"/success"} />;
+    
     return (
-   
       <div>
            <Container style={{marginBottom:30}}>
         <Row>
           <Col
             sm="12"
             md={{ size: 12 }}
-            style={{ backgroundColor: "silver", textAlign: "center" }}
-          >
+            style={{ backgroundColor: "silver", textAlign: "center" }}>
             <h1>{strings.cand_title}</h1>
-            <p>
-                {strings.cand_voteHelp}
-            </p>
+            <p>{strings.cand_voteHelp}</p>
           </Col>
         </Row>
-        {this.state.data.map(e => {
+
+        {//shouw each candidate and radio button
+          this.state.data.map(e => {
           return (
             <Candidate data={e} key={e.id}>
-              <input
+              {this.state.config.limit == 1 ?<input
                 key={e.id}
                 name="isGoing"
-                type={inputConfig}
+                type="radio"
                 style={{ height: 60, width: 50 }}
-                disabled={this.state.disable}
-                onClick={this._onCheckboxClick}
+                onClick={this._onRadioButtonClick}
                 value={e.id}
-              />
+              />: null
+              }
             </Candidate>
-          );
+            );
         })}
+
         <Row>
           <Col className="col-3">
             <Button color="danger" onClick={this._onResetCandidate}>
@@ -177,14 +152,15 @@ export default class HomePage extends React.Component {
             </Button>
           </Col>
         </Row>
-        {this.state.showPopup ? (
+
+        {//vote confirmation popup, works for FIRST PASS VOTE only
+          this.state.showPopup ? (
           <Popup
             detail={this.state.selectedCandidates}
             closePopup={this.togglePopup.bind(this)}
             confirmPopup={this.confirmPopup.bind(this)}
           />
         ) : null}
-
       </Container>
       
       <footer style={{

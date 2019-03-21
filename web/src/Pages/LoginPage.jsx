@@ -72,7 +72,7 @@ export default class LoginView extends Component{
             }
             await axios({
               method: 'post',
-              url: 'http://localhost:4000/api/rest/users/login',
+              url: '/api/rest/users/login',
               data: Loginuserdetails
           }).then((req,res)=>{
        //     alert("succ")
