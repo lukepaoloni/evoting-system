@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import { Container, Form, FormGroup, Input, FormFeedback, Label, FormText, Button } from 'reactstrap';
 
+import VoteResults from '../components/Admin/Results/VoteResults';
+
 import Axios from 'axios';
 
-export default class VoteResults extends Component {
+export default class ResultsPage extends Component {
 
   constructor(props) {
     super(props);
@@ -39,17 +41,23 @@ export default class VoteResults extends Component {
               console.log(err)
           });
   }
-  
     render() {
     // const { validated } = this.state;
+    let results = <p>No election in progress.</p>
+
+    if (this.state.electionInProgress === true) {
+      results = <VoteResults/>
+    }
 
     return (
       <div>
           <Container> 
-            <h1>Election Results</h1>
- 
+
+              {results}
+
           </Container>
       </div>
+
     );
     }
     
