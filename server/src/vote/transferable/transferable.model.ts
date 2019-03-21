@@ -4,4 +4,4 @@ export class Transferable implements IVoteType {
   startDate: Date;
   EndDate: Date;
   Limit: number;
-}
+} 

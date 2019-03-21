@@ -5,3 +5,6 @@ export class FirstPast implements IVoteType {
   EndDate: Date;
   Limit: number;
 }
+
+//implement getResult to return the winner
+
