@@ -125,12 +125,7 @@ export class UserService {
     return await this.userRepository.save(user);
   }
 
-  /**
-   * Get the user by username.
-   * @param username string
-   * @returns Promise<User>
-   * @throws NotFoundException
-   */
+ 
   public async getOneByUsername(username: string) {
     return await this.userRepository.findOneOrFail({
       where: {

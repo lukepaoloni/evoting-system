@@ -37,9 +37,16 @@ export class VoteController {
       });
     }
 
+    
+
     return {
       success: true,
       message: 'User successfully voted.',
     };
+  }
+
+  @Get('results')
+  public async getResults() {
+    return await this.voteService.getResults();
   }
 }

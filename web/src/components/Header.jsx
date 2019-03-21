@@ -46,6 +46,7 @@ export default class Header extends Component{
     if (sessionStorage.getItem("user"))
     {
       const token = JSON.parse(sessionStorage.getItem("user")).token;
+      console.log(token);
       let res;
       try {
         res = await Axios.get(
@@ -73,6 +74,10 @@ export default class Header extends Component{
       var l = new Date();
       let p = new Date(this.state.exp - l);
       let date = p.toString('mm:ss');
+      if(date === "00:00") {
+        sessionStorage.removeItem('user');
+        window.location.reload();
+      }
       this.setState({date : date});    
     }
   }, 1000);

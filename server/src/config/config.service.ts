@@ -26,6 +26,14 @@ export class ConfigService {
     return config.limit;
   }
   /**
+   * Returns the Type of Election
+   * @returns Promise<number>
+   */
+  public async getType() {
+    const config = await this.configRepository.findOneOrFail();
+    return config.voteType;
+  }
+  /**
    * Updates the Single Election located in the database
    * @param config IVoteType
    * @returns Promise<Config[]>
