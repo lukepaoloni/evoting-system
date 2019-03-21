@@ -199,7 +199,7 @@ export default class HomePage extends React.Component {
             width: "100%",
             justifyItems:'justify',
             fontSize:20
-        }}>Totla <strong>{this.state.data.length}</strong> candidates,  scroll to view more </footer>
+        }}>Total <strong>{this.state.data.length}</strong> candidates,  scroll to view more! </footer>
       </div>
     );
   }

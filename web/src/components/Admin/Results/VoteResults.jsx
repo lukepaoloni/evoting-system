@@ -9,35 +9,14 @@ export default class VoteResults extends Component {
     super(props);
 
     this.state = {
-      electionInProgress: false,
-      results: []
+
     };
 
   }
 
   async componentDidMount() {
 
-    const token =JSON.parse(sessionStorage.getItem('user')).token;
-      await Axios({
-        method: 'get',
-        url: 'http://localhost:4000/api/rest/configurations',
-        headers: {
-          "Authorization" : `Bearer ${token}`
-        }
-        }).then((res,err)=>{
-          if (err) {
-            console.error(err)
-          } else {
 
-            if (res.data[0])
-              this.setState({electionInProgress: true});
-
-           console.log(res.data[0].startDate);
-          }
-        }).catch((err)=>{
-              alert(err);
-              console.log(err)
-          });
   }
   
     render() {
