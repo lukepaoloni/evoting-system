@@ -11,7 +11,7 @@ export interface IVoteType {
 }
 
 export enum VoteTypes {
-  FirstPast = 'first_pass',
+  FirstPast = 'first_past',
   Transferable = 'transferable',
   Preferential = 'preferential',
 }
@@ -44,9 +44,9 @@ export class VoteTypeFactory implements IVoteType {
     }
   }
   getResult(data: any);
-  getResult(data: any): FirstPast;
-  getResult(data: any): Transferable;
-  getResult(data: any): Preferential;
+  // getResult(data: any): FirstPast;
+  // getResult(data: any): Transferable;
+  // getResult(data: any): Preferential;
 
   public getResult(data: any) : FirstPast | Transferable | Preferential {
     return null;

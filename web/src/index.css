@@ -29,3 +29,8 @@ code {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+  width: 100%;
+}

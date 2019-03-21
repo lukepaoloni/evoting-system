@@ -96,12 +96,12 @@ export class VoteService {
 
   public async getResults() {
     const type = await this.configService.getType();
-    console.log(type);
+    // console.log(type);
     const votes = await this.voteRepository.find();
     let factory = new VoteTypeFactory();
     let election = factory.create(type);
-    election.getResult();
+    return await election.getResult(votes);
 
-    console.log('votes', votes);
+   // console.log('votes', votes);
   }
 }

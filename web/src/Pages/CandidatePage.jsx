@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Button, Alert } from "reactstrap";
+import { Container, Row, Col, Button,Spinner } from "reactstrap";
 import Candidate from "../components/Voting/Candidate";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
@@ -19,7 +19,6 @@ class CandidatePage extends React.Component {
       user: null,
       data: [],
       config: null,
-      disable: false,
       showPopup: false,
       selectedCandidate: {},
       VoteSuccess: false,
@@ -31,15 +30,14 @@ class CandidatePage extends React.Component {
     strings.setLanguage(sessionStorage.getItem("lang"));
   }
 
+  //outout: get cadidate that belong to user constituency
+  //output: get vote config setting
   async componentWillMount() {
     const user = JSON.parse(sessionStorage.getItem("user"));
     const token = user.token;
 
-    let res;
     try {
-      res = await axios.get(
-        `http://localhost:4000/api/rest/auth/me/constituency`,
-        {
+      let res = await axios.get(`http://localhost:4000/api/rest/auth/me/constituency`,{
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -72,6 +70,7 @@ class CandidatePage extends React.Component {
     }
   }
 
+  //output: show vote confirmation popup
   togglePopup() {
     this.setState({
       showPopup: !this.state.showPopup
@@ -242,13 +241,12 @@ class CandidatePage extends React.Component {
             bottom: "0",
             height: "60px",
             width: "100%",
-            justifyItems: "justify",
-            fontSize: "20"
-          }}
-        >
-          <span>{strings.cand_total} </span>
-          <strong>{this.state.data.length}</strong>
-          <span>{strings.cand_candidates}</span>
+            justifyItems:'justify',
+            fontSize:"20"
+        }}>
+        <span>{strings.cand_total} </span>
+         <strong>{this.state.data.length} </strong> 
+        <span>{strings.cand_candidates}</span>
         </footer>
       </div>
     );

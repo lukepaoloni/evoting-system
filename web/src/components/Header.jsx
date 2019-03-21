@@ -15,6 +15,7 @@ import {
 } from "reactstrap";
 
 import strings from "../lang/strings";
+import Countdown from 'react-countdown-now';
 
 export default class Header extends Component {
   constructor(props) {
@@ -67,15 +68,11 @@ export default class Header extends Component {
   }
 
   x = setInterval(() => {
-    if (sessionStorage.getItem("user")) {
-      var l = new Date();
-      let p = new Date(this.state.exp - l);
-      let date = p.toString("mm:ss");
-      if (date === "00:00") {
-        sessionStorage.removeItem("user");
-        window.location.reload();
-      }
-      this.setState({ date: date });
+    if(sessionStorage.getItem('user'))
+    {
+      // console.log(this.state.exp);
+      let inOneHour = new Date().getTime() + this.state.exp;
+      this.setState({date: inOneHour});
     }
   }, 1000);
 
@@ -116,14 +113,16 @@ export default class Header extends Component {
                 <NavLink href="/vote">{strings.castVote}</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
+                <DropdownToggle nav caret id="options">
                   {strings.header_options}
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem onClick={this._onSetLanguageToEnglish}>
-                    {strings.header_lang} (EN)
+                  <DropdownItem onClick={this._onSetLanguageToEnglish} 
+                                id="changeLangEN">
+                   {strings.header_lang} (EN)
                   </DropdownItem>
-                  <DropdownItem onClick={this._onSetLanguageToGerman}>
+                  <DropdownItem onClick={this._onSetLanguageToGerman}
+                                id="changeLangDE">
                     {strings.header_lang} (DE)
                   </DropdownItem>
                 </DropdownMenu>

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { CandidateService } from './candidate.service';
 import { ApiUseTags } from '@nestjs/swagger';
 import { CandidateDto } from '@user/dto/candidate.dto';
@@ -14,6 +14,11 @@ export class CandidateController {
   @Get()
   public async getAll() {
     return await this.candidateService.getAll();
+  }
+
+  @Get(':id/getOne')
+  public async getOne(@Param('id') id: number) {
+    return await this.candidateService.getOneById(id);
   }
 
 /**
