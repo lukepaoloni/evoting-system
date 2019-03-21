@@ -14,7 +14,8 @@ export class ConfigService {
    * @returns Promise<Config[]>
    */
   public async getAll() {
-    return await this.configRepository.find();
+    const configs = await this.configRepository.find();
+    return configs[0];
   }
   /**
    * Returns the amount of votes the user can have
@@ -34,7 +35,7 @@ export class ConfigService {
   }
   /**
    * Updates the Single Election located in the database
-   * @param config IVoteType 
+   * @param config IVoteType
    * @returns Promise<Config[]>
    * @throws ForbiddenException
    */

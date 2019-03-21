@@ -12,6 +12,6 @@ export class CreateVoteDto {
   candidateId: number;
 
   @ApiModelPropertyOptional()
-  @IsString()
-  priority?: Priority;
+  @IsInt()
+  priority?: number;
 }
