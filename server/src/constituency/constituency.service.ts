@@ -14,9 +14,7 @@ export class ConstituencyService {
   ) {}
 
   public async getAll() {
-    return await this.constituencyRepository.find({
-      relations: ['candidate'],
-    });
+    return await this.constituencyRepository.find();
   }
 
   public async getOneById(id: number) {

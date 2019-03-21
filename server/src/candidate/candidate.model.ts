@@ -44,10 +44,10 @@ export class Candidate extends BaseEntity {
     default: false,
   })
   isElected: boolean;
-//save picture
+
   @Column({
-  length: 255,
-  type:"varchar"
+    length: 255,
+    type: 'varchar',
   })
   profilePic: string;
 

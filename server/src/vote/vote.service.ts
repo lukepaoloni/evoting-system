@@ -86,6 +86,12 @@ export class VoteService {
       );
     }
     const candidate = await this.candidateService.getOneById(data.candidateId);
+    if (limit > 1) {
+      candidate.numOfVotes += data.priority;
+    } else {
+      candidate.numOfVotes += 1;
+    }
+    await candidate.save();
     const vote = this.voteRepository.create({
       voterId: user.id,
       candidateId: candidate.id,
@@ -96,12 +102,21 @@ export class VoteService {
 
   public async getResults() {
     const type = await this.configService.getType();
-    // console.log(type);
     const votes = await this.voteRepository.find();
-    let factory = new VoteTypeFactory();
-    let election = factory.create(type);
-    return await election.getResult(votes);
+    let formatted = [];
 
-   // console.log('votes', votes);
+    for (const vote of votes) {
+      const candidate = await this.candidateService.getOneById(
+        vote.candidateId,
+      );
+      formatted[candidate.id] = {
+        ...candidate,
+      };
+    }
+    const factory = new VoteTypeFactory();
+    const election = factory.create(type);
+    return election.getResult(formatted);
+
+    // console.log('votes', votes);
   }
 }
