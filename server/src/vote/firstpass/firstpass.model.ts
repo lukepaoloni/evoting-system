@@ -7,17 +7,17 @@ export class FirstPast implements IVoteType {
 
   public getResult(data: any) {
     // console.log(data);
-    let iceCream = [];
+    let collection = [];
     let i = 0;
     let frequency = {};
     data.forEach(element => {
-      iceCream[i] = element.candidateId;
+      collection[i] = element.candidateId;
       i++;
     });
-    // console.log(iceCream);
-    iceCream.forEach(function(value) { frequency[value] = 0; });
+    // console.log(collection);
+    collection.forEach(function(value) { frequency[value] = 0; });
 
-    let uniques = iceCream.filter(function(value) {
+    let uniques = collection.filter(function(value) {
         return ++frequency[value] == 1;
     });
 
