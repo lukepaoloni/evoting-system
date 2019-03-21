@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
-import Axios from 'axios'
-import {  Collapse,
+import React, { Component } from "react";
+import Axios from "axios";
+import {
+  Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
@@ -10,19 +11,19 @@ import {  Collapse,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  DropdownItem
+} from "reactstrap";
 
-import strings from '../lang/strings';
+import strings from "../lang/strings";
 
-export default class Header extends Component{
-
+export default class Header extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       isOpen: false,
-      date : "",
-      exp : "",
+      date: "",
+      exp: ""
     };
 
     this.toggle = this.toggle.bind(this);
@@ -39,67 +40,74 @@ export default class Header extends Component{
   }
 
   _handleLogout() {
-    sessionStorage.removeItem("user")
+    sessionStorage.removeItem("user");
   }
 
   async componentWillMount() {
-    if (sessionStorage.getItem("user"))
-    {
+    if (sessionStorage.getItem("user")) {
       const token = JSON.parse(sessionStorage.getItem("user")).token;
       console.log(token);
       let res;
       try {
-        res = await Axios.get(
-          `http://localhost:4000/api/rest/auth/decode`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
+        res = await Axios.get(`http://localhost:4000/api/rest/auth/decode`, {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
-        )
+        });
         var t = new Date(1970, 0, 1); // Epoch
-        
+
         t.setSeconds(res.data.exp);
-        this.setState({exp : t});
+        this.setState({ exp: t });
       } catch (error) {
         // console.log("failed to ");
         // console.log(error);
-      }  
+      }
     }
   }
 
   x = setInterval(() => {
-    if(sessionStorage.getItem('user'))
-    {
+    if (sessionStorage.getItem("user")) {
       var l = new Date();
       let p = new Date(this.state.exp - l);
-      let date = p.toString('mm:ss');
-      if(date === "00:00") {
-        sessionStorage.removeItem('user');
+      let date = p.toString("mm:ss");
+      if (date === "00:00") {
+        sessionStorage.removeItem("user");
         window.location.reload();
       }
-      this.setState({date : date});    
+      this.setState({ date: date });
     }
   }, 1000);
 
-_onSetLanguageToGerman() {
-  sessionStorage.setItem("lang", "de");
-  window.location.reload();
-}
+  _onSetLanguageToGerman() {
+    sessionStorage.setItem("lang", "de");
+    window.location.reload();
+  }
 
-_onSetLanguageToEnglish() {
-  sessionStorage.setItem("lang", "en");
-  window.location.reload();
-}
+  _onSetLanguageToEnglish() {
+    sessionStorage.setItem("lang", "en");
+    window.location.reload();
+  }
 
-    render() {
+  render() {
     return (
       <div>
-        <Navbar style={{backgroundColor:'#f2f3f4'}} light>
-        <a href="/"><i style={{fontSize:'80px', color:'#212529'}} className="fas fa-globe-europe"></i></a>
-          <NavbarBrand href="/" style={{paddingLeft:'1%'}} className="mr-auto"> E-Voting</NavbarBrand>
+        <Navbar style={{ backgroundColor: "#f2f3f4" }} light>
+          <a href="/">
+            <i
+              style={{ fontSize: "80px", color: "#212529" }}
+              className="fas fa-globe-europe"
+            />
+          </a>
+          <NavbarBrand
+            href="/"
+            style={{ paddingLeft: "1%" }}
+            className="mr-auto"
+          >
+            {" "}
+            E-Voting
+          </NavbarBrand>
         </Navbar>
-        <Navbar style={{backgroundColor:'#dfdfdf'}} light expand="md">
+        <Navbar style={{ backgroundColor: "#dfdfdf" }} light expand="md">
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
@@ -112,7 +120,7 @@ _onSetLanguageToEnglish() {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem onClick={this._onSetLanguageToEnglish}>
-                   {strings.header_lang} (EN)
+                    {strings.header_lang} (EN)
                   </DropdownItem>
                   <DropdownItem onClick={this._onSetLanguageToGerman}>
                     {strings.header_lang} (DE)
@@ -121,15 +129,17 @@ _onSetLanguageToEnglish() {
               </UncontrolledDropdown>
               <NavLink disabled>{this.state.date}</NavLink>
               <NavItem>
-                {
-                  sessionStorage.getItem("user")?<NavLink onClick={this._handleLogout} href='/login'>Logout <b>{JSON.parse(sessionStorage.getItem('user')).username}</b></NavLink>: null
-                }
+                {sessionStorage.getItem("user") ? (
+                  <NavLink onClick={this._handleLogout} href="/login">
+                    Logout{" "}
+                    <b>{JSON.parse(sessionStorage.getItem("user")).username}</b>
+                  </NavLink>
+                ) : null}
               </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
       </div>
     );
-    }
-    
+  }
 }

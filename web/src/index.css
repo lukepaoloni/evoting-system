@@ -14,12 +14,18 @@ code {
 }
 
 .accessbility-toolbox {
-  position: fixed;
-  bottom: 0;
-  right: 15vw;
   background: #d8d8d8;
   height: 20vh;
   width: 100%;
-  left: 0;
+}
+.place-bottom {
+  position: fixed;
+  bottom: 0;
   right: 0;
+  width: 100%;
+  left: 0;
+}
+.border-bottom-radius-0 {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
