@@ -45,6 +45,11 @@ export class Candidate extends BaseEntity {
   })
   isElected: boolean;
 
+  @Column({
+  length: 255
+  })
+  profilePic: string;
+
   public incrementVote() {
     this.numOfVotes++;
   }
