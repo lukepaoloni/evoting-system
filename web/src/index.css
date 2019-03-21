@@ -12,3 +12,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.accessbility-toolbox {
+  position: fixed;
+  bottom: 0;
+  right: 15vw;
+  background: #d8d8d8;
+  height: 20vh;
+  width: 100%;
+  left: 0;
+  right: 0;
+}
