@@ -26,20 +26,20 @@ export class ConfigController {
     private readonly userService: UserService,
   ) {}
 
-/**
- * Returns the configuration data. 
- */
+  /**
+   * Returns the configuration data.
+   */
   @Get()
   public async getConfigs() {
     return await this.configService.getAll();
   }
 
-/**
- * Updates the configuration data.
- * User must be an Administrator.
- * @param id - checks whether user is an Administrator
- * @param body
- */
+  /**
+   * Updates the configuration data.
+   * User must be an Administrator.
+   * @param id - checks whether user is an Administrator
+   * @param body
+   */
   @Put()
   @UseGuards(new JwtAuthGuard())
   public async amendConfig(

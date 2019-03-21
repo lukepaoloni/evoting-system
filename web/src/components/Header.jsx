@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 
 import strings from "../lang/strings";
-import Countdown from 'react-countdown-now';
+import Countdown from "react-countdown-now";
 
 export default class Header extends Component {
   constructor(props) {
@@ -43,38 +43,6 @@ export default class Header extends Component {
   _handleLogout() {
     sessionStorage.removeItem("user");
   }
-
-  async componentWillMount() {
-    if (sessionStorage.getItem("user")) {
-      const token = JSON.parse(sessionStorage.getItem("user")).token;
-      console.log(token);
-      let res;
-      try {
-        res = await Axios.get(`http://localhost:4000/api/rest/auth/decode`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        console.log(res.data);
-        var t = new Date(1970, 0, 1); // Epoch
-
-        t.setSeconds(res.data.exp);
-        this.setState({ exp: t });
-      } catch (error) {
-        // console.log("failed to ");
-        // console.log(error);
-      }
-    }
-  }
-
-  x = setInterval(() => {
-    if(sessionStorage.getItem('user'))
-    {
-      // console.log(this.state.exp);
-      let inOneHour = new Date().getTime() + this.state.exp;
-      this.setState({date: inOneHour});
-    }
-  }, 1000);
 
   _onSetLanguageToGerman() {
     sessionStorage.setItem("lang", "de");
@@ -117,19 +85,21 @@ export default class Header extends Component {
                   {strings.header_options}
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem onClick={this._onSetLanguageToEnglish} 
-                                id="changeLangEN">
-                   {strings.header_lang} (EN)
+                  <DropdownItem
+                    onClick={this._onSetLanguageToEnglish}
+                    id="changeLangEN"
+                  >
+                    {strings.header_lang} (EN)
                   </DropdownItem>
-                  <DropdownItem onClick={this._onSetLanguageToGerman}
-                                id="changeLangDE">
+                  <DropdownItem
+                    onClick={this._onSetLanguageToGerman}
+                    id="changeLangDE"
+                  >
                     {strings.header_lang} (DE)
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
-              <NavLink disabled>
-                {/*this.state.date*/}Your session will last for one hour.
-              </NavLink>
+              <NavLink disabled>Your session will last for one hour.</NavLink>
               <NavItem>
                 {sessionStorage.getItem("user") ? (
                   <NavLink onClick={this._handleLogout} href="/login">

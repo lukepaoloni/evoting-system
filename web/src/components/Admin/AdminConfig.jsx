@@ -21,7 +21,8 @@ export default class AdminConfig extends Component {
       startDate: new Date(),
       endDate: new Date(),
       voteType: "first_pass",
-      limit: 1
+      limit: 1,
+      firstAttempt: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -31,19 +32,22 @@ export default class AdminConfig extends Component {
   }
 
   async componentWillMount() {
-    try {
-      const res = await axios.get(
-        "http://localhost:4000/api/rest/configurations"
-      );
-      this.setState({
-        startDate: new Date(res.data.startDate),
-        endDate: new Date(res.data.endDate),
-        voteType: res.data.voteType,
-        limit: res.data.limit
-      });
-    } catch (err) {
-      console.error(err);
-      this.notifyError(err.response);
+    if (this.state.firstAttempt) {
+      try {
+        const res = await axios.get(
+          "http://localhost:4000/api/rest/configurations"
+        );
+        this.setState({
+          startDate: new Date(res.data.startDate),
+          endDate: new Date(res.data.endDate),
+          voteType: res.data.voteType,
+          limit: res.data.limit,
+          firstAttempt: true
+        });
+      } catch (err) {
+        console.error(err);
+        this.notifyError(err.response);
+      }
     }
   }
 
@@ -88,12 +92,13 @@ export default class AdminConfig extends Component {
         .then((res, err) => {
           if (err) {
             console.error(err);
+            this.notifyError("Unable to save configuration.");
           } else {
-            alert(res.data.message);
+            this.notifySuccess("Successfully saved configuration.");
           }
         })
         .catch(err => {
-          alert(err);
+          this.notifyError("Unable to save configuration.");
           console.log(err);
         });
     } else {
@@ -133,11 +138,6 @@ export default class AdminConfig extends Component {
                   timeIntervals={15}
                   dateFormat="MMMM d, yyyy h:mm aa"
                   timeCaption="time"
-                  readOnly={
-                    new Date(endDate).getTime() < new Date().getTime()
-                      ? false
-                      : true
-                  }
                 />
                 <FormFeedback>Required</FormFeedback>
               </FormGroup>
@@ -155,11 +155,6 @@ export default class AdminConfig extends Component {
                   dateFormat="MMMM d, yyyy h:mm aa"
                   timeCaption="time"
                   name="endDate"
-                  readOnly={
-                    new Date(endDate).getTime() < new Date().getTime()
-                      ? false
-                      : true
-                  }
                 />
                 <FormFeedback>Required</FormFeedback>
               </FormGroup>
@@ -173,11 +168,6 @@ export default class AdminConfig extends Component {
                   name="voteType"
                   onChange={this.handleInputChange}
                   id="exampleSelectMulti"
-                  disabled={
-                    new Date(endDate).getTime() < new Date().getTime()
-                      ? false
-                      : true
-                  }
                 >
                   <option
                     value="first_past"
@@ -210,24 +200,15 @@ export default class AdminConfig extends Component {
                   onChange={this.handleInputChange}
                   required
                   value={limit}
-                  disabled={
-                    new Date(endDate).getTime() < new Date().getTime()
-                      ? false
-                      : true
-                  }
                 />
                 <FormFeedback>Required</FormFeedback>
               </FormGroup>
             </div>
-            {new Date(endDate).getTime() < new Date().getTime() ? (
-              <div className="col-12">
-                <Button type="submit" onClick={this.onSubmit} color="success">
-                  Start Election
-                </Button>
-              </div>
-            ) : (
-              ""
-            )}
+            <div className="col-12">
+              <Button type="submit" onClick={this.onSubmit} color="success">
+                Start Election
+              </Button>
+            </div>
           </div>
         </Container>
       </div>

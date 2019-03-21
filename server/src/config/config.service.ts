@@ -40,10 +40,14 @@ export class ConfigService {
    * @throws ForbiddenException
    */
   public async updateConfig({ startDate, endDate, limit, voteType }: any) {
-    let config = await this.configRepository.findOne();
+    let config: Config = (await this.configRepository.find()) as any;
+    config = config[0];
     const startDateInMs = new Date(startDate).getTime();
     const endDateInMs = new Date(endDate).getTime();
 
+    if (!(endDateInMs > startDateInMs)) {
+      throw new ForbiddenException('End date must be after the start date.');
+    }
     if (config && config.endDate) {
       const date = new Date(config.endDate);
       const now = new Date();
@@ -53,12 +57,14 @@ export class ConfigService {
           `You can't amend the configurations until the vote is over.`,
         );
       }
+      config.startDate = startDate;
+      config.endDate = endDate;
+      config.limit = limit;
+      config.voteType = voteType;
+      return await this.configRepository.save(config);
     }
-    if (!(endDateInMs > startDateInMs)) {
-      throw new ForbiddenException('End date must be after the start date.');
-    }
+
     config = await this.configRepository.create({
-      ...config,
       startDate,
       endDate,
       limit,

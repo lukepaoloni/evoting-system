@@ -1,12 +1,10 @@
 import * as request from 'supertest';
 
-describe('Voters', () => {
+describe('Admin - Configurations', () => {
   let token = '';
   const user = {
-    id: null,
-    username: 'testuser',
+    username: 'testadmin',
     password: 'password',
-    constituencyId: null,
   };
 
   beforeAll(done => {
@@ -26,13 +24,20 @@ describe('Voters', () => {
       });
   });
 
-  it(`Get Users Constituency, Candidates In That Constituency & the Parties. (GET).`, done => {
+  it(`Amend configuration. (PUT).`, done => {
     return request('')
-      .get('http://localhost:4000/api/rest/users/constituency')
+      .put('http://localhost:4000/api/rest/configurations')
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${token}`)
+      .send({
+        voteType: 'first_pass',
+        limit: 1,
+        startDate: '2019-05-01 09:00:00',
+        endDate: '2019-08-01 09:00:00',
+      })
       .then(res => {
-        expect(res).toBeTruthy();
+        expect(res.status).toBe(200);
+        expect(res.body).toBeDefined();
         done();
       });
   });
