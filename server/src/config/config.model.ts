@@ -6,7 +6,7 @@ import {
   BeforeUpdate,
   BeforeInsert,
 } from 'typeorm';
-import { VoteTypeFactory, VoteTypes } from 'src/factory/VoteFactory';
+import { VoteTypeFactory, VoteTypes } from '../vote/factory/VoteFactory';
 import * as moment from 'moment';
 
 @Entity('configurations')

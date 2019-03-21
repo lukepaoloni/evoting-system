@@ -1,4 +1,9 @@
-import { Injectable, ForbiddenException } from '@nestjs/common';
+import {
+  Injectable,
+  ForbiddenException,
+  Inject,
+  forwardRef,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Vote } from './vote.model';
 import { Repository } from 'typeorm';
@@ -6,25 +11,54 @@ import { UserService } from '../user/user.service';
 import { CandidateService } from '../candidate/candidate.service';
 import { ConfigService } from '../config/config.service';
 import { CreateVoteDto } from './dto/create-vote.dto';
+import { User } from '@user/user.model';
 
 @Injectable()
 export class VoteService {
   constructor(
     @InjectRepository(Vote)
     private readonly voteRepository: Repository<Vote>,
-    private readonly userService: UserService,
     private readonly candidateService: CandidateService,
     private readonly configService: ConfigService,
+    @Inject(forwardRef(() => UserService))
+    private readonly userService: UserService,
   ) {}
 
+  /**
+   * Get's all the votes with the candidate and voter.
+   * @returns Promise<Vote[]>
+   */
   public async getAll() {
     return this.voteRepository.find({
       relations: ['candidate', 'user'],
     });
   }
 
+  /**
+   * Get's the votes by the voter.
+   * @param voter User
+   * @returns Promise<Vote[]>
+   * @throws ForbiddenException
+   */
+  public async getByVoter(voter: User) {
+    if (voter.isAdmin()) {
+      throw new ForbiddenException('This user is currently an administrator.');
+    }
+    return await this.voteRepository.find({
+      where: {
+        voterId: voter.id,
+      },
+    });
+  }
+
+  /**
+   * Creates a vote.
+   * @param data CreateVoteDto
+   * @returns Promise<Vote>
+   * @throws NotFoundException
+   */
   public async create(data: CreateVoteDto) {
-    const user = await this.userService.getOne(data.voterId);
+    const user = await this.userService.getOneById(data.voterId);
     const alreadyVoted = await this.voteRepository.findOne({
       where: {
         voterId: user.id,

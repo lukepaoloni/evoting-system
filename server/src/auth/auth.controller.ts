@@ -13,7 +13,7 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly userService: UserService,
-  ) { }
+  ) {}
 
   @Get('token')
   public async getToken(@Body() credentials: Credentials) {
@@ -39,7 +39,7 @@ export class AuthController {
   @Get('me')
   @UseGuards(new JwtAuthGuard())
   public async getMe(@CurrentUser() body: any) {
-    const user = await this.userService.getOne(body.id);
+    const user = await this.userService.getOneById(body.id);
     return {
       ...user,
     };

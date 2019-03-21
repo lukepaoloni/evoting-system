@@ -9,18 +9,29 @@ export class ConfigService {
     @InjectRepository(Config)
     private readonly configRepository: Repository<Config>,
   ) {}
-
+  /**
+   * Returns all elections
+   * @returns Promise<Config[]>
+   */
   public async getAll() {
     return await this.configRepository.find();
   }
-
+  /**
+   * Returns the amount of votes the user can have
+   * @returns Promise<number>
+   */
   public async getLimit() {
-    const config = await this.configRepository.findOneOrFail({ id: 1 });
+    const config = await this.configRepository.findOneOrFail();
     return config.limit;
   }
-
+  /**
+   * Updates the Single Election located in the database
+   * @param config IVoteType 
+   * @returns Promise<Config[]>
+   * @throws ForbiddenException
+   */
   public async updateConfig({ startDate, endDate, limit, voteType }: any) {
-    let config = await this.configRepository.findOne({ id: 1 });
+    let config = await this.configRepository.findOne();
     const startDateInMs = new Date(startDate).getTime();
     const endDateInMs = new Date(endDate).getTime();
 

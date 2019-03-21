@@ -22,6 +22,7 @@ export default class Header extends Component{
     this.state = {
       isOpen: false,
       date : "",
+      exp : "",
     };
 
     this.toggle = this.toggle.bind(this);
@@ -41,7 +42,7 @@ export default class Header extends Component{
     sessionStorage.removeItem("user")
   }
 
-  x =  setInterval(async () => {
+  async componentWillMount(){
     if (sessionStorage.getItem("user"))
     {
       const token = JSON.parse(sessionStorage.getItem("user")).token;
@@ -56,17 +57,24 @@ export default class Header extends Component{
           }
         )
         var t = new Date(1970, 0, 1); // Epoch
+        
         t.setSeconds(res.data.exp);
-        var l = new Date();
+        this.setState({exp : t});
       } catch (error) {
         console.log("failed to get Constituencies");
         console.log(error);
-      }
-
+      }  
+    }
   }
-    let p = new Date(t - l);
-    let date = p.toString('mm:ss');
-    this.setState({date : date});
+
+  x = setInterval(() => {
+    if(sessionStorage.getItem('user'))
+    {
+      var l = new Date();
+      let p = new Date(this.state.exp - l);
+      let date = p.toString('mm:ss');
+      this.setState({date : date});    
+    }
   }, 1000);
 
 _onSetLanguageToGerman() {

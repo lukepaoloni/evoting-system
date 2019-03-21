@@ -24,7 +24,7 @@ export class PartyController {
   @Post()
   @UseGuards(new JwtAuthGuard())
   public async create(@CurrentUser('id') id: number, @Body() data: PartyDto) {
-    const user = await this.userService.getOne(id);
+    const user = await this.userService.getOneById(id);
     if (user.isVoter()) {
       throw new ForbiddenException('You must be an admin to do this.');
     }

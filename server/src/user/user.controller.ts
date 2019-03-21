@@ -28,7 +28,7 @@ export class UserController {
   @Get()
   @UseGuards(new JwtAuthGuard())
   public async getAll(@CurrentUser('id') id: number) {
-    const user = await this.userService.getOne(id);
+    const user = await this.userService.getOneById(id);
     if (user.isVoter()) {
       throw new ForbiddenException('You must be an admin to do this.');
     }
@@ -37,7 +37,7 @@ export class UserController {
 
   @Get(':id')
   public async getOne(@Param('id') id: number) {
-    return await this.userService.getOne(id);
+    return await this.userService.getOneById(id);
   }
 
   @Post()
@@ -73,7 +73,7 @@ export class UserController {
   @ApiBearerAuth()
   @UseGuards(new JwtAuthGuard())
   public async getConstituency(@CurrentUser('id') id: number) {
-    const user = await this.userService.getOne(id);
+    const user = await this.userService.getOneById(id);
     if (user.isAdmin()) {
       throw new ForbiddenException('Not allowed.');
     }
