@@ -1,7 +1,7 @@
 const axios = require('axios')
 var faker = require('faker');
-const token = '';
-//console.log(faker.address.country())
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTUzMTE3ODAyLCJleHAiOjE1NTMxMjE0MDJ9.Qp15vm_7E9WYWi78vAV9H8hCjPcx83jFcItu06eAscQ"
+console.log(faker.address.country())
 // axios.post(
 //     'http://localhost:4000/api/rest/constituency', {
 //         name: faker.address.county()
@@ -154,6 +154,10 @@ getCandidate(2,2)
 getCandidate(2,2)
 getCandidate(2,2)
 getCandidate(2,2)
+
+
+
+
 
 function getCandidate(constituency, party){
     axios.post(
