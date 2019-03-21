@@ -25,7 +25,12 @@ export class VoteTypeFactory implements IVoteType {
   create(VoteTypes): FirstPast;
   create(VoteTypes): Transferable;
   create(VoteTypes): Preferential;
-
+  /**
+   * creates vote type depening on input
+   * @param  {VoteTypes} voteTypes
+   * @returns FirstPast
+   * @throws NotImplementException()
+   */
   public create(voteTypes: VoteTypes): FirstPast | Transferable | Preferential {
     switch (voteTypes) {
       case VoteTypes.FirstPast:
@@ -37,5 +42,9 @@ export class VoteTypeFactory implements IVoteType {
       default:
         throw new NotImplementedException();
     }
+  }
+
+  public getResult() : FirstPast | Transferable | Preferential {
+    return null;
   }
 }

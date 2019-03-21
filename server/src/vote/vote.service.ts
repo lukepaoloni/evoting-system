@@ -92,4 +92,10 @@ export class VoteService {
     });
     return await this.voteRepository.save(vote);
   }
+
+  public async getResults() {
+    return this.voteRepository.find({
+      relations: ['candidate', 'user'],
+    });
+  }
 }

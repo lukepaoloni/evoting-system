@@ -41,7 +41,7 @@ export default class AdminConfig extends Component {
     {
       const startdates = this.state.startDate.toString('yyyy-MM-dd HH:mm:ss');
       const endDates = this.state.endDate.toString('yyyy-MM-dd HH:mm:ss');
-      const token =JSON.parse(sessionStorage.getItem('user')).token;
+      const token = JSON.parse(sessionStorage.getItem('user')).token;
 
       await Axios({
         method: 'put',

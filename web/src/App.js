@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import VotePage from './Pages/CandidatePage';
 import AdminConfig from './components/Admin/AdminConfig';
 import SuccessPage from './Pages/SuccessPage'
+import VoteResult from './Pages/VoteResults'
 
 import strings from './lang/strings';
 
@@ -44,10 +45,12 @@ class App extends Component {
                         <Route path="/login" component={LoginPage}/>
                         <Route path="/" exact component={HomePage}/>
                         <Route path="/success" exact component={SuccessPage}/>
-                          <Route path="/admin" exact render={()=>(
-                            (sessionStorage.getItem('user')) ? (JSON.parse(sessionStorage.getItem('user')).role == "admin") ? 
-                                        (<AdminConfig/>):  (<Redirect to='/vote' />):  (<Redirect to='/login' />)
-                          )}/> 
+                        <Route path="/admin" exact render={()=>(
+                          (sessionStorage.getItem('user')) ? (JSON.parse(sessionStorage.getItem('user')).role == "admin") ? 
+                                      (<AdminConfig/>):  (<Redirect to='/vote' />):  (<Redirect to='/login' />)
+                        )}/> 
+                        <Route path="/results" exact component={VoteResult}/>
+
                         <Route component={err} />
                     </Switch>
 

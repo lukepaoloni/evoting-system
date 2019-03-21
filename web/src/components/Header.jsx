@@ -73,6 +73,10 @@ export default class Header extends Component{
       var l = new Date();
       let p = new Date(this.state.exp - l);
       let date = p.toString('mm:ss');
+      if(date === "00:00") {
+        sessionStorage.removeItem('user');
+        window.location.reload();
+      }
       this.setState({date : date});    
     }
   }, 1000);
