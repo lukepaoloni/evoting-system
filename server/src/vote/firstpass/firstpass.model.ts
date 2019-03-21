@@ -4,10 +4,4 @@ export class FirstPast implements IVoteType {
   EndDate: Date;
   Limit: number;
 
-  public getResult(data) : FirstPast {
-    // return null;
-    VoteModule
-
-  }
-
 }

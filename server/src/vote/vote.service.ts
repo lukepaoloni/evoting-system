@@ -94,7 +94,7 @@ export class VoteService {
   }
 
   public async getResults() {
-    return this.voteRepository.find({
+    let res  = this.voteRepository.find({
       relations: ['candidate', 'user'],
     });
   }

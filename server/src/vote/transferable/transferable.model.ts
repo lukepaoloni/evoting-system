@@ -5,9 +5,5 @@ export class Transferable implements IVoteType {
   EndDate: Date;
   Limit: number;
 
-  public getResult() : Transferable {
-    return null;
-  }
-
 
 }

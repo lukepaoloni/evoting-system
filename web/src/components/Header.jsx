@@ -46,6 +46,7 @@ export default class Header extends Component{
     if (sessionStorage.getItem("user"))
     {
       const token = JSON.parse(sessionStorage.getItem("user")).token;
+      console.log(token);
       let res;
       try {
         res = await Axios.get(
