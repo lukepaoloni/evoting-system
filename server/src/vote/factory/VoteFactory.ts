@@ -43,8 +43,12 @@ export class VoteTypeFactory implements IVoteType {
         throw new NotImplementedException();
     }
   }
+  getResult(data: any);
+  getResult(data: any): FirstPast;
+  getResult(data: any): Transferable;
+  getResult(data: any): Preferential;
 
-  public getResult() : FirstPast | Transferable | Preferential {
+  public getResult(data: any) : FirstPast | Transferable | Preferential {
     return null;
   }
 }

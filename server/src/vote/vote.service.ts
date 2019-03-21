@@ -12,6 +12,7 @@ import { CandidateService } from '../candidate/candidate.service';
 import { ConfigService } from '../config/config.service';
 import { CreateVoteDto } from './dto/create-vote.dto';
 import { User } from '@user/user.model';
+import { VoteTypeFactory } from './factory/VoteFactory';
 
 @Injectable()
 export class VoteService {
@@ -94,8 +95,13 @@ export class VoteService {
   }
 
   public async getResults() {
-    let res  = this.voteRepository.find({
-      relations: ['candidate', 'user'],
-    });
+    const type = await this.configService.getType();
+    console.log(type);
+    const votes = await this.voteRepository.find();
+    let factory = new VoteTypeFactory();
+    let election = factory.create(type);
+    election.getResult();
+
+    console.log('votes', votes);
   }
 }

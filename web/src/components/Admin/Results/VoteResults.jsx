@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import { Container, Form, FormGroup, Input, FormFeedback, Label, FormText, Button } from 'reactstrap';
 
-import Axios from 'axios';
-
 export default class VoteResults extends Component {
 
   constructor(props) {
