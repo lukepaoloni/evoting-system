@@ -127,6 +127,7 @@ export default class AdminConfig extends Component {
                 <br />
                 <DatePicker
                   selected={startDate}
+                  name="startDate"
                   onChange={this.handleChange}
                   showTimeSelect
                   timeFormat="HH:mm"

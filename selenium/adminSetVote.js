@@ -3,7 +3,7 @@ var assert = require('assert');
 
 
 
-(async function login() {
+(async function adminSetVote() {
   let driver = await new Builder().forBrowser('chrome').build();
   try {
     driver.get('http://localhost:3000');
@@ -11,11 +11,14 @@ var assert = require('assert');
     driver.findElement(By.id('loginButton')).click();
     await sleep(3000);
     driver.findElement(By.name('username')).sendKeys('Rayne', Key.RETURN);
-    driver.findElement(By.name('password')).sendKeys('notcorrect', Key.RETURN);
+    driver.findElement(By.name('password')).sendKeys('password1', Key.RETURN);
     await sleep(1000);
     driver.findElement(By.id('login')).click();
     await sleep(3000);
+    driver.findElement(By.name('endDate')).click();
+    await sleep(6000);
     const URL = await driver.getCurrentUrl();
+
     assert(URL === "http://localhost:3000/vote" );
     console.log("Logged In succsessfully");
   } catch (err) {

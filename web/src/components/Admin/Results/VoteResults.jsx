@@ -17,33 +17,27 @@ export default class VoteResults extends Component {
   }
   
 
-  async componentDidMount() {
-    let candidates = [];
+  async componentWillMount() {
+    let notNullArray = [];
     try {
       const res = await axios.get(
         "http://localhost:4000/api/rest/votes/results",
       );
-      this.setState({data : res.data})
-      for (var key in this.state.data) {
-        const res = await axios.get(
-          `http://localhost:4000/api/rest/candidates/${key}/getOne`,
-        );
-        res.data.votes = this.state.data[key];
-        candidates.push(res.data);
-    }
+      res.data.forEach(element => {
+        if(element != null)
+        notNullArray.push(element);
+      });
     } catch (err) {
       console.error(err);
       console.log("error", err.response.data.message);
       this.notifyError(err.response.data.message);
     }
     // console.log(candidates);
-    this.setState({candidates: candidates});
-
+    this.setState({candidates: notNullArray});
   }
   
     render() {
     // const { validated } = this.state;
-
     return (
       <div>
           <Container> 
@@ -54,13 +48,14 @@ export default class VoteResults extends Component {
             <div key={e.id}>
               <p>First Name: <b>{e.firstName}</b></p>
               <p>Last Name: <b>{e.lastName}</b></p>
-              <p>Number of Votes: <b>{e.votes}</b></p>
+              <p>Number of Votes: <b>{e.numOfVotes}</b></p>
+              <br/>
             </div>
               )
             })
             }
             {this.state.candidates && 
-              <CSVLink data={this.state.candidates}>Download me</CSVLink>
+              <CSVLink data={this.state.candidates}>Download me{console.log(this.state.candidates)}</CSVLink>
             }
           </Container>
           
