@@ -8,6 +8,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import strings from "../lang/strings";
 
+
+import { string } from "postcss-selector-parser";
+
+
 export default class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -240,17 +244,11 @@ export default class HomePage extends React.Component {
             height: "60px",
             width: "100%",
             justifyItems:'justify',
-            fontSize:20
+            fontSize:"20"
         }}>
         <span>{strings.cand_total} </span>
          <strong>{this.state.data.length}</strong> 
         <span>{strings.cand_candidates}</span>
-            justifyItems: "justify",
-            fontSize: 20
-          }}
-        >
-          Total <strong>{this.state.data.length}</strong> candidates, scroll to
-          view more{" "}
         </footer>
       </div>
     );
