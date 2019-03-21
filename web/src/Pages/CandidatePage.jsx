@@ -239,6 +239,12 @@ export default class HomePage extends React.Component {
             bottom: "0",
             height: "60px",
             width: "100%",
+            justifyItems:'justify',
+            fontSize:20
+        }}>
+        <span>{strings.cand_total} </span>
+         <strong>{this.state.data.length}</strong> 
+        <span>{strings.cand_candidates}</span>
             justifyItems: "justify",
             fontSize: 20
           }}

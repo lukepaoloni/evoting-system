@@ -8,11 +8,19 @@ import { CandidateDto } from '@user/dto/candidate.dto';
 export class CandidateController {
   constructor(private readonly candidateService: CandidateService) {}
 
+/**
+ * Retrieves all of the candidates. Using CandidateService.
+ */
   @Get()
   public async getAll() {
     return await this.candidateService.getAll();
   }
 
+/**
+ * Creates a new candidate using the JSON body param. 
+ * Using CandidateService
+ * @param body 
+ */
   @Post()
   public async create(@Body() body: CandidateDto) {
     try {
@@ -20,7 +28,7 @@ export class CandidateController {
 
       return {
         success: true,
-        message: 'Successfully created a new user.',
+        message: 'Successfully created a new candidate.',
       };
     } catch (err) {
       return {

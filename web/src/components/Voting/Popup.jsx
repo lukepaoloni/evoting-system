@@ -12,11 +12,14 @@ export default class Popup extends React.Component {
         <div className='popup'>
           <div className='popup_inner'>
             <h1>{strings.vote_confirm}</h1>
-            <p style={{fontSize:24}}>you are voting for <span style={{fontWeight:'bold'}}>{this.props.detail.firstName} {this.props.detail.lastName}</span><br/>
-            pleas click ok to confirm vote. click cancle to pick another candidate</p>
+            <p style={{fontSize:24}}>
+              You are voting for <span style={{fontWeight:'bold'}}>{this.props.detail.firstName} {this.props.detail.lastName}</span><br/>
+              Please click ok to confirm vote. Click cancel to pick another candidate.</p>
           
           <Button style={{marginRight: 20}}  color="info" onClick={this.props.confirmPopup}>{strings.vote_confirm}</Button>
-          <Button  style={{marginLeft: 20}}  color="danger" onClick={this.props.closePopup}>cancel</Button>        
+          <Button  style={{marginLeft: 20}}  color="danger" onClick={this.props.closePopup}>
+            Cancel
+          </Button>        
           </div>
         </div>
       );
