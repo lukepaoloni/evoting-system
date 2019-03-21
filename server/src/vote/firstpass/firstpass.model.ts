@@ -30,3 +30,6 @@ export class FirstPast implements IVoteType {
   }
 
 }
+
+//implement getResult to return the winner
+

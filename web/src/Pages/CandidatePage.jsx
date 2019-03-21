@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Button, Alert } from "reactstrap";
+import { Container, Row, Col, Button,Spinner } from "reactstrap";
 import Candidate from "../components/Voting/Candidate";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
@@ -7,6 +7,10 @@ import Popup from "../components/Voting/Popup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import strings from "../lang/strings";
+
+
+import { string } from "postcss-selector-parser";
+
 
 export default class HomePage extends React.Component {
   constructor(props) {
@@ -16,7 +20,6 @@ export default class HomePage extends React.Component {
       user: null,
       data: [],
       config: null,
-      disable: false,
       showPopup: false,
       selectedCandidate: {},
       VoteSuccess: false,
@@ -28,15 +31,14 @@ export default class HomePage extends React.Component {
     strings.setLanguage(sessionStorage.getItem("lang"));
   }
 
+  //outout: get cadidate that belong to user constituency
+  //output: get vote config setting
   async componentWillMount() {
     const user = JSON.parse(sessionStorage.getItem("user"));
     const token = user.token;
 
-    let res;
     try {
-      res = await axios.get(
-        `http://localhost:4000/api/rest/auth/me/constituency`,
-        {
+      let res = await axios.get(`http://localhost:4000/api/rest/auth/me/constituency`,{
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -69,6 +71,7 @@ export default class HomePage extends React.Component {
     }
   }
 
+  //output: show vote confirmation popup
   togglePopup() {
     this.setState({
       showPopup: !this.state.showPopup
@@ -240,17 +243,11 @@ export default class HomePage extends React.Component {
             height: "60px",
             width: "100%",
             justifyItems:'justify',
-            fontSize:20
+            fontSize:"20"
         }}>
         <span>{strings.cand_total} </span>
-         <strong>{this.state.data.length}</strong> 
+         <strong>{this.state.data.length} </strong> 
         <span>{strings.cand_candidates}</span>
-            justifyItems: "justify",
-            fontSize: 20
-          }}
-        >
-          Total <strong>{this.state.data.length}</strong> candidates, scroll to
-          view more{" "}
         </footer>
       </div>
     );

@@ -9,4 +9,7 @@ export class Transferable implements IVoteType {
     console.log(data)
     return null;
   }
-}
+
+} 
+
+
