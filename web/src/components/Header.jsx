@@ -98,14 +98,16 @@ _onSetLanguageToEnglish() {
                 <NavLink href="/vote">{strings.castVote}</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
+                <DropdownToggle nav caret id="options">
                   {strings.header_options}
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem onClick={this._onSetLanguageToEnglish}>
+                  <DropdownItem onClick={this._onSetLanguageToEnglish} 
+                                id="changeLangEN">
                    {strings.header_lang} (EN)
                   </DropdownItem>
-                  <DropdownItem onClick={this._onSetLanguageToGerman}>
+                  <DropdownItem onClick={this._onSetLanguageToGerman}
+                                id="changeLangDE">
                     {strings.header_lang} (DE)
                   </DropdownItem>
                 </DropdownMenu>

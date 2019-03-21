@@ -16,7 +16,7 @@ export default class HomeView extends Component{
         return(
                 <Container>
                     <Jumbotron>
-                        <h1 className="display-3">{strings.home_title}</h1>
+                        <h1 id="title-header" className="display-3">{strings.home_title}</h1>
                         <p>{strings.home_body}</p>
                         <p className="lead">
                             <Button id="loginButton" block color="primary" href="login">{strings.home_voteBtn}</Button>
